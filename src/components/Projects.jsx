@@ -41,18 +41,22 @@ const Projects = ({ refProp, visible }) => {
           {projects.map((p, i) => (
             <div
               key={i}
-              className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer"
+              className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer flex flex-col justify-between"
             >
               <img
                 src={p.img}
                 alt={p.title}
-                className="w-full h-48 object-cover hover:scale-110 transition duration-300"
+                className="w-full h-48 object-cover"
+                // i removed this to make consistent hover "hover:scale-110 transition duration-300"
               />
-              <div className="p-4">
+              <div className="p-4 flex flex-col grow">
                 <h3 className="font-semibold text-lg text-green-600">
                   {p.title}
                 </h3>
-                <p>{p.desc}</p>
+                <p className="mb-4">{p.desc}</p>
+                <button className="mt-auto bg-green-600 text-white text-center py-2 rounded hover:bg-green-700 transition">
+                  Learn More
+                </button>
               </div>
             </div>
           ))}
