@@ -12,7 +12,7 @@ const Hero = ({ parallaxRef, scrollY }) => {
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       ></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-green-900/70"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-blue-900/70 to-green-900/70"></div>
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <h1 className="text-5xl md:text-7xl font-bold mb-6">
           Cliberduche Corporation
