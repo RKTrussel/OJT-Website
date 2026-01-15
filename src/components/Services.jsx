@@ -1,7 +1,12 @@
 import React from "react";
 
 const Services = ({ refProp, visible }) => {
-  const services = [
+  const primaryServices = [
+    {
+      title: "Backfill Sourcing / Land Sourcing",
+      desc: "Reliable sourcing and supply of premium backfill and land materials",
+      icon: "https://img.icons8.com/ios-filled/64/000000/soil.png",
+    },
     {
       title: "Land Development",
       desc: "Comprehensive land preparation and development services",
@@ -9,20 +14,40 @@ const Services = ({ refProp, visible }) => {
     },
     {
       title: "Site Management",
-      desc: "Professional site management and coordination",
+      desc: "Professional site management and coordination for efficient operations",
       icon: "https://img.icons8.com/ios-filled/64/000000/helmet.png",
     },
     {
-      title: "Backfill Materials",
-      desc: "Premium backfill sourcing and supply",
-      icon: "https://img.icons8.com/ios-filled/64/000000/soil.png",
-    },
-    {
       title: "Equipment Leasing",
-      desc: "Heavy equipment leasing and rental services",
+      desc: "Heavy equipment leasing and rental services for all projects",
       icon: "https://img.icons8.com/ios-filled/64/000000/truck.png",
     },
   ];
+
+  const secondaryServices = [
+    {
+      title: "Land Development",
+      desc: "Supporting additional land development needs",
+      icon: "https://img.icons8.com/?size=100&id=cS1YQzGas7pb&format=png&color=000000",
+    },
+    {
+      title: "Project Management Consultation",
+      desc: "Expert consultation to ensure project success from start to finish",
+      icon: "https://img.icons8.com/ios-filled/64/000000/project.png",
+    },
+  ];
+
+  const renderServices = (servicesArray) =>
+    servicesArray.map((s, i) => (
+      <div
+        key={i}
+        className="bg-white p-6 rounded-2xl shadow text-center hover:shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+      >
+        <img src={s.icon} alt={s.title} className="mx-auto mb-4 w-16 h-16" />
+        <h3 className="text-xl font-semibold mb-4">{s.title}</h3>
+        <p className="text-gray-600">{s.desc}</p>
+      </div>
+    ));
 
   return (
     <>
@@ -37,27 +62,27 @@ const Services = ({ refProp, visible }) => {
           <h2 className="text-3xl font-semibold mb-10 text-center">
             Our Services
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((s, i) => (
-              <div
-                key={i}
-                className="bg-white p-6 rounded-2xl shadow text-center hover:shadow-lg transition duration-300"
-              >
-                <img
-                  src={s.icon}
-                  alt={s.title}
-                  className="mx-auto mb-4 w-16 h-16"
-                />
-                <h3 className="text-xl font-semibold mb-4">{s.title}</h3>
-                <p>{s.desc}</p>
-              </div>
-            ))}
+
+          {/* Primary Services */}
+          <h3 className="text-2xl font-semibold mb-6 text-green-700 text-center">
+            Primary Functions
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {renderServices(primaryServices)}
+          </div>
+
+          {/* Secondary Services */}
+          <h3 className="text-2xl font-semibold mb-6 text-blue-700 text-center">
+            Secondary Functions
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {renderServices(secondaryServices)}
           </div>
         </div>
       </section>
 
       {/* Section Separator */}
-      <div className="h-1 bg-linear-to-r from-blue-500 via-green-500 to-blue-500"></div>
+      <div className="h-1 bg-gradient-to-r from-blue-500 via-green-500 to-blue-500"></div>
     </>
   );
 };
