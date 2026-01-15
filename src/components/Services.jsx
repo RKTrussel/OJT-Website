@@ -29,7 +29,7 @@ const Services = ({ refProp, visible }) => {
       <section
         id="services"
         ref={refProp}
-        className={`bg-gray-50 py-16 transition-all duration-700 ${
+        className={`scroll-mt-18 bg-gray-50 py-16 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >

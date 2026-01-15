@@ -24,7 +24,7 @@ const Projects = ({ refProp, visible }) => {
       <section
         id="projects"
         ref={refProp}
-        className={`bg-green-50 max-w-6xl mx-auto px-6 py-16 transition-all duration-700 ${
+        className={`scroll-mt-18 bg-green-50 max-w-6xl mx-auto px-6 py-16 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >

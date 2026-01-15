@@ -6,7 +6,7 @@ const Mission = ({ refProp, visible }) => {
       <section
         id="mission"
         ref={refProp}
-        className={`bg-linear-to-br from-gray-50 to-gray-100 py-16 transition-all duration-700 ${
+        className={`scroll-mt-18 bg-linear-to-br from-gray-50 to-gray-100 py-16 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >

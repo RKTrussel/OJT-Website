@@ -5,7 +5,7 @@ const Contact = ({ refProp, visible }) => {
     <section
       id="contact"
       ref={refProp}
-      className={`bg-gray-50 max-w-6xl mx-auto px-6 py-16 transition-all duration-700 ${
+      className={`scroll-mt-18 bg-gray-50 max-w-6xl mx-auto px-6 py-16 transition-all duration-700 ${
         visible ? "animate-fade-in-up" : "opacity-0"
       }`}
     >
