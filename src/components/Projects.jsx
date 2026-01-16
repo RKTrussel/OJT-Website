@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 const Projects = ({ refProp, visible }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeImage, setActiveImage] = useState(0);
 
-  const projects = [
+  const projects = useMemo(() => [
     {
       title: "Road Construction",
       desc: "Highway and infrastructure development projects",
-      img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+      img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop",
       details: `Cliberduche Corporation undertakes road construction projects that include concrete roadworks, pavements, embankment, drainage systems, and slope protection. These projects are executed in compliance with engineering standards, safety protocols, and government regulations.
 
 Example Project:
@@ -18,16 +18,16 @@ MDI – Mercator Holdings Projects (2019–2026)
 • Gabion walls, retaining walls, fencing
 • Electrical post lights and landscape works`,
       gallery: [
-        "https://images.unsplash.com/photo-1503387762-592deb58ef4e",
-        "https://images.unsplash.com/photo-1560179707-f14e90ef3623",
-        "https://images.unsplash.com/photo-1590650046871-92c887180603",
+        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1590650046871-92c887180603?w=800&h=600&fit=crop",
       ],
       status: "Ongoing / Completed",
     },
     {
       title: "Land Development",
       desc: "Site preparation and land development services",
-      img: "https://images.unsplash.com/photo-1590845947670-c009801ffa74",
+      img: "https://images.unsplash.com/photo-1590845947670-c009801ffa74?w=400&h=300&fit=crop",
       details: `Our land development services include clearing, cutting and peeling, leveling, compaction, and installation of RCP and PVC pipes. We also supply high-quality backfill materials such as aggregates, mixed soil, and boulders to support various commercial and industrial projects.
 
 Example Projects:
@@ -39,16 +39,16 @@ Silang, Cavite Project (2021)
 Laguna & Cavite Sites
 • Over 14 million cubic meters of backfilling materials`,
       gallery: [
-        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf",
-        "https://images.unsplash.com/photo-1581092334494-1a5a93cdb7b0",
-        "https://images.unsplash.com/photo-1621905252472-943afaa20e20",
+        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1581092334494-1a5a93cdb7b0?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1621905252472-943afaa20e20?w=800&h=600&fit=crop",
       ],
       status: "Completed",
     },
     {
       title: "Bridge Construction",
       desc: "Bridge building and structural engineering",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64",
+      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
       details: `Cliberduche Corporation is involved in bridge construction and rehabilitation projects, including embankment works, ripraps, drainage systems, and structural rectification.
 
 Example Project:
@@ -57,13 +57,13 @@ Pier 2 – North Harbour Project (2026)
 • Lagoon embankment
 • Drainage, water, and electrical works`,
       gallery: [
-        "https://images.unsplash.com/photo-1504307651254-35680f356dfd",
-        "https://images.unsplash.com/photo-1536895058696-a69b1c7ba34f",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1536895058696-a69b1c7ba34f?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
       ],
       status: "Ongoing",
     },
-  ];
+  ], []);
 
   return (
     <>
@@ -88,11 +88,13 @@ Pier 2 – North Harbour Project (2026)
               <div
                 key={i}
                 className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 flex flex-col"
+                style={{ willChange: 'transform' }}
               >
                 <img
                   src={p.img}
                   alt={p.title}
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
 
                 <div className="p-4 flex flex-col grow">
@@ -119,7 +121,7 @@ Pier 2 – North Harbour Project (2026)
 
       {selectedProject && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-white max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg shadow-xl p-6 relative animate-fade-in-up">
+          <div className="bg-white max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg shadow-xl p-6 relative animate-fade-in-up" style={{ willChange: 'transform, opacity' }}>
             <button
               onClick={() => setSelectedProject(null)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
@@ -131,13 +133,14 @@ Pier 2 – North Harbour Project (2026)
               src={selectedProject.gallery[activeImage]}
               alt="Project"
               className="w-full h-64 object-cover rounded mb-4"
+              loading="lazy"
             />
 
             <div className="flex gap-3 mb-4">
               {selectedProject.gallery.map((img, index) => (
                 <img
                   key={index}
-                  src={img}
+                  src={img.replace('w=800&h=600', 'w=80&h=64')}
                   alt="Thumbnail"
                   onClick={() => setActiveImage(index)}
                   className={`w-20 h-16 object-cover rounded cursor-pointer border-2 ${
@@ -145,6 +148,7 @@ Pier 2 – North Harbour Project (2026)
                       ? "border-green-600"
                       : "border-transparent"
                   }`}
+                  loading="lazy"
                 />
               ))}
             </div>
@@ -176,4 +180,4 @@ Pier 2 – North Harbour Project (2026)
   );
 };
 
-export default Projects;
+export default React.memo(Projects);
