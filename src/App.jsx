@@ -1,8 +1,8 @@
 import React from "react";
-import CliberducheWebsite from "./pages/CliberducheWebsite";
+import Routes from "./routes/Routes";
 
 function App() {
-  return <CliberducheWebsite />;
+  return <Routes />;
 }
 
 export default App;
