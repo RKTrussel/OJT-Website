@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@layer base {
+  body {
+    font-family: 'Lato', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -17,4 +26,8 @@ html {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
+}
+
+body {
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
 }

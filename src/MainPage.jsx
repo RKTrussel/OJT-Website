@@ -136,23 +136,23 @@ export default function CliberducheWebsite() {
           Cliberduche Corporation handles small, medium, and large commercial and industrial projects. Our expertise includes land clearing, cutting and leveling, drainage installation, road and bridge construction, slope protection, erosion prevention, and soil stabilization works.
         </p>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer">
-            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Road Construction" className="w-full h-48 object-cover hover:scale-110 transition duration-300" />
-            <div className="p-4">
+          <div className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer flex flex-col md:flex-row">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Road Construction" className="w-full md:w-1/2 h-48 object-cover hover:scale-110 transition duration-300" />
+            <div className="p-4 md:w-1/2 flex flex-col justify-center">
               <h3 className="font-semibold text-lg text-green-600">Road Construction</h3>
               <p>Highway and infrastructure development projects</p>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer">
-            <img src="https://images.unsplash.com/photo-1590845947670-c009801ffa74?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Land Development" className="w-full h-48 object-cover hover:scale-110 transition duration-300" />
-            <div className="p-4">
+          <div className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer flex flex-col md:flex-row">
+            <img src="https://images.unsplash.com/photo-1590845947670-c009801ffa74?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Land Development" className="w-full md:w-1/2 h-48 object-cover hover:scale-110 transition duration-300" />
+            <div className="p-4 md:w-1/2 flex flex-col justify-center">
               <h3 className="font-semibold text-lg text-green-600">Land Development</h3>
               <p>Site preparation and land development services</p>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bridge Construction" className="w-full h-48 object-cover hover:scale-110 transition duration-300" />
-            <div className="p-4">
+          <div className="bg-white rounded-lg shadow overflow-hidden hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer flex flex-col md:flex-row">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bridge Construction" className="w-full md:w-1/2 h-48 object-cover hover:scale-110 transition duration-300" />
+            <div className="p-4 md:w-1/2 flex flex-col justify-center">
               <h3 className="font-semibold text-lg text-green-600">Bridge Construction</h3>
               <p>Bridge building and structural engineering</p>
             </div>
