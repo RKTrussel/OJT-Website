@@ -16,7 +16,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="fixed bottom-0 left-0 w-full bg-gray-900 text-white pt-12 z-50">
+    <footer className="bg-gray-900 text-white pt-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid gap-10 md:grid-cols-3">
           {/* Company Info */}
