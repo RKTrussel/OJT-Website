@@ -1,18 +1,18 @@
 import React from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import logo1 from '../img/logo_1.png';
-import logo2 from '../img/logo_2.png';
-import logo3 from '../img/logo_3.png';
-import logo4 from '../img/logo_4.png';
-import logo5 from '../img/logo_5.jpg';
+import logo1 from "../img/logo_1.png";
+import logo2 from "../img/logo_2.png";
+import logo3 from "../img/logo_3.png";
+import logo4 from "../img/logo_4.png";
+import logo5 from "../img/logo_5.jpg";
 
 const Footer = () => {
   const certificates = [
-    { src: logo1, alt: 'Certificate 1' },
-    { src: logo2, alt: 'Certificate 2' },
-    { src: logo3, alt: 'Certificate 3' },
-    { src: logo4, alt: 'Certificate 4' },
-    { src: logo5, alt: 'Certificate 5' },
+    { src: logo1, alt: "Certificate 1" },
+    { src: logo2, alt: "Certificate 2" },
+    { src: logo3, alt: "Certificate 3" },
+    { src: logo4, alt: "Certificate 4" },
+    { src: logo5, alt: "Certificate 5" },
   ];
 
   return (
@@ -79,10 +79,17 @@ const Footer = () => {
 
         {/* Certifications Section */}
         <div className="mt-12">
-          <h4 className="font-semibold text-lg mb-6 text-center">Certifications</h4>
+          <h4 className="font-semibold text-lg mb-6 text-center">
+            Certifications
+          </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center">
-            {certificates.map(cert => (
-              <img key={cert.alt} src={cert.src} alt={cert.alt} className="w-32 h-32 object-contain" />
+            {certificates.map((cert) => (
+              <img
+                key={cert.alt}
+                src={cert.src}
+                alt={cert.alt}
+                className="w-32 h-32 object-contain"
+              />
             ))}
           </div>
         </div>
