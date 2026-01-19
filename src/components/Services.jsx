@@ -38,24 +38,53 @@ const Services = ({ refProp, visible }) => {
     },
   ];
 
+  const serviceImages = [
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", // Backfill Sourcing
+    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", // Land Development
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", // Site Management
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", // Equipment Leasing
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", // Land Development (secondary)
+    "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", // Project Management Consultation
+  ];
+
   const renderServices = (servicesArray) =>
     servicesArray.map((s, i) => (
       <div
         key={i}
-        className="bg-white p-6 rounded-2xl shadow text-center hover:shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg border border-gray-300"
+        className="bg-white p-6 rounded-2xl shadow text-center hover:shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer relative overflow-hidden group shadow-lg border border-gray-300"
       >
-        <img src={s.icon} alt={s.title} className="mx-auto mb-4 w-16 h-16" />
-        <h3 className="text-xl font-semibold mb-4">{s.title}</h3>
-        <p className="text-gray-600">{s.desc}</p>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-green-100 opacity-50 animate-gradient"></div>
+        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <img src={serviceImages[i]} alt="Service" className="w-full h-full object-cover opacity-80" />
+        </div>
+        <div className="relative z-10">
+          <img src={s.icon} alt={s.title} className="mx-auto mb-4 w-16 h-16 hover:animate-pulse transition-transform duration-300" />
+          <h3 className="text-xl font-semibold mb-4 group-hover:text-white transition-colors duration-300">{s.title}</h3>
+          <p className="text-gray-600 group-hover:text-white transition-colors duration-300">{s.desc}</p>
+        </div>
       </div>
     ));
 
   return (
     <>
+      <style>
+        {`
+          @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+          }
+        `}
+      </style>
       <section
         id="services"
         ref={refProp}
-        className={`scroll-mt-18 bg-gradient-to-br from-gray to-blue-200 py-16 transition-all duration-700 ${
+        className={`scroll-mt-18 bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 py-16 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >

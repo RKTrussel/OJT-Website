@@ -6,7 +6,7 @@ const Contact = ({ refProp, visible }) => {
     <section
       id="contact"
       ref={refProp}
-      className={`scroll-mt-18 bg-gradient-to-r from-green-100 via-gray-100 to-blue-100 w-full transition-all duration-700 ${
+      className={`scroll-mt-18 bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 w-full transition-all duration-700 ${
         visible ? "animate-fade-in-up" : "opacity-0"
       }`}
     >

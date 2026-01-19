@@ -18,6 +18,29 @@ const Navbar = ({ activeSection }) => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
+  useEffect(() => {
+    const sections = links.map(link => document.getElementById(link.href.slice(1)));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let current = '';
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            current = entry.target.id;
+          }
+        });
+        if (current) setSelected(current);
+      },
+      { threshold: 0.1 }
+    );
+
+    sections.forEach(section => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const links = [
     { name: "About", href: "#about", icon: Info },
     { name: "Services", href: "#services", icon: Briefcase },
@@ -37,7 +60,7 @@ const Navbar = ({ activeSection }) => {
           {/* Logo */}
           <div className="flex items-center gap-3 text-xl font-semibold tracking-wide text-white">
             <img src={logo} alt="Cliberduche Logo" className="w-15 h-10 object-contain" />
-            <span className="text-white">Cliberduche</span>
+            <span className="text-white navbar-font">Cliberduche</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -52,7 +75,7 @@ const Navbar = ({ activeSection }) => {
                   href={link.href}
                   onClick={() => setSelected(link.href.slice(1))}
                   className={`
-                    relative flex items-center gap-2 text-sm transition
+                    navbar-font relative flex items-center gap-2 text-sm transition
                     ${
                       isActive
                         ? "text-green-400"
@@ -106,7 +129,7 @@ const Navbar = ({ activeSection }) => {
                     setSelected(link.href.slice(1));
                     handleClick(); // close menu
                   }}
-                  className={`flex items-center gap-3 px-6 py-4 text-sm transition
+                  className={`navbar-font flex items-center gap-3 px-6 py-4 text-sm transition
                     ${
                       isActive
                         ? "text-green-400 bg-white/5"
