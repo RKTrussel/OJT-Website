@@ -1,19 +1,30 @@
 import React from "react";
+import logo from "../img/cliberduche_logo.png"; 
 
 const Contact = ({ refProp, visible }) => {
   return (
     <section
       id="contact"
       ref={refProp}
-      className={`scroll-mt-18 bg-gray-50 w-full transition-all duration-700 ${
+      className={`scroll-mt-18 bg-gradient-to-r from-green-100 via-gray-100 to-blue-100 w-full transition-all duration-700 ${
         visible ? "animate-fade-in-up" : "opacity-0"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-semibold mb-10 text-center">Contact Us</h2>
+        <div className="flex items-center justify-center gap-4 mb-10">
+          <img
+            src={logo}
+            alt="Cliberduche Logo"
+            className="w-16 h-16 object-contain"
+          />
+          <h2 className="text-3xl font-semibold text-green-700 text-center">
+            Contact Us
+          </h2>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-xl font-semibold mb-6 text-green-600">
+            <h3 className="text-xl font-semibold mb-6 text-green-700">
               Get In Touch
             </h3>
             <div className="space-y-6">
@@ -58,7 +69,7 @@ const Contact = ({ refProp, visible }) => {
             </div>
           </div>
           <div>
-            <form className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+            <form className="bg-white p-9 rounded-xl shadow-lg border border-green-400">
               <h4 className="text-lg font-semibold mb-6 text-gray-800">
                 Send us a Message
               </h4>

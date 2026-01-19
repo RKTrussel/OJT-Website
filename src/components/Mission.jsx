@@ -1,19 +1,27 @@
 import React from "react";
-
+import logo from "../img/cliberduche_logo.png";
 const Mission = ({ refProp, visible = true }) => {
   return (
     <>
       <section
         id="mission"
         ref={refProp}
-        className={`scroll-mt-18 bg-linear-to-br from-gray-50 to-gray-100 py-16 transition-all duration-700 ${
+        className={`scroll-mt-18 bg-linear-to-br from-white-50 to-gray-300 py-16 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-semibold mb-12 text-center text-green-600">
-            Mission & Vision
-          </h2>
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <img
+              src={logo}
+              alt="Cliberduche Logo"
+              className="w-16 h-16 object-contain"
+            />
+            <h2 className="text-3xl font-semibold text-green-600 text-center">
+              Mission & Vision
+            </h2>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12">
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
               <div className="text-center mb-6">
@@ -39,6 +47,7 @@ const Mission = ({ refProp, visible = true }) => {
                 employees, and other stakeholders.”
               </p>
             </div>
+
             <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
               <div className="text-center mb-6">
                 <img
@@ -61,6 +70,7 @@ const Mission = ({ refProp, visible = true }) => {
               </p>
             </div>
           </div>
+
           <div className="mt-12 bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
             <div className="text-center mb-6">
               <img
@@ -122,7 +132,6 @@ const Mission = ({ refProp, visible = true }) => {
         </div>
       </section>
 
-      {/* Section Separator */}
       <div className="h-1 bg-linear-to-r from-blue-500 via-green-500 to-blue-500"></div>
     </>
   );

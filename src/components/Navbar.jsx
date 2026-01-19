@@ -8,6 +8,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import logo from "../img/cliberduche_logo.png"; 
 
 const Navbar = ({ activeSection }) => {
   const [open, setOpen] = useState(false);
@@ -32,8 +33,11 @@ const Navbar = ({ activeSection }) => {
       {/* Glass Container */}
       <div className="bg-gray-900/60 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-xl font-semibold tracking-wide text-white">
-            <span className="text-green-400">Cliberduche</span>
+          
+          {/* Logo */}
+          <div className="flex items-center gap-3 text-xl font-semibold tracking-wide text-white">
+            <img src={logo} alt="Cliberduche Logo" className="w-15 h-10 object-contain" />
+            <span className="text-white">Cliberduche</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -61,7 +65,7 @@ const Navbar = ({ activeSection }) => {
                     }
                   `}
                 >
-                  <Icon size={16} />
+                  <Icon size={18} />
                   {link.name}
                 </a>
               );

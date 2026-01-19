@@ -56,7 +56,7 @@ export default function CliberducheWebsite() {
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">Cliberduche Corporation</h1>
           <p className="text-xl md:text-2xl mb-8">
-            Foundations • Site Development • Full-scale Construction Works • Trust & Reliability
+            Foundations  •  Site Development  •  Full-scale Construction Works  •  Trust & Reliability
           </p>
           <a href="#about" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
             Learn More

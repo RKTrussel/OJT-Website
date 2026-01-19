@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import logo from "../img/cliberduche_logo.png";
 
 const Projects = ({ refProp, visible }) => {
   const projects = [
@@ -33,14 +34,21 @@ const Projects = ({ refProp, visible }) => {
       <section
         id="projects"
         ref={refProp}
-        className={`scroll-mt-18 w-full bg-green-50 transition-all duration-700 ${
+        className={`scroll-mt-18 w-full bg-gradient-to-r from-green-200 via-gray-100 to-blue-200 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="text-3xl font-semibold text-center mb-6">
-            Our Projects
-          </h2>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <img
+              src={logo}
+              alt="Cliberduche Logo"
+              className="w-16 h-16 object-contain"
+            />
+            <h2 className="text-3xl font-semibold text-center">
+              Our Projects
+            </h2>
+          </div>
 
           <p className="text-center mb-12 max-w-3xl mx-auto">
             Our expertise spans land development, infrastructure, and complex
@@ -98,21 +106,21 @@ const DeckCard = ({ project, position, onClick, active }) => {
     center:
       "z-30 scale-105 md:scale-110 rotate-0 opacity-100 hover:scale-110 hover:shadow-2xl transition-transform duration-300",
     left: `
-    z-10
-    -translate-x-16 sm:-translate-x-20 md:-translate-x-48
-    scale-90 sm:scale-95 md:scale-95
-    -rotate-3 sm:-rotate-4 md:-rotate-6
-    opacity-50 sm:opacity-60
-    hover:scale-105 hover:shadow-xl transition-transform duration-300
-  `,
+      z-10
+      -translate-x-16 sm:-translate-x-20 md:-translate-x-48
+      scale-90 sm:scale-95 md:scale-95
+      -rotate-3 sm:-rotate-4 md:-rotate-6
+      opacity-50 sm:opacity-60
+      hover:scale-105 hover:shadow-xl transition-transform duration-300
+    `,
     right: `
-    z-10
-    translate-x-16 sm:translate-x-20 md:translate-x-48
-    scale-90 sm:scale-95 md:scale-95
-    rotate-3 sm:rotate-4 md:rotate-6
-    opacity-50 sm:opacity-60
-    hover:scale-105 hover:shadow-xl transition-transform duration-300
-  `,
+      z-10
+      translate-x-16 sm:translate-x-20 md:translate-x-48
+      scale-90 sm:scale-95 md:scale-95
+      rotate-3 sm:rotate-4 md:rotate-6
+      opacity-50 sm:opacity-60
+      hover:scale-105 hover:shadow-xl transition-transform duration-300
+    `,
   };
 
   // Responsive width
@@ -147,7 +155,7 @@ const DeckCard = ({ project, position, onClick, active }) => {
         <p className="text-sm text-gray-600 mt-2">{project.desc}</p>
 
         {active && (
-          <button className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
+          <button className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition cursor-pointer">
             Learn More
           </button>
         )}

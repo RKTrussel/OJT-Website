@@ -31,7 +31,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-green-400 mb-4">Quick Links</h4>
             <ul className="space-y-3 text-gray-300">
               {[
                 { name: "About", href: "#about" },
@@ -53,7 +53,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
+            <h4 className="font-semibold text-green-400 mb-4">Contact Info</h4>
 
             <div className="space-y-4 text-gray-300">
               <div className="flex items-start gap-3">
@@ -79,7 +79,7 @@ const Footer = () => {
 
         {/* Certifications Section */}
         <div className="mt-12">
-          <h4 className="font-semibold text-lg mb-6 text-center">
+          <h4 className="font-semibold text-green-400 mb-4 text-center">
             Certifications
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center">

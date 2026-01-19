@@ -1,21 +1,30 @@
 import React from "react";
-
+import logo from "../img/cliberduche_logo.png"; 
 const About = ({ refProp, visible }) => {
   return (
     <>
       <section
         id="about"
         ref={refProp}
-        className={`scroll-mt-18 w-full bg-blue-50 transition-all duration-700 ${
+        className={`scroll-mt-18 w-full bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 transition-all duration-700 ${
           visible ? "animate-fade-in-up" : "opacity-0"
         }`}
       >
+        <div className="h-1 bg-gradient-to-r from-green-400 via-blue-400 to-green-400"></div>
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-semibold mb-6 text-green-600">
-                About Us
-              </h2>
+              <div className="flex items-center gap-4 mb-6">
+                <img
+                  src={logo}
+                  alt="Cliberduche Logo"
+                  className="w-16 h-16 object-contain"
+                />
+                <h2 className="text-3xl font-semibold text-green-600">
+                  About Us
+                </h2>
+              </div>
+
               <p className="mb-4">
                 Established in 2018, Cliberduche Corporation was founded with
                 the vision of providing high-quality land development and
@@ -41,8 +50,7 @@ const About = ({ refProp, visible }) => {
         </div>
       </section>
 
-      {/* Section Separator */}
-      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
+      <div className="h-1 bg-gradient-to-r from-green-400 via-blue-400 to-green-400"></div>
     </>
   );
 };
