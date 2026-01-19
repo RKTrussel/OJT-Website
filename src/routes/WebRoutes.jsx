@@ -17,10 +17,10 @@ const WebRoutes = {
       path: "cliberduche-website",
       element: <CliberducheWebsite />,
     },
-    // {
-    //   path: "cliberduche-website/sample-project",
-    //   element: <SampleProjects />,
-    // },
+    {
+      path: "cliberduche-website/sample-project",
+      element: <SampleProjects />,
+    },
   ],
 };
 
