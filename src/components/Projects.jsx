@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-<<<<<<< HEAD
-import logo from "../img/cliberduche_logo.png";
-=======
 import { Link } from "react-router-dom";
->>>>>>> 8faf15b637d54f29b4e1a2aa0e5dc280d8f5cd82
+import logo from "../img/cliberduche_logo.png"; // <-- import your logo
 
 const Projects = ({ refProp, visible }) => {
   const projects = [
@@ -45,15 +42,14 @@ const Projects = ({ refProp, visible }) => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-16">
+          {/* Logo + Heading */}
           <div className="flex items-center justify-center gap-4 mb-6">
             <img
               src={logo}
               alt="Cliberduche Logo"
               className="w-16 h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-center">
-              Our Projects
-            </h2>
+            <h2 className="text-3xl font-semibold text-center">Our Projects</h2>
           </div>
 
           <p className="text-center mb-12 max-w-3xl mx-auto">
@@ -114,32 +110,18 @@ const DeckCard = ({ project, position, onClick, active }) => {
     left: `
       z-10
       -translate-x-16 sm:-translate-x-20 md:-translate-x-48
-<<<<<<< HEAD
       scale-90 sm:scale-95 md:scale-95
       -rotate-3 sm:-rotate-4 md:-rotate-6
       opacity-50 sm:opacity-60
       hover:scale-105 hover:shadow-xl transition-transform duration-300
-=======
-      scale-90 sm:scale-95
-      -rotate-3 sm:-rotate-4 md:-rotate-6
-      opacity-50
-      cursor-pointer
->>>>>>> 8faf15b637d54f29b4e1a2aa0e5dc280d8f5cd82
     `,
     right: `
       z-10
       translate-x-16 sm:translate-x-20 md:translate-x-48
-<<<<<<< HEAD
       scale-90 sm:scale-95 md:scale-95
       rotate-3 sm:rotate-4 md:rotate-6
       opacity-50 sm:opacity-60
       hover:scale-105 hover:shadow-xl transition-transform duration-300
-=======
-      scale-90 sm:scale-95
-      rotate-3 sm:rotate-4 md:rotate-6
-      opacity-50
-      cursor-pointer
->>>>>>> 8faf15b637d54f29b4e1a2aa0e5dc280d8f5cd82
     `,
   };
 
@@ -180,18 +162,9 @@ const DeckCard = ({ project, position, onClick, active }) => {
 
         {/* BUTTON */}
         {active && (
-<<<<<<< HEAD
-          <button className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition cursor-pointer">
+          <button className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
             Learn More
           </button>
-=======
-          <Link
-            to={project.route}
-            className="mt-4 block text-center w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
-          >
-            View Project →
-          </Link>
->>>>>>> 8faf15b637d54f29b4e1a2aa0e5dc280d8f5cd82
         )}
       </div>
     </div>
