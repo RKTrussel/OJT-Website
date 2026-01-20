@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../img/cliberduche_logo.png"; // <-- import your logo
 
 const Projects = ({ refProp, visible }) => {
+  const [bgLoaded, setBgLoaded] = useState(false);
   const projects = [
     {
       title: "Road Construction",
@@ -37,11 +38,27 @@ const Projects = ({ refProp, visible }) => {
       <section
         id="projects"
         ref={refProp}
-        className={`scroll-mt-18 w-full bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 transition-all duration-700 ${
-          visible ? "animate-fade-in-up" : "opacity-0"
-        }`}
+        className="scroll-mt-18 w-full relative overflow-hidden"
       >
-        <div className="max-w-6xl mx-auto px-6 py-16">
+        <div
+          className={`absolute inset-0 bg-cinematic ${
+            bgLoaded ? "is-loaded" : ""
+          }`}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            alt="Project site"
+            className="bg-cinematic__image"
+            onLoad={() => setBgLoaded(true)}
+            onError={() => setBgLoaded(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/85 via-slate-900/65 to-emerald-900/70"></div>
+        </div>
+        <div
+          className={`relative z-10 max-w-6xl mx-auto px-6 py-20 reveal-clip ${
+            visible ? "is-visible" : ""
+          }`}
+        >
           {/* Logo + Heading */}
           <div className="flex items-center justify-center gap-4 mb-6">
             <img
@@ -49,10 +66,12 @@ const Projects = ({ refProp, visible }) => {
               alt="Cliberduche Logo"
               className="w-16 h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-center">Our Projects</h2>
+            <h2 className="text-3xl font-semibold text-center text-white">
+              Our Projects
+            </h2>
           </div>
 
-          <p className="text-center mb-12 max-w-3xl mx-auto">
+          <p className="text-center mb-12 max-w-3xl mx-auto text-slate-200">
             Our expertise spans land development, infrastructure, and complex
             construction projects.
           </p>
@@ -94,8 +113,6 @@ const Projects = ({ refProp, visible }) => {
           </div>
         </div>
       </section>
-
-      <div className="h-1 w-full bg-linear-to-r from-green-500 via-blue-500 to-green-500" />
     </>
   );
 };

@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../img/cliberduche_logo.png"; 
 const About = ({ refProp, visible }) => {
+  const [bgLoaded, setBgLoaded] = useState(false);
   return (
     <>
       <section
         id="about"
         ref={refProp}
-        className={`scroll-mt-18 w-full bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 transition-all duration-700 ${
-          visible ? "animate-fade-in-up" : "opacity-0"
-        }`}
+        className="scroll-mt-18 w-full relative overflow-hidden"
       >
-        <div className="h-1 bg-gradient-to-r from-green-400 via-blue-400 to-green-400"></div>
-        <div className="max-w-7xl mx-auto px-6 py-16">
+        <div
+          className={`absolute inset-0 bg-cinematic ${
+            bgLoaded ? "is-loaded" : ""
+          }`}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            alt="Construction site"
+            className="bg-cinematic__image"
+            onLoad={() => setBgLoaded(true)}
+            onError={() => setBgLoaded(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-emerald-900/70"></div>
+        </div>
+        <div
+          className={`relative z-10 max-w-7xl mx-auto px-6 py-20 reveal-clip ${
+            visible ? "is-visible" : ""
+          }`}
+        >
           {/* Hero Header */}
           <div className="text-center mb-16 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-green-100/30 via-blue-100/30 to-green-100/30 rounded-3xl -z-10"></div>
@@ -21,11 +37,11 @@ const About = ({ refProp, visible }) => {
                 alt="Cliberduche Logo"
                 className="w-24 h-24 object-contain"
               />
-              <h2 className="text-5xl font-bold text-green-800">
+              <h2 className="text-5xl font-bold text-white">
                 About Us
               </h2>
             </div>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto mb-8">
               Embark on our journey of excellence, from humble beginnings to industry leadership in land development and construction.
             </p>
             <div className="flex justify-center gap-8 text-center">
@@ -33,10 +49,7 @@ const About = ({ refProp, visible }) => {
                 <div className="text-3xl font-bold text-green-600 animate-pulse">2018</div>
                 <div className="text-sm text-gray-600">Founded</div>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                <div className="text-3xl font-bold text-blue-600 animate-pulse">14M+</div>
-                <div className="text-sm text-gray-600">Cubic Meters</div>
-              </div>
+           
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div className="text-3xl font-bold text-green-600 animate-pulse">2</div>
                 <div className="text-sm text-gray-600">Locations</div>
@@ -141,8 +154,6 @@ const About = ({ refProp, visible }) => {
           </div>
         </div>
       </section>
-
-      <div className="h-1 bg-gradient-to-r from-green-400 via-blue-400 to-green-400"></div>
     </>
   );
 };

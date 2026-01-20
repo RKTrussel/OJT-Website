@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../img/cliberduche_logo.png";
 
 const Services = ({ refProp, visible }) => {
+  const [bgLoaded, setBgLoaded] = useState(false);
   const primaryServices = [
     {
       title: "Backfill Sourcing / Land Sourcing",
@@ -51,17 +52,17 @@ const Services = ({ refProp, visible }) => {
     servicesArray.map((s, i) => (
       <div
         key={i}
-        className="bg-white p-6 rounded-2xl shadow text-center hover:shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer relative overflow-hidden group shadow-lg border border-gray-300"
+        className="bg-white/10 p-6 rounded-2xl text-center hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300 cursor-pointer relative overflow-hidden group border border-white/20 backdrop-blur-md"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-green-100 opacity-50 animate-gradient"></div>
-        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/5 opacity-70 animate-gradient"></div>
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <img src={serviceImages[i]} alt="Service" className="w-full h-full object-cover opacity-80" />
         </div>
         <div className="relative z-10">
-          <img src={s.icon} alt={s.title} className="mx-auto mb-4 w-16 h-16 hover:animate-pulse transition-transform duration-300" />
-          <h3 className="text-xl font-semibold mb-4 group-hover:text-white transition-colors duration-300">{s.title}</h3>
-          <p className="text-gray-600 group-hover:text-white transition-colors duration-300">{s.desc}</p>
+          <img src={s.icon} alt={s.title} className="mx-auto mb-4 w-16 h-16 brightness-0 invert hover:animate-pulse transition-transform duration-300" />
+          <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-white transition-colors duration-300">{s.title}</h3>
+          <p className="text-slate-200 group-hover:text-white transition-colors duration-300">{s.desc}</p>
         </div>
       </div>
     ));
@@ -84,24 +85,40 @@ const Services = ({ refProp, visible }) => {
       <section
         id="services"
         ref={refProp}
-        className={`scroll-mt-18 bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 py-16 transition-all duration-700 ${
-          visible ? "animate-fade-in-up" : "opacity-0"
-        }`}
+        className="scroll-mt-18 relative overflow-hidden py-20"
       >
-        <div className="max-w-6xl mx-auto px-6">
+        <div
+          className={`absolute inset-0 bg-cinematic ${
+            bgLoaded ? "is-loaded" : ""
+          }`}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            alt="Heavy equipment"
+            className="bg-cinematic__image"
+            onLoad={() => setBgLoaded(true)}
+            onError={() => setBgLoaded(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/65 to-emerald-900/70"></div>
+        </div>
+        <div
+          className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
+            visible ? "is-visible" : ""
+          }`}
+        >
           <div className="flex items-center justify-center gap-4 mb-10">
             <img
               src={logo}
               alt="Cliberduche Logo"
               className="w-16 h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-green-900 text-center">
+            <h2 className="text-3xl font-semibold text-white text-center">
               Our Services
             </h2>
           </div>
 
           {/* Primary Services */}
-          <h3 className="text-2xl font-semibold mb-6 text-blue-1000 text-center">
+          <h3 className="text-2xl font-semibold mb-6 text-slate-200 text-center">
             Primary Functions
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -109,7 +126,7 @@ const Services = ({ refProp, visible }) => {
           </div>
 
           {/* Secondary Services */}
-          <h3 className="text-2xl font-semibold mb-6 text-blue-1000 text-center">
+          <h3 className="text-2xl font-semibold mb-6 text-slate-200 text-center">
             Secondary Functions
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
@@ -117,9 +134,6 @@ const Services = ({ refProp, visible }) => {
           </div>
         </div>
       </section>
-
-      {/* Section Separator */}
-      <div className="h-1 bg-gradient-to-r from-blue-500 via-green-500 to-blue-500"></div>
     </>
   );
 };

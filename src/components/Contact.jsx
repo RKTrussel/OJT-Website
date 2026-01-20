@@ -1,30 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../img/cliberduche_logo.png"; 
 
 const Contact = ({ refProp, visible }) => {
+  const [bgLoaded, setBgLoaded] = useState(false);
   return (
     <section
       id="contact"
       ref={refProp}
-      className={`scroll-mt-18 bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 w-full transition-all duration-700 ${
-        visible ? "animate-fade-in-up" : "opacity-0"
-      }`}
+      className="scroll-mt-18 w-full relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div
+        className={`absolute inset-0 bg-cinematic ${
+          bgLoaded ? "is-loaded" : ""
+        }`}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+          alt="Office"
+          className="bg-cinematic__image"
+          onLoad={() => setBgLoaded(true)}
+          onError={() => setBgLoaded(true)}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/85 via-slate-900/60 to-emerald-900/70"></div>
+      </div>
+      <div
+        className={`relative z-10 max-w-6xl mx-auto px-6 py-20 reveal-clip ${
+          visible ? "is-visible" : ""
+        }`}
+      >
         <div className="flex items-center justify-center gap-4 mb-10">
           <img
             src={logo}
             alt="Cliberduche Logo"
             className="w-16 h-16 object-contain"
           />
-          <h2 className="text-3xl font-semibold text-green-700 text-center">
+          <h2 className="text-3xl font-semibold text-white text-center">
             Contact Us
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-xl font-semibold mb-6 text-green-700">
+            <h3 className="text-xl font-semibold mb-6 text-emerald-200">
               Get In Touch
             </h3>
             <div className="space-y-6">
@@ -35,8 +52,8 @@ const Contact = ({ refProp, visible }) => {
                   className="mt-1 mr-3"
                 />
                 <div>
-                  <p className="font-semibold text-gray-800">Office Address</p>
-                  <p className="text-gray-600">
+                  <p className="font-semibold text-white">Office Address</p>
+                  <p className="text-slate-200">
                     Lot 3739 National Highway, 3/F CBD Building, Brgy. Pulo,
                     Cabuyao City, Laguna, Philippines
                   </p>
@@ -49,8 +66,8 @@ const Contact = ({ refProp, visible }) => {
                   className="mr-3"
                 />
                 <div>
-                  <p className="font-semibold text-gray-800">Phone</p>
-                  <p className="text-gray-600">
+                  <p className="font-semibold text-white">Phone</p>
+                  <p className="text-slate-200">
                     +63 49 546-6107 / 0967-302-6643
                   </p>
                 </div>
@@ -62,14 +79,14 @@ const Contact = ({ refProp, visible }) => {
                   className="mr-3"
                 />
                 <div>
-                  <p className="font-semibold text-gray-800">Email</p>
-                  <p className="text-gray-600">cliberduche.corp@yahoo.com</p>
+                  <p className="font-semibold text-white">Email</p>
+                  <p className="text-slate-200">cliberduche.corp@yahoo.com</p>
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <form className="bg-white p-9 rounded-xl shadow-lg border border-green-400">
+            <form className="bg-white/95 p-9 rounded-xl shadow-lg border border-white/20 backdrop-blur">
               <h4 className="text-lg font-semibold mb-6 text-gray-800">
                 Send us a Message
               </h4>

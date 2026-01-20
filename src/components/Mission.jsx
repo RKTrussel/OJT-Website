@@ -1,29 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../img/cliberduche_logo.png";
 const Mission = ({ refProp, visible = true }) => {
+  const [bgLoaded, setBgLoaded] = useState(false);
   return (
     <>
       <section
         id="mission"
         ref={refProp}
-        className={`scroll-mt-18 bg-gradient-to-r from-green-200 via-blue-50 to-blue-300 py-16 transition-all duration-700 ${
-          visible ? "animate-fade-in-up" : "opacity-0"
-        }`}
+        className="scroll-mt-18 relative overflow-hidden py-20"
       >
-        <div className="max-w-6xl mx-auto px-6">
+        <div
+          className={`absolute inset-0 bg-cinematic ${
+            bgLoaded ? "is-loaded" : ""
+          }`}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            alt="Landscape"
+            className="bg-cinematic__image"
+            onLoad={() => setBgLoaded(true)}
+            onError={() => setBgLoaded(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-emerald-900/70"></div>
+        </div>
+        <div
+          className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
+            visible ? "is-visible" : ""
+          }`}
+        >
           <div className="flex items-center justify-center gap-4 mb-12">
             <img
               src={logo}
               alt="Cliberduche Logo"
               className="w-16 h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-green-600 text-center">
+            <h2 className="text-3xl font-semibold text-white text-center">
               Mission & Vision
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+            <div className="bg-white/90 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 backdrop-blur">
               <div className="text-center mb-6">
                 <img
                   src="https://img.icons8.com/ios-filled/50/22c55e/handshake.png"
@@ -48,7 +65,7 @@ const Mission = ({ refProp, visible = true }) => {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+            <div className="bg-white/90 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 backdrop-blur">
               <div className="text-center mb-6">
                 <img
                   src="https://img.icons8.com/ios-filled/50/3b82f6/binoculars.png"
@@ -71,7 +88,7 @@ const Mission = ({ refProp, visible = true }) => {
             </div>
           </div>
 
-          <div className="mt-12 bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div className="mt-12 bg-white/90 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 backdrop-blur">
             <div className="text-center mb-6">
               <img
                 src="https://img.icons8.com/ios-filled/50/f59e0b/diamond.png"
@@ -132,7 +149,6 @@ const Mission = ({ refProp, visible = true }) => {
         </div>
       </section>
 
-      <div className="h-1 bg-linear-to-r from-blue-500 via-green-500 to-blue-500"></div>
     </>
   );
 };

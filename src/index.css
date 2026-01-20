@@ -33,6 +33,66 @@ html {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
+@keyframes bgSlowDrift {
+  0% {
+    transform: translateY(var(--parallaxY, 0px)) scale(1);
+  }
+  50% {
+    transform: translateY(calc(var(--parallaxY, 0px) - 1%)) scale(1.05);
+  }
+  100% {
+    transform: translateY(var(--parallaxY, 0px)) scale(1);
+  }
+}
+
+.bg-cinematic {
+  opacity: 0;
+  transition: opacity 800ms ease;
+}
+
+.bg-cinematic.is-loaded {
+  opacity: 1;
+}
+
+.bg-cinematic__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: bgSlowDrift 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.reveal-clip {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: clip-path 900ms ease, opacity 600ms ease, transform 900ms ease;
+  will-change: clip-path, opacity, transform;
+}
+
+.reveal-clip.is-visible {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-cinematic__image {
+    animation: none;
+  }
+
+  .animate-fade-in-up {
+    animation: none;
+  }
+
+  .reveal-clip {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 body {
   background: linear-gradient(to bottom, #f8f9fa, #ffffff);
 }
