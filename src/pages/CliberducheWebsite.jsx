@@ -50,9 +50,9 @@ export default function CliberducheWebsite() {
 
       <Hero parallaxRef={parallaxRef} scrollY={scrollY} />
       <About refProp={aboutRef} visible={visibleSections.about} />
+      <Mission refProp={missionRef} visible={visibleSections.mission} />
       <Services refProp={servicesRef} visible={visibleSections.services} />
       <Projects refProp={projectsRef} visible={visibleSections.projects} />
-      <Mission refProp={missionRef} visible={visibleSections.mission} />
       <Contact refProp={contactRef} visible={visibleSections.contact} />
 
       <Footer />

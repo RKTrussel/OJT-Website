@@ -43,9 +43,9 @@ const Navbar = ({ activeSection }) => {
 
   const links = [
     { name: "About", href: "#about", icon: Info },
+    { name: "Mission & Vision", href: "#mission", icon: Target },
     { name: "Services", href: "#services", icon: Briefcase },
     { name: "Projects", href: "#projects", icon: FolderKanban },
-    { name: "Mission & Vision", href: "#mission", icon: Target },
     { name: "Contact", href: "#contact", icon: Mail },
   ];
 

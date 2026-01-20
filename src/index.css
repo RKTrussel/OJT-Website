@@ -58,8 +58,15 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: bgSlowDrift 18s ease-in-out infinite;
+  animation: bgSlowDrift 26s ease-in-out infinite;
   will-change: transform, opacity;
+}
+
+.cinematic-title {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .reveal-clip {

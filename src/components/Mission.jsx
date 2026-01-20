@@ -34,24 +34,26 @@ const Mission = ({ refProp, visible = true }) => {
               alt="Cliberduche Logo"
               className="w-16 h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-white text-center">
+            <h2 className="text-3xl font-semibold text-white text-center cinematic-title">
               Mission & Vision
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white/90 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 backdrop-blur">
+            <div className="bg-slate-900/60 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 backdrop-blur-md border border-white/10">
               <div className="text-center mb-6">
-                <img
-                  src="https://img.icons8.com/ios-filled/50/22c55e/handshake.png"
-                  alt="Mission"
-                  className="w-12 h-12 mx-auto mb-2"
-                />
-                <h3 className="text-2xl font-semibold text-green-600">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
+                  <img
+                    src="https://img.icons8.com/ios-filled/50/22c55e/handshake.png"
+                    alt="Mission"
+                    className="w-8 h-8"
+                  />
+                </div>
+                <h3 className="text-2xl font-semibold text-emerald-300 tracking-wide">
                   Our Mission
                 </h3>
               </div>
-              <p className="text-gray-700 leading-relaxed text-justify">
+              <p className="text-slate-200 leading-relaxed text-left max-w-prose mx-auto">
                 “We are a responsible land development company that provides
                 high-quality backfill materials for land development projects
                 and other infrastructures, including but not limited to sub-base
@@ -65,18 +67,20 @@ const Mission = ({ refProp, visible = true }) => {
               </p>
             </div>
 
-            <div className="bg-white/90 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 backdrop-blur">
+            <div className="bg-slate-900/60 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 backdrop-blur-md border border-white/10">
               <div className="text-center mb-6">
-                <img
-                  src="https://img.icons8.com/ios-filled/50/3b82f6/binoculars.png"
-                  alt="Vision"
-                  className="w-12 h-12 mx-auto mb-2"
-                />
-                <h3 className="text-2xl font-semibold text-blue-600">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
+                  <img
+                    src="https://img.icons8.com/ios-filled/50/3b82f6/binoculars.png"
+                    alt="Vision"
+                    className="w-8 h-8"
+                  />
+                </div>
+                <h3 className="text-2xl font-semibold text-sky-300 tracking-wide">
                   Our Vision
                 </h3>
               </div>
-              <p className="text-gray-700 leading-relaxed text-justify">
+              <p className="text-slate-200 leading-relaxed text-left max-w-prose mx-auto">
                 “Our vision is to be a highly respected, world-class natural
                 resource land development company committed to adhering to
                 international standards in land development operations and
@@ -88,60 +92,76 @@ const Mission = ({ refProp, visible = true }) => {
             </div>
           </div>
 
-          <div className="mt-12 bg-white/90 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 backdrop-blur">
+          <div className="mt-12 bg-slate-900/60 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 backdrop-blur-md border border-white/10">
             <div className="text-center mb-6">
-              <img
-                src="https://img.icons8.com/ios-filled/50/f59e0b/diamond.png"
-                alt="Core Values"
-                className="w-12 h-12 mx-auto mb-2"
-              />
-              <h3 className="text-2xl font-semibold text-amber-600">
+              <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
+                <img
+                  src="https://img.icons8.com/ios-filled/50/f59e0b/diamond.png"
+                  alt="Core Values"
+                  className="w-8 h-8"
+                />
+              </div>
+              <h3 className="text-2xl font-semibold text-amber-300 tracking-wide">
                 Our Core Values
               </h3>
             </div>
-            <p className="text-gray-700 leading-relaxed text-justify">
+            <p className="text-slate-200 leading-relaxed text-left max-w-3xl mx-auto">
               Taking pride, we believe that there is an intelligent Creator who
               made us, and our purpose is to help one another and be truthful in
               all our transactions, and thus CLIBERDUCHE CORPORATION takes pride
               in being able to offer its services at the most competitive
               prices, taking into consideration QUALITY, SAFETY, AND INTEGRITY.
             </p>
-            <div className="mt-4 space-y-4">
-              <div className="flex items-start">
-                <img
-                  src="https://img.icons8.com/ios-filled/50/f59e0b/star.png"
-                  alt="Quality"
-                  className="w-8 h-8 mr-4 mt-1 shrink-0"
-                />
-                <p className="text-gray-700 leading-relaxed text-justify">
-                  <strong>Quality</strong> – ensures projects are of high
-                  Quality and pair with local standards to be able to be
-                  competitive in the National and Local Market scene.
+            <div className="mt-6 grid gap-6 md:grid-cols-3">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <img
+                    src="https://img.icons8.com/ios-filled/50/f59e0b/star.png"
+                    alt="Quality"
+                    className="w-7 h-7"
+                  />
+                  <h4 className="text-lg font-semibold text-amber-200">
+                    Quality
+                  </h4>
+                </div>
+                <p className="text-slate-200 leading-relaxed text-left">
+                  Ensures projects are of high Quality and pair with local
+                  standards to be able to be competitive in the National and
+                  Local Market scene.
                 </p>
               </div>
-              <div className="flex items-start">
-                <img
-                  src="https://img.icons8.com/ios-filled/50/f59e0b/shield.png"
-                  alt="Safety"
-                  className="w-8 h-8 mr-4 mt-1 shrink-0"
-                />
-                <p className="text-gray-700 leading-relaxed text-justify">
-                  <strong>Safety</strong> – ensures safety at work site, safety
-                  of projects and safety of personnel and thus we ensure safety
-                  practices which is the pinnacle, before and after execution of
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <img
+                    src="https://img.icons8.com/ios-filled/50/f59e0b/shield.png"
+                    alt="Safety"
+                    className="w-7 h-7"
+                  />
+                  <h4 className="text-lg font-semibold text-amber-200">
+                    Safety
+                  </h4>
+                </div>
+                <p className="text-slate-200 leading-relaxed text-left">
+                  Ensures safety at work site, safety of projects and safety of
+                  personnel and thus we ensure safety practices which is the
+                  pinnacle, before and after execution of projects.
+                </p>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <img
+                    src="https://img.icons8.com/ios-filled/50/f59e0b/certificate.png"
+                    alt="Integrity"
+                    className="w-7 h-7"
+                  />
+                  <h4 className="text-lg font-semibold text-amber-200">
+                    Integrity
+                  </h4>
+                </div>
+                <p className="text-slate-200 leading-relaxed text-left">
+                  Ensure compliance with existing laws covering the construction
+                  industry, reliable workforce and our timely delivery of
                   projects.
-                </p>
-              </div>
-              <div className="flex items-start">
-                <img
-                  src="https://img.icons8.com/ios-filled/50/f59e0b/certificate.png"
-                  alt="Integrity"
-                  className="w-8 h-8 mr-4 mt-1 shrink-0"
-                />
-                <p className="text-gray-700 leading-relaxed text-justify">
-                  <strong>Integrity</strong> – ensure compliance with existing
-                  laws covering the construction industry, reliable workforce
-                  and our timely delivery of projects.
                 </p>
               </div>
             </div>
