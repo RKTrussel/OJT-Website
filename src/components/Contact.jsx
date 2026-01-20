@@ -86,42 +86,50 @@ const Contact = ({ refProp, visible }) => {
             </div>
           </div>
           <div>
-            <form className="bg-white/95 p-9 rounded-xl shadow-lg border border-white/20 backdrop-blur">
-              <h4 className="text-lg font-semibold mb-6 text-gray-800">
-                Send us a Message
-              </h4>
+            <form className="bg-slate-900/70 p-8 sm:p-10 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-md">
+              <div className="mb-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-emerald-200/80">
+                  Contact Form
+                </p>
+                <h4 className="text-2xl font-semibold text-white">
+                  Send us a Message
+                </h4>
+                <p className="text-slate-300 mt-2">
+                  Tell us about your project and we’ll respond within 24–48 hours.
+                </p>
+              </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2 font-medium">
+                <label className="block text-slate-200 mb-2 text-sm font-medium">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
                   placeholder="Your Name"
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2 font-medium">
+                <label className="block text-slate-200 mb-2 text-sm font-medium">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
                   placeholder="your@email.com"
                 />
               </div>
               <div className="mb-6">
-                <label className="block text-gray-700 mb-2 font-medium">
+                <label className="block text-slate-200 mb-2 text-sm font-medium">
                   Message
                 </label>
                 <textarea
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 h-32 resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 h-32 resize-none"
                   placeholder="Your message here..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-md hover:shadow-lg"
+                className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40"
               >
                 Send Message
               </button>
