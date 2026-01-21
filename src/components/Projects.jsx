@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "../img/cliberduche_logo.png"; // <-- import your logo
+import logo from "../img/cliberduche_logo.png";
+import projectsBg from "../img/main_background-projects.png";
 
 const Projects = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
@@ -46,8 +47,8 @@ const Projects = ({ refProp, visible }) => {
           }`}
         >
           <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-            alt="Project site"
+            src={projectsBg}
+            alt="Project Site Background"
             className="bg-cinematic__image"
             onLoad={() => setBgLoaded(true)}
             onError={() => setBgLoaded(true)}
@@ -149,23 +150,18 @@ const DeckCard = ({ project, position, onClick, active }) => {
       className={`${base} ${styles[position]} ${widthClass}`}
       onClick={!active ? onClick : undefined}
     >
-      {/* IMAGE */}
       <div className="relative h-48 sm:h-52">
         <img
           src={project.img}
           alt={project.title}
           className="w-full h-full object-cover"
         />
-
-        {/* EDGE BLUR */}
         {!active && (
           <>
             <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-white/70 to-transparent backdrop-blur-sm" />
             <div className="absolute inset-y-0 right-0 w-1/3 bg-linear-to-l from-white/70 to-transparent backdrop-blur-sm" />
           </>
         )}
-
-        {/* CLICK OVERLAY (CENTER ONLY) */}
         {active && (
           <Link to={project.route} className="absolute inset-0 z-40" />
         )}
@@ -176,8 +172,6 @@ const DeckCard = ({ project, position, onClick, active }) => {
           {project.title}
         </h3>
         <p className="text-sm text-gray-600 mt-2">{project.desc}</p>
-
-        {/* BUTTON */}
         {active && (
           <button className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
             Learn More

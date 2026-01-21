@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "../img/cliberduche_logo.png";
+import servicesBg from "../img/main_background-services.png";
 
 const Services = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
@@ -93,7 +94,7 @@ const Services = ({ refProp, visible }) => {
           }`}
         >
           <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            src={servicesBg}
             alt="Heavy equipment"
             className="bg-cinematic__image"
             onLoad={() => setBgLoaded(true)}

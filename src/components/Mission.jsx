@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import logo from "../img/cliberduche_logo.png";
+import missionBg from "../img/main_background-mission.png";
+
 const Mission = ({ refProp, visible = true }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
   return (
@@ -15,8 +17,8 @@ const Mission = ({ refProp, visible = true }) => {
           }`}
         >
           <img
-            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-            alt="Landscape"
+            src={missionBg}
+            alt="Mission Background"
             className="bg-cinematic__image"
             onLoad={() => setBgLoaded(true)}
             onError={() => setBgLoaded(true)}

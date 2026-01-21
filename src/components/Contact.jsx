@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import logo from "../img/cliberduche_logo.png"; 
+import logo from "../img/cliberduche_logo.png";
+import contactBg from "../img/main_background-contact.jpg";
 
 const Contact = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
+
   return (
     <section
       id="contact"
@@ -15,14 +17,15 @@ const Contact = ({ refProp, visible }) => {
         }`}
       >
         <img
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-          alt="Office"
+          src={contactBg}
+          alt="Contact Background"
           className="bg-cinematic__image"
           onLoad={() => setBgLoaded(true)}
           onError={() => setBgLoaded(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/85 via-slate-900/60 to-emerald-900/70"></div>
       </div>
+
       <div
         className={`relative z-10 max-w-6xl mx-auto px-6 py-20 reveal-clip ${
           visible ? "is-visible" : ""
@@ -44,6 +47,7 @@ const Contact = ({ refProp, visible }) => {
             <h3 className="text-xl font-semibold mb-6 text-emerald-200">
               Get In Touch
             </h3>
+
             <div className="space-y-6">
               <div className="flex items-start">
                 <img
@@ -59,6 +63,7 @@ const Contact = ({ refProp, visible }) => {
                   </p>
                 </div>
               </div>
+
               <div className="flex items-center">
                 <img
                   src="https://img.icons8.com/ios-filled/24/22c55e/phone.png"
@@ -72,6 +77,7 @@ const Contact = ({ refProp, visible }) => {
                   </p>
                 </div>
               </div>
+
               <div className="flex items-center">
                 <img
                   src="https://img.icons8.com/ios-filled/24/22c55e/email.png"
@@ -80,11 +86,14 @@ const Contact = ({ refProp, visible }) => {
                 />
                 <div>
                   <p className="font-semibold text-white">Email</p>
-                  <p className="text-slate-200">cliberduche.corp@yahoo.com</p>
+                  <p className="text-slate-200">
+                    cliberduche.corp@yahoo.com
+                  </p>
                 </div>
               </div>
             </div>
           </div>
+
           <div>
             <form className="bg-slate-900/70 p-8 sm:p-10 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-md">
               <div className="mb-6">
@@ -95,9 +104,11 @@ const Contact = ({ refProp, visible }) => {
                   Send us a Message
                 </h4>
                 <p className="text-slate-300 mt-2">
-                  Tell us about your project and we’ll respond within 24–48 hours.
+                  Tell us about your project and we’ll respond within 24–48
+                  hours.
                 </p>
               </div>
+
               <div className="mb-4">
                 <label className="block text-slate-200 mb-2 text-sm font-medium">
                   Name
@@ -108,6 +119,7 @@ const Contact = ({ refProp, visible }) => {
                   placeholder="Your Name"
                 />
               </div>
+
               <div className="mb-4">
                 <label className="block text-slate-200 mb-2 text-sm font-medium">
                   Email
@@ -118,6 +130,7 @@ const Contact = ({ refProp, visible }) => {
                   placeholder="your@email.com"
                 />
               </div>
+
               <div className="mb-6">
                 <label className="block text-slate-200 mb-2 text-sm font-medium">
                   Message
@@ -127,6 +140,7 @@ const Contact = ({ refProp, visible }) => {
                   placeholder="Your message here..."
                 ></textarea>
               </div>
+
               <button
                 type="submit"
                 className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40"
