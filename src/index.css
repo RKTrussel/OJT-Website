@@ -83,12 +83,68 @@ html {
   transform: translateY(0);
 }
 
+@keyframes cardMediaFloat {
+  0% {
+    transform: translateY(0) scale(1.02);
+    filter: saturate(1.05);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.04);
+    filter: saturate(1.12);
+  }
+  100% {
+    transform: translateY(0) scale(1.02);
+    filter: saturate(1.05);
+  }
+}
+
+@keyframes cardMediaShine {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.35;
+  }
+  60% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateX(120%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+.card-media-float {
+  animation: cardMediaFloat 10s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+.card-media-shine {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.12) 45%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  animation: cardMediaShine 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bg-cinematic__image {
     animation: none;
   }
 
   .animate-fade-in-up {
+    animation: none;
+  }
+
+  .card-media-float,
+  .card-media-shine {
     animation: none;
   }
 
