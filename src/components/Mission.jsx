@@ -5,7 +5,7 @@ import missionBg from "../img/main_background-mission.png";
 const Mission = ({ refProp, visible = true }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
   return (
-    <>
+    <div>
       <section
         id="mission"
         ref={refProp}
@@ -23,7 +23,7 @@ const Mission = ({ refProp, visible = true }) => {
             onLoad={() => setBgLoaded(true)}
             onError={() => setBgLoaded(true)}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-emerald-900/70"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-slate-900/80 via-slate-900/60 to-emerald-900/70"></div>
         </div>
         <div
           className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
@@ -170,8 +170,8 @@ const Mission = ({ refProp, visible = true }) => {
           </div>
         </div>
       </section>
-
-    </>
+      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
+    </div>
   );
 };
 

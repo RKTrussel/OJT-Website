@@ -55,21 +55,33 @@ const Services = ({ refProp, visible }) => {
         key={i}
         className="bg-white/10 p-6 rounded-2xl text-center hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300 cursor-pointer relative overflow-hidden group border border-white/20 backdrop-blur-md"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/5 opacity-70 animate-gradient"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-white/15 to-white/5 opacity-70 animate-gradient"></div>
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <img src={serviceImages[i]} alt="Service" className="w-full h-full object-cover opacity-80" />
+          <img
+            src={serviceImages[i]}
+            alt="Service"
+            className="w-full h-full object-cover opacity-80"
+          />
         </div>
         <div className="relative z-10">
-          <img src={s.icon} alt={s.title} className="mx-auto mb-4 w-16 h-16 brightness-0 invert hover:animate-pulse transition-transform duration-300" />
-          <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-white transition-colors duration-300">{s.title}</h3>
-          <p className="text-slate-200 group-hover:text-white transition-colors duration-300">{s.desc}</p>
+          <img
+            src={s.icon}
+            alt={s.title}
+            className="mx-auto mb-4 w-16 h-16 brightness-0 invert hover:animate-pulse transition-transform duration-300"
+          />
+          <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-white transition-colors duration-300">
+            {s.title}
+          </h3>
+          <p className="text-slate-200 group-hover:text-white transition-colors duration-300">
+            {s.desc}
+          </p>
         </div>
       </div>
     ));
 
   return (
-    <>
+    <div>
       <style>
         {`
           @keyframes gradient {
@@ -100,7 +112,7 @@ const Services = ({ refProp, visible }) => {
             onLoad={() => setBgLoaded(true)}
             onError={() => setBgLoaded(true)}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/65 to-emerald-900/70"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-slate-900/85 via-slate-900/65 to-emerald-900/70"></div>
         </div>
         <div
           className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
@@ -135,7 +147,8 @@ const Services = ({ refProp, visible }) => {
           </div>
         </div>
       </section>
-    </>
+      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
+    </div>
   );
 };
 
