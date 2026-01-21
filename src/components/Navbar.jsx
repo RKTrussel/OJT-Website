@@ -8,58 +8,63 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import logo from "../img/cliberduche_logo.png"; 
+import logo from "../img/cliberduche_logo.png";
 
-const Navbar = ({ activeSection }) => {
+const BASE_URL = "/cliberduche-website";
+
+const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
+  const links = [
+    { name: "About", href: `${BASE_URL}#about`, icon: Info },
+    { name: "Mission & Vision", href: `${BASE_URL}#mission`, icon: Target },
+    { name: "Services", href: `${BASE_URL}#services`, icon: Briefcase },
+    { name: "Projects", href: `${BASE_URL}#projects`, icon: FolderKanban },
+    { name: "Contact", href: `${BASE_URL}#contact`, icon: Mail },
+  ];
+
+  // lock scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
+  // auto active section on scroll
   useEffect(() => {
-    const sections = links.map(link => document.getElementById(link.href.slice(1)));
+    const sections = links
+      .map((link) => document.getElementById(link.href.split("#")[1]))
+      .filter(Boolean);
 
     const observer = new IntersectionObserver(
       (entries) => {
-        let current = '';
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            current = entry.target.id;
+            setSelected(entry.target.id);
           }
         });
-        if (current) setSelected(current);
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 },
     );
 
-    sections.forEach(section => {
-      if (section) observer.observe(section);
-    });
+    sections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
   }, []);
 
-  const links = [
-    { name: "About", href: "#about", icon: Info },
-    { name: "Mission & Vision", href: "#mission", icon: Target },
-    { name: "Services", href: "#services", icon: Briefcase },
-    { name: "Projects", href: "#projects", icon: FolderKanban },
-    { name: "Contact", href: "#contact", icon: Mail },
-  ];
-
-  const handleClick = () => setOpen(false);
+  const handleClose = () => setOpen(false);
 
   return (
     <nav className="fixed top-0 w-full z-50">
       {/* Glass Container */}
       <div className="bg-gray-900/60 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          
           {/* Logo */}
           <div className="flex items-center gap-3 text-xl font-semibold tracking-wide text-white">
-            <img src={logo} alt="Cliberduche Logo" className="w-15 h-10 object-contain" />
+            <img
+              src={logo}
+              alt="Cliberduche Logo"
+              className="w-15 h-10 object-contain"
+            />
             <span className="text-white navbar-font">Cliberduche</span>
           </div>
 
@@ -67,13 +72,14 @@ const Navbar = ({ activeSection }) => {
           <div className="hidden md:flex items-center gap-10">
             {links.map((link) => {
               const Icon = link.icon;
-              const isActive = selected === link.href.slice(1);
+              const section = link.href.split("#")[1];
+              const isActive = selected === section;
 
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setSelected(link.href.slice(1))}
+                  onClick={() => setSelected(section)}
                   className={`
                     navbar-font relative flex items-center gap-2 text-sm transition
                     ${
@@ -119,15 +125,16 @@ const Navbar = ({ activeSection }) => {
           <div className="flex flex-col divide-y divide-white/10">
             {links.map((link) => {
               const Icon = link.icon;
-              const isActive = selected === link.href.slice(1);
+              const section = link.href.split("#")[1];
+              const isActive = selected === section;
 
               return (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => {
-                    setSelected(link.href.slice(1));
-                    handleClick(); // close menu
+                    setSelected(section);
+                    handleClose();
                   }}
                   className={`navbar-font flex items-center gap-3 px-6 py-4 text-sm transition
                     ${
