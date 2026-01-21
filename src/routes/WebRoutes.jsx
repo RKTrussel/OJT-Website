@@ -4,7 +4,15 @@ import { Navigate } from "react-router-dom";
 const CliberducheWebsite = React.lazy(() =>
   import("../pages/CliberducheWebsite")
 );
-const SampleProjects = React.lazy(() => import("../projects/SampleProjects"));
+const BridgeConstructionMain = React.lazy(() =>
+  import("../pages/BridgeConstructionMain")
+);
+const LandDevelopmentMain = React.lazy(() =>
+  import("../pages/LandDevelopmentMain")
+);
+const RoadConstructionMain = React.lazy(() =>
+  import("../pages/RoadConstructionMain")
+);
 
 const WebRoutes = {
   path: "/",
@@ -18,8 +26,16 @@ const WebRoutes = {
       element: <CliberducheWebsite />,
     },
     {
-      path: "cliberduche-website/sample-project",
-      element: <SampleProjects />,
+      path: "cliberduche-website/bridge-construction",
+      element: <BridgeConstructionMain />,
+    },
+    {
+      path: "cliberduche-website/land-development",
+      element: <LandDevelopmentMain />,
+    },
+    {
+      path: "cliberduche-website/road-construction",
+      element: <RoadConstructionMain />,
     },
   ],
 };
