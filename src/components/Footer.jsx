@@ -82,19 +82,22 @@ const Footer = () => {
           <h4 className="font-semibold text-green-400 mb-4 text-center">
             Certifications
           </h4>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center">
+
+          {/* Horizontal scroll for mobile */}
+          <div className="flex overflow-x-auto space-x-4 py-4 px-2 md:grid md:grid-cols-5 md:gap-4 md:overflow-visible">
             {certificates.map((cert) => (
               <img
                 key={cert.alt}
                 src={cert.src}
                 alt={cert.alt}
-                className="w-32 h-32 object-contain"
+                className="w-32 h-32 object-contain shrink-0
+                           transform transition duration-300
+                           hover:scale-110 hover:shadow-lg cursor-pointer"
               />
             ))}
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-12 py-6 text-center text-gray-400 text-sm">
           © 2018–2026 Cliberduche Corporation. All Rights Reserved.
         </div>
