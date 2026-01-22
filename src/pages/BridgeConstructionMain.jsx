@@ -12,7 +12,7 @@ const BridgeConstructionMain = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="grow pt-24">
+      <main>
         <BridgeConstruction />
       </main>
 
