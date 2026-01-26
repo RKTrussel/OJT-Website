@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logo from "../img/cliberduche_logo.png";
+import cbdImg from "../img/CBD_2019.png";
+import mdi24Img from "../img/MDI_2024.png";
+import mdi25Img from "../img/MDI_2025.png";
+import mdi26Img from "../img/MDI_2026.png";
+import pierNorthImg from "../img/Pier_NorthHarbour2026.png";
+import silangCaviteImg from "../img/SilangCavite2021.png";
+import tanzaCaviteImg from "../img/TanzaCavite2021.png";
 
 const Projects = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
@@ -11,43 +18,43 @@ const Projects = ({ refProp, visible }) => {
     {
       title: "CBD BUILDING PROJECT 2019",
       desc: "Highway and infrastructure development projects",
-      img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80",
+      img: cbdImg,
       route: "road-construction",
     },
     {
       title: "MDI - MERCATOR HOLDINGS PROJECT 2024",
       desc: "Site preparation and land development services",
-      img: "https://images.unsplash.com/photo-1590845947670-c009801ffa74?auto=format&fit=crop&w=900&q=80",
+      img: mdi24Img,
       route: "land-development",
     },
     {
       title: "MDI - MERCATOR HOLDINGS PROJECT 2025",
       desc: "Bridge building and structural engineering",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      img: mdi25Img,
       route: "bridge-construction",
     },
     {
       title: "MDI - MERCATOR HOLDINGS PROJECT 2026",
       desc: "Bridge building and structural engineering",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      img: mdi26Img,
       route: "bridge-construction",
     },
     {
       title: "PIER 2 NORTH HARBOUR 2026",
       desc: "Bridge building and structural engineering",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      img: pierNorthImg,
       route: "bridge-construction",
     },
     {
       title: "SILANG, CAVITE PROJECT 2021",
       desc: "Bridge building and structural engineering",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      img: silangCaviteImg,
       route: "bridge-construction",
     },
     {
       title: "WDV PHASE 4 TANZA, CAVITE 2026",
       desc: "Bridge building and structural engineering",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      img: tanzaCaviteImg,
       route: "bridge-construction",
     },
   ];
