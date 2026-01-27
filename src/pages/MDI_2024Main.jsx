@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import BridgeConstruction from "../projects/BridgeConstruction";
+import MDI_2024 from "../projects/MDI_2024";
 
 const MDI_2024Main = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const MDI_2024Main = () => {
       <Navbar />
 
       <main>
-        <BridgeConstruction />
+        <MDI_2024 />
       </main>
 
       <Footer />

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import BridgeConstruction from "../projects/BridgeConstruction";
+import Pier2_NorthHarbour2026 from "../projects/Pier2_NorthHarbour2026";
 
 const Pier2_NorthHarbour2026Main = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const Pier2_NorthHarbour2026Main = () => {
       <Navbar />
 
       <main>
-        <BridgeConstruction />
+        <Pier2_NorthHarbour2026 />
       </main>
 
       <Footer />
