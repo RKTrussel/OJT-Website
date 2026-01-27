@@ -71,7 +71,7 @@ const MDI_2024 = () => {
         <div className="relative z-10 mt-10 max-w-300 mx-auto h-full flex items-center px-6">
           <div className="max-w-xl text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Road Construction Project
+              MDI - MERCATOR HOLDINGS PROJECT 2024
             </h1>
             <p className="text-lg md:text-xl leading-relaxed">
               Modernizing urban infrastructure through durable, safe, and

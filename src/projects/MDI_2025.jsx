@@ -15,14 +15,14 @@ import {
 } from "lucide-react";
 
 import Picture23 from "../img/MDI2025_Images/Picture23.png";
-import Picture24 from "../img/MDI2025_Images/Picture22.png";
+import Picture24 from "../img/MDI2025_Images/Picture24.png";
 import Picture25 from "../img/MDI2025_Images/Picture25.png";
 import Picture26 from "../img/MDI2025_Images/Picture26.png";
-import Picture27 from "../img/MDI2025_Images/Picture27.png";
 import Picture28 from "../img/MDI2025_Images/Picture28.png";
 import Picture29 from "../img/MDI2025_Images/Picture29.png";
 import Picture30 from "../img/MDI2025_Images/Picture30.png";
-import Picture32 from "../img/MDI2025_Images/Picture31.png";
+import Picture31 from "../img/MDI2025_Images/Picture31.png";
+import Picture32 from "../img/MDI2025_Images/Picture32.png";
 import Picture33 from "../img/MDI2025_Images/Picture33.png";
 import Picture34 from "../img/MDI2025_Images/Picture34.png";
 import Picture35 from "../img/MDI2025_Images/Picture35.png";
@@ -33,13 +33,13 @@ const GALLERY_IMAGES = [
   Picture24,
   Picture25,
   Picture26,
-  Picture27,
   Picture28,
   Picture29,
   Picture30,
   Picture31,
   Picture32,
   Picture33,
+  Picture34,
   Picture35,
 ];
 
@@ -49,13 +49,13 @@ const MDI_2025 = () => {
     Picture24,
     Picture25,
     Picture26,
-    Picture27,
     Picture28,
     Picture29,
     Picture30,
     Picture31,
     Picture32,
     Picture33,
+    Picture34,
     Picture35,
   ];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -105,7 +105,7 @@ const MDI_2025 = () => {
         <div className="relative z-10 mt-10 max-w-300 mx-auto h-full flex items-center px-6">
           <div className="max-w-xl text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Road Construction Project
+              MDI - MERCATOR HOLDINGS PROJECT 2025
             </h1>
             <p className="text-lg md:text-xl leading-relaxed">
               Modernizing urban infrastructure through durable, safe, and
