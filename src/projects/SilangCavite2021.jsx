@@ -14,28 +14,32 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroImg from "../img/main_background-contact.jpg";
-import gallery1 from "../img/main_background-mission.png";
-import gallery2 from "../img/main_background-projects.png";
-import gallery3 from "../img/main_background-services.png";
+import Picture11 from "../img/SilangCavite2021_Images/Picture11.png";
+import Picture12 from "../img/SilangCavite2021_Images/Picture12.png";
+import Picture13 from "../img/SilangCavite2021_Images/Picture13.png";
+import Picture14 from "../img/SilangCavite2021_Images/Picture14.png";
+import Picture15 from "../img/SilangCavite2021_Images/Picture15.png";
+import Picture16 from "../img/SilangCavite2021_Images/Picture16.png";
 
 // Add all projects images here
 const GALLERY_IMAGES = [
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
+  Picture11,
+  Picture12,
+  Picture13,
+  Picture14,
+  Picture15,
+  Picture16,
 ];
 
 const SilangCavite2021 = () => {
-  const heroImages = [heroImg, gallery1, gallery2, gallery3];
+  const heroImages = [
+    Picture11,
+    Picture12,
+    Picture13,
+    Picture14,
+    Picture15,
+    Picture16,
+  ];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -109,10 +113,10 @@ const SilangCavite2021 = () => {
             <h3 className="text-2xl font-semibold mb-4">Key Details</h3>
             <ul className="space-y-3 text-lg">
               <li className="flex items-center gap-2">
-                <Calendar className="w-5 h-5" /> Jan 2026
+                <Calendar className="w-5 h-5" /> 2021
               </li>
               <li className="flex items-center gap-2">
-                <Briefcase className="w-5 h-5" /> Metro City
+                <Briefcase className="w-5 h-5" /> Silang, Cavite
               </li>
             </ul>
           </div>
@@ -181,7 +185,10 @@ const SilangCavite2021 = () => {
             <div>
               <ListChecks className="w-8 h-8 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Scope</h3>
-              <p className="text-lg leading-relaxed">(3-STOREY BUILDING)</p>
+              <p className="text-lg leading-relaxed">
+                LEVELING AND COMPACTION, DRAINAGE, ROAD NETWORK, RIPRAP, BRIDGE,
+                RECTIFICATION
+              </p>
             </div>
 
             <div>

@@ -14,28 +14,32 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroImg from "../img/main_background-contact.jpg";
-import gallery1 from "../img/main_background-mission.png";
-import gallery2 from "../img/main_background-projects.png";
-import gallery3 from "../img/main_background-services.png";
+import Picture46 from "../img/TanzaCavite2021_Images/Picture46.png";
+import Picture47 from "../img/TanzaCavite2021_Images/Picture47.png";
+import Picture48 from "../img/TanzaCavite2021_Images/Picture48.png";
+import Picture49 from "../img/TanzaCavite2021_Images/Picture49.png";
+import Picture50 from "../img/TanzaCavite2021_Images/Picture50.png";
+import Picture51 from "../img/TanzaCavite2021_Images/Picture51.png";
 
 // Add all projects images here
 const GALLERY_IMAGES = [
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
+  Picture46,
+  Picture47,
+  Picture48,
+  Picture49,
+  Picture50,
+  Picture51,
 ];
 
 const TanzaCavite2026 = () => {
-  const heroImages = [heroImg, gallery1, gallery2, gallery3];
+  const heroImages = [
+    Picture46,
+    Picture47,
+    Picture48,
+    Picture49,
+    Picture50,
+    Picture51,
+  ];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -109,10 +113,10 @@ const TanzaCavite2026 = () => {
             <h3 className="text-2xl font-semibold mb-4">Key Details</h3>
             <ul className="space-y-3 text-lg">
               <li className="flex items-center gap-2">
-                <Calendar className="w-5 h-5" /> Jan 2026
+                <Calendar className="w-5 h-5" /> 2026
               </li>
               <li className="flex items-center gap-2">
-                <Briefcase className="w-5 h-5" /> Metro City
+                <Briefcase className="w-5 h-5" /> Tanza, Cavite
               </li>
             </ul>
           </div>
@@ -181,7 +185,9 @@ const TanzaCavite2026 = () => {
             <div>
               <ListChecks className="w-8 h-8 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Scope</h3>
-              <p className="text-lg leading-relaxed">(3-STOREY BUILDING)</p>
+              <p className="text-lg leading-relaxed">
+                RETAINING WALL & PERIMETER FENCE
+              </p>
             </div>
 
             <div>

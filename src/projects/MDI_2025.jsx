@@ -14,28 +14,50 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroImg from "../img/main_background-contact.jpg";
-import gallery1 from "../img/main_background-mission.png";
-import gallery2 from "../img/main_background-projects.png";
-import gallery3 from "../img/main_background-services.png";
+import Picture23 from "../img/MDI2025_Images/Picture23.png";
+import Picture24 from "../img/MDI2025_Images/Picture22.png";
+import Picture25 from "../img/MDI2025_Images/Picture25.png";
+import Picture26 from "../img/MDI2025_Images/Picture26.png";
+import Picture27 from "../img/MDI2025_Images/Picture27.png";
+import Picture28 from "../img/MDI2025_Images/Picture28.png";
+import Picture29 from "../img/MDI2025_Images/Picture29.png";
+import Picture30 from "../img/MDI2025_Images/Picture30.png";
+import Picture32 from "../img/MDI2025_Images/Picture31.png";
+import Picture33 from "../img/MDI2025_Images/Picture33.png";
+import Picture34 from "../img/MDI2025_Images/Picture34.png";
+import Picture35 from "../img/MDI2025_Images/Picture35.png";
 
 // Add all projects images here
 const GALLERY_IMAGES = [
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
+  Picture23,
+  Picture24,
+  Picture25,
+  Picture26,
+  Picture27,
+  Picture28,
+  Picture29,
+  Picture30,
+  Picture31,
+  Picture32,
+  Picture33,
+  Picture35,
 ];
 
 const MDI_2025 = () => {
-  const heroImages = [heroImg, gallery1, gallery2, gallery3];
+  const heroImages = [
+    Picture23,
+    Picture24,
+    Picture25,
+    Picture26,
+    Picture27,
+    Picture28,
+    Picture29,
+    Picture30,
+    Picture31,
+    Picture32,
+    Picture33,
+    Picture35,
+  ];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -109,7 +131,7 @@ const MDI_2025 = () => {
             <h3 className="text-2xl font-semibold mb-4">Key Details</h3>
             <ul className="space-y-3 text-lg">
               <li className="flex items-center gap-2">
-                <Calendar className="w-5 h-5" /> Jan 2026
+                <Calendar className="w-5 h-5" /> 2025
               </li>
               <li className="flex items-center gap-2">
                 <Briefcase className="w-5 h-5" /> Metro City
@@ -181,7 +203,10 @@ const MDI_2025 = () => {
             <div>
               <ListChecks className="w-8 h-8 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Scope</h3>
-              <p className="text-lg leading-relaxed">(3-STOREY BUILDING)</p>
+              <p className="text-lg leading-relaxed">
+                EMBANKMENT, GABION WALL, PERIMETER FENCE AND GATE, RETAINING
+                WALL, PAVEMENT, ELECTRICAL POST LIGHTS, AND LANDSCAPE
+              </p>
             </div>
 
             <div>

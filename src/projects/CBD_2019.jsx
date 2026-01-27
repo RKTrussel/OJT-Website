@@ -14,28 +14,32 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroImg from "../img/main_background-contact.jpg";
-import gallery1 from "../img/main_background-mission.png";
-import gallery2 from "../img/main_background-projects.png";
-import gallery3 from "../img/main_background-services.png";
+import Picture17 from "../img/CBD2019_Images/Picture17.png";
+import Picture18 from "../img/CBD2019_Images/Picture18.png";
+import Picture19 from "../img/CBD2019_Images/Picture19.png";
+import Picture20 from "../img/CBD2019_Images/Picture20.png";
+import Picture21 from "../img/CBD2019_Images/Picture21.png";
+import Picture22 from "../img/CBD2019_Images/Picture22.png";
 
 // Add all projects images here
 const GALLERY_IMAGES = [
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
+  Picture17,
+  Picture18,
+  Picture19,
+  Picture20,
+  Picture21,
+  Picture22,
 ];
 
 const CBD_2019 = () => {
-  const heroImages = [heroImg, gallery1, gallery2, gallery3];
+  const heroImages = [
+    Picture17,
+    Picture18,
+    Picture19,
+    Picture20,
+    Picture21,
+    Picture22,
+  ];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {

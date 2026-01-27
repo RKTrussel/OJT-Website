@@ -14,28 +14,16 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import heroImg from "../img/main_background-contact.jpg";
-import gallery1 from "../img/main_background-mission.png";
-import gallery2 from "../img/main_background-projects.png";
-import gallery3 from "../img/main_background-services.png";
+import Picture7 from "../img/MDI2024_Images/Picture7.png";
+import Picture8 from "../img/MDI2024_Images/Picture8.png";
+import Picture9 from "../img/MDI2024_Images/Picture9.png";
+import Picture10 from "../img/MDI2024_Images/Picture10.png";
 
 // Add all projects images here
-const GALLERY_IMAGES = [
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-  gallery3,
-  gallery1,
-  gallery2,
-];
+const GALLERY_IMAGES = [Picture7, Picture8, Picture9, Picture10];
 
 const MDI_2024 = () => {
-  const heroImages = [heroImg, gallery1, gallery2, gallery3];
+  const heroImages = [Picture7, Picture8, Picture9, Picture10];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -109,7 +97,7 @@ const MDI_2024 = () => {
             <h3 className="text-2xl font-semibold mb-4">Key Details</h3>
             <ul className="space-y-3 text-lg">
               <li className="flex items-center gap-2">
-                <Calendar className="w-5 h-5" /> Jan 2026
+                <Calendar className="w-5 h-5" /> 2026
               </li>
               <li className="flex items-center gap-2">
                 <Briefcase className="w-5 h-5" /> Metro City
@@ -181,7 +169,10 @@ const MDI_2024 = () => {
             <div>
               <ListChecks className="w-8 h-8 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Scope</h3>
-              <p className="text-lg leading-relaxed">(3-STOREY BUILDING)</p>
+              <p className="text-lg leading-relaxed">
+                CLEARING, GRUBBING, TEMPORARY FENCE REMOVAL OF UNSUITABLE SOIL
+                AND LEVELING
+              </p>
             </div>
 
             <div>
