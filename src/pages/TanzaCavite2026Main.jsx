@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import TanzaCavite2021 from "../projects/TanzaCavite2021";
+import TanzaCavite2026 from "../projects/TanzaCavite2026";
 
 const TanzaCavite2021Main = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const TanzaCavite2021Main = () => {
       <Navbar />
 
       <main>
-        <TanzaCavite2021 />
+        <TanzaCavite2026 />
       </main>
 
       <Footer />
