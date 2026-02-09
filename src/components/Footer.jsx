@@ -16,8 +16,22 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white pt-12">
+    <footer className="bg-slate-950 text-white pt-12">
       <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 px-6 py-8 text-center backdrop-blur">
+          <h3 className="text-2xl font-semibold text-white">
+            Ready to start your next build?
+          </h3>
+          <p className="text-slate-300 mt-2">
+            Share your scope and timeline—our team responds within 24–48 hours.
+          </p>
+          <a
+            href="#contact"
+            className="focus-ring mt-6 inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
+          >
+            Start a Project
+          </a>
+        </div>
         <div className="grid gap-10 md:grid-cols-3">
           {/* Company Info */}
           <div>
@@ -90,9 +104,10 @@ const Footer = () => {
                 key={cert.alt}
                 src={cert.src}
                 alt={cert.alt}
+                loading="lazy"
                 className="w-32 h-32 object-contain shrink-0
                            transform transition duration-300
-                           hover:scale-110 hover:shadow-lg cursor-pointer"
+                           hover:scale-110 hover:shadow-[0_18px_40px_-26px_rgba(14,165,233,0.6)] cursor-pointer"
               />
             ))}
           </div>

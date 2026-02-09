@@ -2,8 +2,8 @@ import React from "react";
 
 const LinearIndeterminate = () => (
   <>
-    <div className="relative w-full h-2 bg-gray-200 overflow-hidden rounded">
-      <div className="indeterminate-bar absolute h-full bg-blue-500 rounded"></div>
+    <div className="relative w-full h-2 bg-slate-200 overflow-hidden rounded">
+      <div className="indeterminate-bar absolute h-full bg-linear-to-r from-sky-500 via-emerald-500 to-sky-400 rounded"></div>
     </div>
     <style>
       {`

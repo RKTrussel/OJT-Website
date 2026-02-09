@@ -17,10 +17,10 @@ const Navbar = () => {
   const [selected, setSelected] = useState(null);
 
   const links = [
-    { name: "About", href: `${BASE_URL}#about`, icon: Info },
-    { name: "Mission & Vision", href: `${BASE_URL}#mission`, icon: Target },
     { name: "Services", href: `${BASE_URL}#services`, icon: Briefcase },
     { name: "Projects", href: `${BASE_URL}#projects`, icon: FolderKanban },
+    { name: "About", href: `${BASE_URL}#about`, icon: Info },
+    { name: "Mission & Vision", href: `${BASE_URL}#mission`, icon: Target },
     { name: "Contact", href: `${BASE_URL}#contact`, icon: Mail },
   ];
 
@@ -56,7 +56,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50">
       {/* Glass Container */}
-      <div className="bg-gray-900/60 backdrop-blur-xl border-b border-white/10">
+      <div className="bg-slate-950/70 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3 text-xl font-semibold tracking-wide text-white">
@@ -80,21 +80,22 @@ const Navbar = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setSelected(section)}
+                  aria-current={isActive ? "page" : undefined}
                   className={`
-                    navbar-font relative flex items-center gap-2 text-sm transition
+                    navbar-font group relative flex items-center gap-2 text-sm transition
                     ${
                       isActive
-                        ? "text-green-400"
-                        : "text-gray-300 hover:text-white"
+                        ? "text-sky-300"
+                        : "text-slate-200 hover:text-sky-200"
                     }
                     after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                    after:bg-green-400 after:transition-all after:duration-300
+                    after:bg-linear-to-r after:from-sky-400 after:to-emerald-400 after:transition-all after:duration-300
                     ${
                       isActive ? "after:w-full" : "after:w-0 hover:after:w-full"
                     }
                   `}
                 >
-                  <Icon size={18} />
+                  <Icon size={18} className="transition group-hover:text-sky-200" />
                   {link.name}
                 </a>
               );
@@ -121,7 +122,7 @@ const Navbar = () => {
             : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="mx-4 mt-2 rounded-2xl bg-gray-900/80 backdrop-blur-xl border border-white/10 shadow-xl">
+        <div className="mx-4 mt-2 rounded-2xl bg-slate-950/80 backdrop-blur-xl border border-white/10 shadow-xl">
           <div className="flex flex-col divide-y divide-white/10">
             {links.map((link) => {
               const Icon = link.icon;
@@ -136,15 +137,16 @@ const Navbar = () => {
                     setSelected(section);
                     handleClose();
                   }}
+                  aria-current={isActive ? "page" : undefined}
                   className={`navbar-font flex items-center gap-3 px-6 py-4 text-sm transition
                     ${
                       isActive
-                        ? "text-green-400 bg-white/5"
-                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                        ? "text-sky-300 bg-white/5"
+                        : "text-slate-200 hover:text-sky-200 hover:bg-white/5"
                     }
                   `}
                 >
-                  <Icon size={18} />
+                  <Icon size={18} className="transition" />
                   {link.name}
                 </a>
               );

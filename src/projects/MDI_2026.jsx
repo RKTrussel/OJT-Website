@@ -51,7 +51,9 @@ const MDI_2026 = () => {
   }, []);
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full min-h-screen surface-b text-slate-100 relative overflow-hidden">
+      <div className="absolute inset-0 section-noise" />
+      <div className="relative z-10">
       {/* ================= HERO ================= */}
       <section className="relative w-full h-[60vh] sm:h-[65vh] lg:h-[70vh] overflow-hidden">
         {heroImages.map((img, index) => (
@@ -65,15 +67,18 @@ const MDI_2026 = () => {
           />
         ))}
 
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
 
         <div className="relative z-10 h-full flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-            <div className="max-w-xl">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <div className="max-w-xl space-y-4 rounded-2xl border border-white/10 bg-white/10 p-5 sm:p-7 backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.3em] text-white/90">
+                Project Highlight
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
                 MDI – MERCATOR HOLDINGS PROJECT 2026
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-gray-200">
+              <p className="text-base sm:text-lg md:text-xl text-white/80">
                 Modernizing urban infrastructure through durable, safe, and
                 sustainable road networks.
               </p>
@@ -86,11 +91,11 @@ const MDI_2026 = () => {
         {/* ================= OVERVIEW ================= */}
         <section className="my-12 md:my-20 grid gap-6 md:grid-cols-3">
           {/* Project Overview */}
-          <div className="md:col-span-2 bg-gray-50 rounded-2xl p-6 sm:p-8 shadow-sm">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+          <div className="md:col-span-2 rounded-3xl border border-white/10 card-surface p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-gray-700">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
               This project focuses on the planning, construction, and delivery of
               high-quality road infrastructure designed to improve traffic flow,
               safety, and long-term durability.
@@ -98,8 +103,8 @@ const MDI_2026 = () => {
           </div>
 
           {/* Key Details */}
-          <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 shadow-sm">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4">
+          <div className="rounded-3xl border border-white/10 card-surface p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-slate-100">
               Key Details
             </h3>
             <div className="flex items-center gap-3 text-base sm:text-lg">
@@ -111,9 +116,12 @@ const MDI_2026 = () => {
 
         {/* ================= GALLERY ================= */}
         <section className="mb-24">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6">
-            Project Gallery
-          </h2>
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-100">
+              Project Gallery
+            </h2>
+            <span className="hidden sm:block h-px flex-1 bg-white/10" />
+          </div>
 
           <div
             className="
@@ -132,7 +140,8 @@ const MDI_2026 = () => {
                   min-w-[80%] sm:min-w-[60%]
                   md:min-w-0
                   snap-center
-                  overflow-hidden rounded-xl shadow-md
+                  overflow-hidden rounded-2xl shadow-md ring-1 ring-white/10
+                  transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
                 "
               >
                 <img
@@ -149,7 +158,7 @@ const MDI_2026 = () => {
             ))}
           </div>
 
-          <p className="mt-4 text-sm text-gray-500 md:hidden">
+          <p className="mt-4 text-sm text-slate-400 md:hidden">
             Swipe left or right to view more photos
           </p>
         </section>
@@ -198,6 +207,7 @@ const MDI_2026 = () => {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 };

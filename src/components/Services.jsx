@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../img/cliberduche_logo.png";
-import servicesBg from "../img/main_background-services.png";
 
 const Services = ({ refProp, visible }) => {
-  const [bgLoaded, setBgLoaded] = useState(false);
   const primaryServices = [
     {
       title: "Backfill Sourcing / Land Sourcing",
@@ -53,10 +51,10 @@ const Services = ({ refProp, visible }) => {
     servicesArray.map((s, i) => (
       <div
         key={i}
-        className="bg-white/10 p-6 rounded-2xl text-center hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300 cursor-pointer relative overflow-hidden group border border-white/20 backdrop-blur-md"
+        className="card-surface hover-lift p-6 rounded-2xl text-center transition-transform duration-300 cursor-pointer relative overflow-hidden group"
       >
-        <div className="absolute inset-0 bg-linear-to-br from-white/15 to-white/5 opacity-70 animate-gradient"></div>
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-slate-900/80 via-sky-900/60 to-emerald-900/60 opacity-90 gradient-slow"></div>
+        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <img
             src={serviceImages[i]}
@@ -68,12 +66,12 @@ const Services = ({ refProp, visible }) => {
           <img
             src={s.icon}
             alt={s.title}
-            className="mx-auto mb-4 w-16 h-16 brightness-0 invert hover:animate-pulse transition-transform duration-300"
+            className="mx-auto mb-4 w-16 h-16 transition-transform duration-300 group-hover:scale-110 group-hover:brightness-125"
           />
-          <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-white transition-colors duration-300">
+          <h3 className="text-xl font-semibold mb-4 text-slate-100 group-hover:text-white transition-colors duration-300">
             {s.title}
           </h3>
-          <p className="text-slate-200 group-hover:text-white transition-colors duration-300">
+          <p className="text-slate-300 group-hover:text-white transition-colors duration-300">
             {s.desc}
           </p>
         </div>
@@ -82,52 +80,36 @@ const Services = ({ refProp, visible }) => {
 
   return (
     <div>
-      <style>
-        {`
-          @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-gradient {
-            background-size: 200% 200%;
-            animation: gradient 3s ease infinite;
-          }
-        `}
-      </style>
       <section
         id="services"
         ref={refProp}
         className="scroll-mt-18 relative overflow-hidden py-20"
       >
-        <div
-          className={`absolute inset-0 bg-cinematic ${
-            bgLoaded ? "is-loaded" : ""
-          }`}
-        >
-          <img
-            src={servicesBg}
-            alt="Heavy equipment"
-            className="bg-cinematic__image"
-            onLoad={() => setBgLoaded(true)}
-            onError={() => setBgLoaded(true)}
-          />
-          <div className="absolute inset-0 bg-linear-to-r from-slate-900/85 via-slate-900/65 to-emerald-900/70"></div>
-        </div>
+        <div className="absolute inset-0 surface-a gradient-slow"></div>
+        <div className="absolute inset-0 section-noise"></div>
         <div
           className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
             visible ? "is-visible" : ""
           }`}
         >
-          <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex flex-col items-center justify-center gap-2 mb-10 text-center">
+            <span className="text-[11px] uppercase tracking-[0.35em] text-amber-200 bg-amber-400/10 border border-amber-300/30 px-4 py-2 rounded-full">
+              Capabilities
+            </span>
+            <div className="flex items-center justify-center gap-4">
             <img
               src={logo}
               alt="Cliberduche Logo"
               className="w-16 h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-white text-center">
+            <h2 className="text-3xl font-semibold text-slate-100 text-center">
               Our Services
             </h2>
+            </div>
+            <p className="text-slate-300 max-w-3xl">
+              Reliable execution from sourcing to site management, tailored to
+              infrastructure and land development needs.
+            </p>
           </div>
 
           {/* Primary Services */}
@@ -147,7 +129,6 @@ const Services = ({ refProp, visible }) => {
           </div>
         </div>
       </section>
-      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
     </div>
   );
 };

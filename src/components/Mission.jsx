@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../img/cliberduche_logo.png";
-import missionBg from "../img/main_background-mission.png";
 
 const Mission = ({ refProp, visible = true }) => {
-  const [bgLoaded, setBgLoaded] = useState(false);
   return (
     <div>
       <section
@@ -11,40 +9,33 @@ const Mission = ({ refProp, visible = true }) => {
         ref={refProp}
         className="scroll-mt-18 relative overflow-hidden py-20"
       >
-        <div
-          className={`absolute inset-0 bg-cinematic ${
-            bgLoaded ? "is-loaded" : ""
-          }`}
-        >
-          <img
-            src={missionBg}
-            alt="Mission Background"
-            className="bg-cinematic__image"
-            onLoad={() => setBgLoaded(true)}
-            onError={() => setBgLoaded(true)}
-          />
-          <div className="absolute inset-0 bg-linear-to-r from-slate-900/80 via-slate-900/60 to-emerald-900/70"></div>
-        </div>
+        <div className="absolute inset-0 surface-b gradient-slow"></div>
+        <div className="absolute inset-0 section-noise"></div>
         <div
           className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
             visible ? "is-visible" : ""
           }`}
         >
-          <div className="flex items-center justify-center gap-4 mb-12">
-            <img
-              src={logo}
-              alt="Cliberduche Logo"
-              className="w-16 h-16 object-contain"
-            />
-            <h2 className="text-3xl font-semibold text-white text-center cinematic-title">
-              Mission & Vision
-            </h2>
+          <div className="flex flex-col items-center justify-center gap-2 mb-12">
+            <span className="text-[11px] uppercase tracking-[0.35em] text-amber-200 bg-amber-400/10 border border-amber-300/30 px-4 py-2 rounded-full">
+              Our purpose
+            </span>
+            <div className="flex items-center justify-center gap-4">
+              <img
+                src={logo}
+                alt="Cliberduche Logo"
+                className="w-16 h-16 object-contain"
+              />
+              <h2 className="text-3xl font-semibold text-slate-100 text-center cinematic-title">
+                Mission & Vision
+              </h2>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-slate-900/60 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 backdrop-blur-md border border-white/10">
+            <div className="card-surface hover-lift p-8 rounded-2xl transition duration-300">
               <div className="text-center mb-6">
-                <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
                   <img
                     src="https://img.icons8.com/ios-filled/50/22c55e/handshake.png"
                     alt="Mission"
@@ -55,7 +46,7 @@ const Mission = ({ refProp, visible = true }) => {
                   Our Mission
                 </h3>
               </div>
-              <p className="text-slate-200 leading-relaxed text-left max-w-prose mx-auto">
+              <p className="text-slate-300 leading-relaxed text-left max-w-prose mx-auto">
                 “We are a responsible land development company that provides
                 high-quality backfill materials for land development projects
                 and other infrastructures, including but not limited to sub-base
@@ -69,9 +60,9 @@ const Mission = ({ refProp, visible = true }) => {
               </p>
             </div>
 
-            <div className="bg-slate-900/60 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 backdrop-blur-md border border-white/10">
+            <div className="card-surface hover-lift p-8 rounded-2xl transition duration-300">
               <div className="text-center mb-6">
-                <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-sky-50 border border-sky-200 flex items-center justify-center">
                   <img
                     src="https://img.icons8.com/ios-filled/50/3b82f6/binoculars.png"
                     alt="Vision"
@@ -82,7 +73,7 @@ const Mission = ({ refProp, visible = true }) => {
                   Our Vision
                 </h3>
               </div>
-              <p className="text-slate-200 leading-relaxed text-left max-w-prose mx-auto">
+              <p className="text-slate-300 leading-relaxed text-left max-w-prose mx-auto">
                 “Our vision is to be a highly respected, world-class natural
                 resource land development company committed to adhering to
                 international standards in land development operations and
@@ -94,9 +85,9 @@ const Mission = ({ refProp, visible = true }) => {
             </div>
           </div>
 
-          <div className="mt-12 bg-slate-900/60 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 backdrop-blur-md border border-white/10">
+          <div className="mt-12 card-surface hover-lift p-8 rounded-2xl transition duration-300">
             <div className="text-center mb-6">
-              <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
+              <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center">
                 <img
                   src="https://img.icons8.com/ios-filled/50/f59e0b/diamond.png"
                   alt="Core Values"
@@ -107,7 +98,7 @@ const Mission = ({ refProp, visible = true }) => {
                 Our Core Values
               </h3>
             </div>
-            <p className="text-slate-200 leading-relaxed text-left max-w-3xl mx-auto">
+            <p className="text-slate-300 leading-relaxed text-left max-w-3xl mx-auto">
               Taking pride, we believe that there is an intelligent Creator who
               made us, and our purpose is to help one another and be truthful in
               all our transactions, and thus CLIBERDUCHE CORPORATION takes pride
@@ -115,52 +106,52 @@ const Mission = ({ refProp, visible = true }) => {
               prices, taking into consideration QUALITY, SAFETY, AND INTEGRITY.
             </p>
             <div className="mt-6 grid gap-6 md:grid-cols-3">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
+              <div className="card-surface hover-lift rounded-xl p-5">
                 <div className="flex items-center gap-3 mb-3">
                   <img
                     src="https://img.icons8.com/ios-filled/50/f59e0b/star.png"
                     alt="Quality"
                     className="w-7 h-7"
                   />
-                  <h4 className="text-lg font-semibold text-amber-200">
+                  <h4 className="text-lg font-semibold text-amber-300">
                     Quality
                   </h4>
                 </div>
-                <p className="text-slate-200 leading-relaxed text-left">
+                <p className="text-slate-300 leading-relaxed text-left">
                   Ensures projects are of high Quality and pair with local
                   standards to be able to be competitive in the National and
                   Local Market scene.
                 </p>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
+              <div className="card-surface hover-lift rounded-xl p-5">
                 <div className="flex items-center gap-3 mb-3">
                   <img
                     src="https://img.icons8.com/ios-filled/50/f59e0b/shield.png"
                     alt="Safety"
                     className="w-7 h-7"
                   />
-                  <h4 className="text-lg font-semibold text-amber-200">
+                  <h4 className="text-lg font-semibold text-amber-300">
                     Safety
                   </h4>
                 </div>
-                <p className="text-slate-200 leading-relaxed text-left">
+                <p className="text-slate-300 leading-relaxed text-left">
                   Ensures safety at work site, safety of projects and safety of
                   personnel and thus we ensure safety practices which is the
                   pinnacle, before and after execution of projects.
                 </p>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
+              <div className="card-surface hover-lift rounded-xl p-5">
                 <div className="flex items-center gap-3 mb-3">
                   <img
                     src="https://img.icons8.com/ios-filled/50/f59e0b/certificate.png"
                     alt="Integrity"
                     className="w-7 h-7"
                   />
-                  <h4 className="text-lg font-semibold text-amber-200">
+                  <h4 className="text-lg font-semibold text-amber-300">
                     Integrity
                   </h4>
                 </div>
-                <p className="text-slate-200 leading-relaxed text-left">
+                <p className="text-slate-300 leading-relaxed text-left">
                   Ensure compliance with existing laws covering the construction
                   industry, reliable workforce and our timely delivery of
                   projects.
@@ -170,7 +161,6 @@ const Mission = ({ refProp, visible = true }) => {
           </div>
         </div>
       </section>
-      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
     </div>
   );
 };

@@ -275,7 +275,7 @@ const Contact = ({ refProp, visible }) => {
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/60 text-slate-900 font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 disabled:cursor-not-allowed"
+                  className="focus-ring w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/60 text-white font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-[0_18px_45px_-28px_rgba(14,165,233,0.6)] hover:shadow-[0_22px_55px_-28px_rgba(16,185,129,0.6)] disabled:cursor-not-allowed"
                 >
                   {isSending ? "Sending..." : "Send Message"}
                 </button>
@@ -284,7 +284,6 @@ const Contact = ({ refProp, visible }) => {
           </div>
         </div>
       </section>
-      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
     </div>
   );
 };

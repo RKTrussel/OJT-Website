@@ -64,9 +64,6 @@ export default function CliberducheWebsite() {
         </div>
       </header>
 
-      {/* Section Separator */}
-      <div className="h-1 bg-gradient-to-r from-green-500 via-blue-500 to-green-500"></div>
-
       {/* Navigation */}
       <nav className="bg-gray-900/80 backdrop-blur-md text-white flex justify-between items-center px-6 py-4 fixed top-0 w-full z-20 border-b border-white/10">
         <div className="text-2xl font-bold text-green-500">Cliberduche</div>
@@ -126,9 +123,6 @@ export default function CliberducheWebsite() {
         </div>
       </section>
 
-      {/* Section Separator */}
-      <div className="h-1 bg-gradient-to-r from-blue-500 via-green-500 to-blue-500"></div>
-
       {/* Projects */}
       <section id="projects" ref={projectsRef} className={`bg-green-50 max-w-6xl mx-auto px-6 py-16 transition-all duration-700 ${visibleSections.projects ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <h2 className="text-3xl font-semibold mb-10 text-center">Our Projects</h2>
@@ -160,9 +154,6 @@ export default function CliberducheWebsite() {
         </div>
       </section>
 
-      {/* Section Separator */}
-      <div className="h-1 bg-gradient-to-r from-green-500 via-blue-500 to-green-500"></div>
-
       {/* Mission & Vision */}
       <section id="mission" ref={missionRef} className={`bg-gradient-to-br from-gray-50 to-gray-100 py-16 transition-all duration-700 ${visibleSections.mission ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="max-w-6xl mx-auto px-6">
@@ -189,9 +180,6 @@ export default function CliberducheWebsite() {
           </div>
         </div>
       </section>
-
-      {/* Section Separator */}
-      <div className="h-1 bg-gradient-to-r from-blue-500 via-green-500 to-blue-500"></div>
 
       {/* Contact */}
       <section id="contact" ref={contactRef} className={`bg-gray-50 max-w-6xl mx-auto px-6 py-16 transition-all duration-700 ${visibleSections.contact ? 'animate-fade-in-up' : 'opacity-0'}`}>

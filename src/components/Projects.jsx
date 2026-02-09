@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logo from "../img/cliberduche_logo.png";
@@ -11,7 +11,6 @@ import silangCaviteImg from "../img/SilangCavite2021.png";
 import tanzaCaviteImg from "../img/TanzaCavite2021.png";
 
 const Projects = ({ refProp, visible }) => {
-  const [bgLoaded, setBgLoaded] = useState(false);
   const navigate = useNavigate();
 
   const projects = [
@@ -59,7 +58,7 @@ const Projects = ({ refProp, visible }) => {
     },
   ];
 
-  const ITEMS_PER_PAGE = 6;
+  const ITEMS_PER_PAGE = 3;
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
@@ -76,32 +75,34 @@ const Projects = ({ refProp, visible }) => {
         className="scroll-mt-18 w-full relative overflow-hidden"
       >
         {/* Background */}
-        <div
-          className={`absolute inset-0 ${bgLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80"
-            alt="Project site"
-            className="w-full h-full object-cover"
-            onLoad={() => setBgLoaded(true)}
-            onError={() => setBgLoaded(true)}
-          />
-          <div className="absolute inset-0 bg-linear-to-br from-slate-900/95 via-slate-900/80 to-emerald-900/70" />
-        </div>
+        <div className="absolute inset-0 surface-b gradient-slow" />
+        <div className="absolute inset-0 section-noise" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 text-center sm:text-left">
-            <img src={logo} alt="Logo" className="w-16 h-10 sm:w-20 sm:h-12" />
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-wide">
-              Our Projects
-            </h2>
+        <div
+          className={`relative z-10 max-w-7xl mx-auto px-6 py-20 ${
+            visible ? "is-visible" : ""
+          }`}
+        >
+          {/* Logo + Heading */}
+          <div className="flex flex-col items-center justify-center gap-3 mb-8 text-center">
+            <span className="text-[11px] uppercase tracking-[0.35em] text-amber-200 bg-amber-400/10 border border-amber-300/30 px-4 py-2 rounded-full shadow-sm">
+              Highlights
+            </span>
+            <div className="flex items-center justify-center gap-4">
+              <img
+                src={logo}
+                alt="Cliberduche Logo"
+                className="w-16 h-16 object-contain"
+              />
+              <h2 className="text-3xl sm:text-4xl font-semibold text-slate-100 tracking-wide">
+                Our Projects
+              </h2>
+            </div>
           </div>
 
-          <p className="text-center mb-12 max-w-3xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
-            We specialize in delivering high-quality infrastructure, land
-            development, and structural projects. Our work reflects expertise,
-            innovation, and sustainable engineering practices.
+          <p className="text-center mb-12 max-w-3xl mx-auto text-slate-300">
+            Featured work across land development, infrastructure, and complex
+            construction—built with safety, quality, and speed.
           </p>
 
           {/* Projects Grid / Scroll */}
@@ -110,24 +111,25 @@ const Projects = ({ refProp, visible }) => {
               <div
                 key={index}
                 onClick={() => navigate(project.route)}
-                className="relative group cursor-pointer overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-transform duration-300 transform active:scale-[0.97] min-w-[70%] sm:min-w-0 snap-center"
+                className="relative group cursor-pointer overflow-hidden rounded-2xl card-surface hover-lift transition-transform duration-500 ring-1 ring-white/10"
               >
                 <div className="relative h-96 sm:h-72 lg:h-80 w-full">
                   <img
                     src={project.img}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-4 sm:p-5">
-                    <h3 className="text-white text-lg sm:text-xl font-semibold leading-snug">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/40 to-transparent flex flex-col justify-end p-4 sm:p-5">
+                    <h3 className="text-slate-100 text-lg sm:text-xl font-semibold leading-snug">
                       {project.title}
                     </h3>
-                    <p className="text-gray-200 text-sm sm:text-base line-clamp-3 mt-1">
+                    <p className="text-slate-300 text-sm sm:text-base line-clamp-3 mt-1">
                       {project.desc}
                     </p>
-                    <button className="mt-3 px-4 py-2 text-sm sm:text-base font-medium text-white bg-green-600 rounded-full transition-all duration-300 group-hover:bg-green-500 hover:scale-105">
+                    <button className="focus-ring mt-3 px-4 py-2 text-sm sm:text-base font-medium text-white bg-sky-600/90 border border-sky-400/30 rounded-full transition-all duration-300 group-hover:bg-sky-500 hover:scale-105">
                       View Project →
                     </button>
                   </div>
@@ -148,58 +150,40 @@ const Projects = ({ refProp, visible }) => {
 
           {/* Pagination (Desktop Only) */}
           {totalPages > 1 && (
-            <div className="hidden sm:flex flex-col items-center gap-5 mt-14">
-              <div className="flex gap-3">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setPage(i + 1)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      page === i + 1
-                        ? "bg-green-500 scale-125 shadow-lg shadow-green-500/50"
-                        : "bg-white/40 hover:bg-white/70"
-                    }`}
-                  />
-                ))}
-              </div>
+            <div className="flex justify-center items-center gap-4 mt-12">
+              <button
+                onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                disabled={page === 1}
+                className={`focus-ring flex items-center gap-2 px-4 py-2 rounded-full border transition ${
+                  page === 1
+                    ? "opacity-40 cursor-not-allowed bg-slate-900/60 text-slate-400 border-slate-700/60"
+                    : "bg-slate-900/60 text-slate-200 border-slate-700/60 hover:bg-slate-800/70"
+                }`}
+              >
+                <ChevronLeft className="w-5 h-5 text-sky-300" />
+                Prev
+              </button>
 
-              <div className="flex items-center gap-6">
-                <button
-                  onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                  disabled={page === 1}
-                  className={`group flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 border backdrop-blur-md ${
-                    page === 1
-                      ? "opacity-30 cursor-not-allowed bg-white/20"
-                      : "bg-linear-to-r from-green-500 to-emerald-600 text-white hover:scale-105 hover:shadow-lg hover:shadow-green-500/40"
-                  }`}
-                >
-                  <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-                  Prev
-                </button>
+              <span className="text-slate-300 text-sm font-medium">
+                Page {page} of {totalPages}
+              </span>
 
-                <span className="text-white text-sm font-semibold tracking-wide">
-                  {page} / {totalPages}
-                </span>
-
-                <button
-                  onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-                  disabled={page === totalPages}
-                  className={`group flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 border backdrop-blur-md ${
-                    page === totalPages
-                      ? "opacity-30 cursor-not-allowed bg-white/20"
-                      : "bg-linear-to-r from-emerald-600 to-green-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-green-500/40"
-                  }`}
-                >
-                  Next
-                  <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
+              <button
+                onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                disabled={page === totalPages}
+                className={`focus-ring flex items-center gap-2 px-4 py-2 rounded-full border transition ${
+                  page === totalPages
+                    ? "opacity-40 cursor-not-allowed bg-slate-900/60 text-slate-400 border-slate-700/60"
+                    : "bg-slate-900/60 text-slate-200 border-slate-700/60 hover:bg-slate-800/70"
+                }`}
+              >
+                Next
+                <ChevronRight className="w-5 h-5 text-sky-300" />
+              </button>
             </div>
           )}
         </div>
       </section>
-
-      <div className="h-1 bg-linear-to-r from-green-500 via-blue-500 to-green-500"></div>
     </div>
   );
 };
