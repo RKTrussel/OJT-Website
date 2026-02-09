@@ -17,11 +17,11 @@ const ProjectDetails = () => {
 
         <div className="grid gap-6 md:grid-cols-3 items-start">
           {/* Scope */}
-          <div className="rounded-3xl border border-emerald-400/25 bg-slate-900/60 p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
+          <div className="rounded-3xl border border-emerald-400/30 bg-slate-900/60 p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
             <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:text-left">
-              <ListChecks className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-300 drop-shadow-[0_0_12px_rgba(52,211,153,0.35)]" />
+              <ListChecks className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-300 drop-shadow-[0_0_12px_rgba(22,163,74,0.45)]" />
               <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-emerald-200/80">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-emerald-200/90">
                   Scope
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
@@ -35,11 +35,11 @@ const ProjectDetails = () => {
           </div>
 
           {/* MQP Process */}
-          <div className="rounded-3xl border border-sky-400/25 bg-slate-900/60 p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
+          <div className="rounded-3xl border border-sky-400/30 bg-slate-900/60 p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
             <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:text-left">
-              <Settings className="w-6 h-6 sm:w-8 sm:h-8 text-sky-300 drop-shadow-[0_0_12px_rgba(56,189,248,0.35)]" />
+              <Settings className="w-6 h-6 sm:w-8 sm:h-8 text-sky-300 drop-shadow-[0_0_12px_rgba(29,78,216,0.45)]" />
               <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-sky-200/80">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-sky-200/90">
                   Process
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
@@ -51,7 +51,7 @@ const ProjectDetails = () => {
             <div className="relative mt-6">
               <div
                 className={`relative ml-4 ${
-                  showAllSteps ? "" : "max-h-[420px] overflow-hidden"
+                  showAllSteps ? "" : "max-h-[360px] overflow-hidden"
                 }`}
               >
                 <div className="absolute left-3 top-0 h-full border-l border-dashed border-white/15"></div>
@@ -61,43 +61,43 @@ const ProjectDetails = () => {
                   step: "1",
                   title: "Specific Order of Materials & P.O.",
                   desc: "Place orders according to production plan to ensure proper material availability.",
-                  color: "bg-rose-500/20 text-rose-200",
+                  color: "bg-rose-500/20 text-rose-100",
                 },
                 {
                   step: "2",
                   title: "Source – Site of Materials",
                   desc: "Identify and secure the source of materials needed for production.",
-                  color: "bg-emerald-500/20 text-emerald-200",
+                  color: "bg-emerald-500/20 text-emerald-100",
                 },
                 {
                   step: "3",
                   title: "Sampling and Laboratory Test",
                   desc: "Perform quality checks through sampling and lab testing to ensure standards.",
-                  color: "bg-sky-500/20 text-sky-200",
+                  color: "bg-sky-500/20 text-sky-100",
                 },
                 {
                   step: "4",
                   title: "Forecasting & Scheduling / Survey of Site",
                   desc: "Plan timelines, forecast material needs, and survey the site for readiness.",
-                  color: "bg-emerald-500/20 text-emerald-200",
+                  color: "bg-emerald-500/20 text-emerald-100",
                 },
                 {
                   step: "5",
                   title: "Loading – Volume Check & Delivery",
                   desc: "Check volumes during loading and ensure delivery matches the order.",
-                  color: "bg-sky-500/20 text-sky-200",
+                  color: "bg-sky-500/20 text-sky-100",
                 },
                 {
                   step: "6",
                   title: "Site Dumping – Spreading & Compaction",
                   desc: "Distribute and compact materials properly on site.",
-                  color: "bg-emerald-500/20 text-emerald-200",
+                  color: "bg-emerald-500/20 text-emerald-100",
                 },
                 {
                   step: "7",
                   title: "Final Checking",
                   desc: "Perform final inspection to validate material quality and placement.",
-                  color: "bg-rose-500/20 text-rose-200",
+                  color: "bg-rose-500/20 text-rose-100",
                 },
               ].map((item, i) => (
                 <div key={i} className="mb-8 relative pl-10">
@@ -122,7 +122,7 @@ const ProjectDetails = () => {
                 <button
                   type="button"
                   onClick={() => setShowAllSteps((prev) => !prev)}
-                  className="text-xs uppercase tracking-[0.25em] text-sky-200/80 hover:text-sky-200 transition"
+                  className="text-xs uppercase tracking-[0.25em] text-sky-200/80 hover:text-sky-100 transition"
                 >
                   {showAllSteps ? "Show less" : "View full process"}
                 </button>
@@ -131,11 +131,11 @@ const ProjectDetails = () => {
           </div>
 
           {/* Result */}
-          <div className="rounded-3xl border border-emerald-400/25 bg-slate-900/60 p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
+          <div className="rounded-3xl border border-emerald-400/30 bg-slate-900/60 p-6 sm:p-8 shadow-[0_20px_60px_-40px_rgba(2,6,23,0.7)]">
             <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:text-left">
-              <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-300 drop-shadow-[0_0_12px_rgba(52,211,153,0.35)]" />
+              <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-300 drop-shadow-[0_0_12px_rgba(22,163,74,0.45)]" />
               <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-emerald-200/80">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-emerald-200/90">
                   Outcome
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
