@@ -61,7 +61,7 @@ const MDI_2024 = () => {
 
         <div className="relative z-10 h-full flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-            <div className="max-w-xl space-y-4 rounded-2xl border border-white/10 bg-white/10 p-5 sm:p-7 backdrop-blur-sm">
+            <div className="w-full md:w-fit max-w-full space-y-4 rounded-2xl border border-white/10 bg-white/10 p-5 sm:p-7 backdrop-blur-sm">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.3em] text-white/90">
                 Project Highlight
               </span>
@@ -153,7 +153,10 @@ const MDI_2024 = () => {
           </p>
         </section>
 
-        <ProjectDetails />
+        <ProjectDetails
+          scopeText="Earthworks, drainage, and site development for Mercator Holdings."
+          outcomeText="Prepared a stable, build-ready platform with compliant grading and drainage."
+        />
       </div>
 
       {/* ================= PREVIEW MODAL ================= */}

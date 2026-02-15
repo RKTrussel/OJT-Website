@@ -181,17 +181,6 @@ const About = ({ refProp, visible }) => {
                         </div>
                       ))}
                     </div>
-                    <div
-                      className={`${cardBase} p-6 ml-auto`}
-                      style={{ width: "fit-content" }}
-                    >
-                      <p className="text-sm font-semibold mb-2 text-slate-100">
-                        Quality Standards
-                      </p>
-                      <p className="text-xs text-slate-300">
-                        Exceeding industry expectations since day one
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>

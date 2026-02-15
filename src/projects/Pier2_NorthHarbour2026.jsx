@@ -62,7 +62,7 @@ const Pier2_NorthHarbour2026 = () => {
 
         <div className="relative z-10 h-full flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-            <div className="max-w-xl space-y-4 rounded-2xl border border-white/10 bg-white/10 p-5 sm:p-7 backdrop-blur-sm">
+            <div className="w-full space-y-4 rounded-2xl border border-white/10 bg-white/10 p-5 sm:p-7 backdrop-blur-sm">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.3em] text-white/90">
                 Project Highlight
               </span>
@@ -154,7 +154,10 @@ const Pier2_NorthHarbour2026 = () => {
           </p>
         </section>
 
-        <ProjectDetails />
+        <ProjectDetails
+          scopeText="Harbour-side earthworks, quay support, and access improvements."
+          outcomeText="Enhanced port operations with safer access and reinforced coastal works."
+        />
       </div>
 
       {/* ================= PREVIEW MODAL ================= */}

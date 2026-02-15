@@ -1,7 +1,59 @@
 import React, { useState } from "react";
 import { ListChecks, Settings, CheckCircle } from "lucide-react";
 
-const ProjectDetails = () => {
+const DEFAULT_PROCESS_STEPS = [
+  {
+    step: "1",
+    title: "Specific Order of Materials & P.O.",
+    desc: "Place orders according to production plan to ensure proper material availability.",
+    color: "bg-rose-500/20 text-rose-100",
+  },
+  {
+    step: "2",
+    title: "Source – Site of Materials",
+    desc: "Identify and secure the source of materials needed for production.",
+    color: "bg-emerald-500/20 text-emerald-100",
+  },
+  {
+    step: "3",
+    title: "Sampling and Laboratory Test",
+    desc: "Perform quality checks through sampling and lab testing to ensure standards.",
+    color: "bg-sky-500/20 text-sky-100",
+  },
+  {
+    step: "4",
+    title: "Forecasting & Scheduling / Survey of Site",
+    desc: "Plan timelines, forecast material needs, and survey the site for readiness.",
+    color: "bg-emerald-500/20 text-emerald-100",
+  },
+  {
+    step: "5",
+    title: "Loading – Volume Check & Delivery",
+    desc: "Check volumes during loading and ensure delivery matches the order.",
+    color: "bg-sky-500/20 text-sky-100",
+  },
+  {
+    step: "6",
+    title: "Site Dumping – Spreading & Compaction",
+    desc: "Distribute and compact materials properly on site.",
+    color: "bg-emerald-500/20 text-emerald-100",
+  },
+  {
+    step: "7",
+    title: "Final Checking",
+    desc: "Perform final inspection to validate material quality and placement.",
+    color: "bg-rose-500/20 text-rose-100",
+  },
+];
+
+const ProjectDetails = ({
+  scopeText = "(3-STOREY BUILDING)",
+  scopeTitle = "Project Coverage",
+  processTitle = "Manufacturing Quality Plan (MQP)",
+  processSteps = DEFAULT_PROCESS_STEPS,
+  outcomeText =
+    "Delivered a durable, safer roadway with improved traffic flow and reduced maintenance requirements.",
+}) => {
   const [showAllSteps, setShowAllSteps] = useState(false);
 
   return (
@@ -25,12 +77,12 @@ const ProjectDetails = () => {
                   Scope
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
-                  Project Coverage
+                  {scopeTitle}
                 </h3>
               </div>
             </div>
             <p className="mt-4 text-base sm:text-lg text-slate-300 text-center md:text-left">
-              (3-STOREY BUILDING)
+              {scopeText}
             </p>
           </div>
 
@@ -43,7 +95,7 @@ const ProjectDetails = () => {
                   Process
                 </p>
                 <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
-                  Manufacturing Quality Plan (MQP)
+                  {processTitle}
                 </h3>
               </div>
             </div>
@@ -56,50 +108,7 @@ const ProjectDetails = () => {
               >
                 <div className="absolute left-3 top-0 h-full border-l border-dashed border-white/15"></div>
 
-              {[
-                {
-                  step: "1",
-                  title: "Specific Order of Materials & P.O.",
-                  desc: "Place orders according to production plan to ensure proper material availability.",
-                  color: "bg-rose-500/20 text-rose-100",
-                },
-                {
-                  step: "2",
-                  title: "Source – Site of Materials",
-                  desc: "Identify and secure the source of materials needed for production.",
-                  color: "bg-emerald-500/20 text-emerald-100",
-                },
-                {
-                  step: "3",
-                  title: "Sampling and Laboratory Test",
-                  desc: "Perform quality checks through sampling and lab testing to ensure standards.",
-                  color: "bg-sky-500/20 text-sky-100",
-                },
-                {
-                  step: "4",
-                  title: "Forecasting & Scheduling / Survey of Site",
-                  desc: "Plan timelines, forecast material needs, and survey the site for readiness.",
-                  color: "bg-emerald-500/20 text-emerald-100",
-                },
-                {
-                  step: "5",
-                  title: "Loading – Volume Check & Delivery",
-                  desc: "Check volumes during loading and ensure delivery matches the order.",
-                  color: "bg-sky-500/20 text-sky-100",
-                },
-                {
-                  step: "6",
-                  title: "Site Dumping – Spreading & Compaction",
-                  desc: "Distribute and compact materials properly on site.",
-                  color: "bg-emerald-500/20 text-emerald-100",
-                },
-                {
-                  step: "7",
-                  title: "Final Checking",
-                  desc: "Perform final inspection to validate material quality and placement.",
-                  color: "bg-rose-500/20 text-rose-100",
-                },
-              ].map((item, i) => (
+              {processSteps.map((item, i) => (
                 <div key={i} className="mb-8 relative pl-10">
                   <div
                     className={`absolute left-0 top-0 w-6 h-6 rounded-full flex items-center justify-center ${item.color} font-semibold ring-1 ring-white/10`}
@@ -144,8 +153,7 @@ const ProjectDetails = () => {
               </div>
             </div>
             <p className="mt-4 text-base sm:text-lg text-slate-300 text-center md:text-left">
-              Delivered a durable, safer roadway with improved traffic flow and
-              reduced maintenance requirements.
+              {outcomeText}
             </p>
           </div>
         </div>
