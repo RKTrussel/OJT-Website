@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, FileText, Download } from "lucide-react";
 import logo1 from "../img/logo_1.png";
 import logo2 from "../img/logo_2.png";
 import logo3 from "../img/logo_3.png";
@@ -38,9 +38,22 @@ const Footer = () => {
             <h3 className="text-2xl font-bold text-green-500 mb-4">
               Cliberduche Corporation
             </h3>
-            <p className="text-gray-300 leading-relaxed">
+
+            <p className="text-gray-300 leading-relaxed mb-4">
               Building the future with quality and reliability since 2018.
             </p>
+
+            {/* Company Profile PDF Button */}
+            <a
+              href="https://drive.google.com/uc?export=download&id=1NojO4TMZRm3ej_KeTEBSFfRS1YPwOsIG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-green-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-green-500"
+            >
+              <FileText size={16} />
+              Download Company Profile
+              <Download size={16} />
+            </a>
           </div>
 
           {/* Quick Links */}
