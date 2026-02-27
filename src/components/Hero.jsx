@@ -65,18 +65,17 @@ const Hero = ({ parallaxRef, scrollY }) => {
             </a>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center max-w-md mx-auto">
             {[
               { label: "Since", value: "2018" },
-              { label: "Materials", value: "14M+ m³" },
-              { label: "Locations", value: "Laguna & Cavite" },
+              { label: "Locations", value: "Laguna" },
             ].map((item) => (
               <div
                 key={item.label}
-                className="bg-white/10 border border-white/10 rounded-2xl px-5 py-4 backdrop-blur-sm"
+                className="bg-white/10 border border-white/10 rounded-xl px-4 py-3 backdrop-blur-sm"
               >
-                <p className="text-sm text-slate-200/80">{item.label}</p>
-                <p className="text-lg font-semibold text-white">{item.value}</p>
+                <p className="text-xs text-slate-200/80">{item.label}</p>
+                <p className="text-base font-semibold text-white">{item.value}</p>
               </div>
             ))}
           </div>
