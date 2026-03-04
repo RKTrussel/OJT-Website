@@ -153,7 +153,7 @@ const Services = ({ refProp, visible }) => {
       <section
         id="services"
         ref={refProp}
-        className="scroll-mt-18 relative overflow-hidden py-20"
+        className="scroll-mt-6 relative overflow-hidden py-20"
       >
         {/* Background */}
         <div className="absolute inset-0 surface-a gradient-slow" />

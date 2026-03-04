@@ -96,10 +96,19 @@ const TAG_COLORS = {
 const ProjectCard = ({ project, index, isCarousel }) => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+
+  const handleNavigate = () => {
+    if (isExiting) return;
+    setIsExiting(true);
+    window.setTimeout(() => {
+      navigate(project.route);
+    }, 260);
+  };
 
   return (
     <div
-      onClick={() => navigate(project.route)}
+      onClick={handleNavigate}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{ animationDelay: `${index * 80}ms` }}
@@ -107,10 +116,18 @@ const ProjectCard = ({ project, index, isCarousel }) => {
         "group relative cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden",
         "ring-1 ring-white/10 bg-slate-900/60 backdrop-blur-sm",
         "transition-all duration-500",
+        isExiting ? "opacity-70 scale-[0.98]" : "opacity-100",
         "hover:ring-blue-400/50 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-1 sm:hover:-translate-y-2",
         isCarousel ? "shrink-0 w-[78vw] max-w-75 snap-center" : "w-full",
       ].join(" ")}
     >
+      <div
+        aria-hidden="true"
+        className={[
+          "project-card__veil absolute inset-0 bg-slate-950/60 opacity-0 transition-opacity duration-300",
+          isExiting ? "opacity-100" : "",
+        ].join(" ")}
+      />
       {/* Image */}
       <div className="relative overflow-hidden h-44 sm:h-52 lg:h-60">
         <img
@@ -223,7 +240,7 @@ const Projects = ({ refProp, visible }) => {
     <section
       id="projects"
       ref={refProp}
-      className="scroll-mt-16 sm:scroll-mt-20 w-full relative overflow-hidden"
+      className="scroll-mt-6 sm:scroll-mt-8 w-full relative overflow-hidden"
     >
       {/* Backgrounds */}
       <div className="absolute inset-0 bg-linear-to-br from-slate-950 via-slate-900 to-slate-950" />

@@ -7,7 +7,7 @@ const Mission = ({ refProp, visible = true }) => {
       <section
         id="mission"
         ref={refProp}
-        className="scroll-mt-18 relative overflow-hidden py-20"
+        className="scroll-mt-6 relative overflow-hidden py-20"
       >
         <div className="absolute inset-0 surface-b gradient-slow"></div>
         <div className="absolute inset-0 section-noise"></div>

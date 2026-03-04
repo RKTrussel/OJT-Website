@@ -181,7 +181,7 @@ const Contact = ({ refProp, visible }) => {
       <section
         id="contact"
         ref={refProp}
-        className="scroll-mt-18 w-full relative overflow-hidden"
+        className="scroll-mt-6 w-full relative overflow-hidden"
       >
         <div
           className={`absolute inset-0 bg-cinematic ${

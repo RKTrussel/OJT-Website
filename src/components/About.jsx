@@ -9,7 +9,7 @@ const About = ({ refProp, visible }) => {
       <section
         id="about"
         ref={refProp}
-        className="scroll-mt-18 w-full relative overflow-hidden"
+        className="scroll-mt-6 w-full relative overflow-hidden"
       >
         <div className="absolute inset-0 surface-a gradient-slow"></div>
         <div className="absolute inset-0 section-noise"></div>
