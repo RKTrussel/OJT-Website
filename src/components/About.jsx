@@ -14,9 +14,8 @@ const About = ({ refProp, visible }) => {
         <div className="absolute inset-0 surface-a gradient-slow"></div>
         <div className="absolute inset-0 section-noise"></div>
         <div
-          className={`relative z-10 max-w-7xl mx-auto px-6 py-20 reveal-clip ${
-            visible ? "is-visible" : ""
-          }`}
+          className={`relative z-10 max-w-7xl mx-auto px-6 py-20 reveal-clip ${visible ? "is-visible" : ""
+            }`}
         >
           {/* Hero Header */}
           <div className="relative overflow-hidden rounded-3xl card-surface hover-lift px-8 py-12 mb-16">
@@ -141,8 +140,8 @@ const About = ({ refProp, visible }) => {
                       <div className="absolute inset-0 rounded-3xl bg-linear-to-t from-black/45 via-black/10 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
                       <div className="absolute inset-0 rounded-3xl card-media-shine"></div>
                       <img
-                        src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                        alt="Quality materials on site"
+                        src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Construction materials and site operations"
                         className="relative w-full h-64 md:h-80 object-cover rounded-3xl border border-slate-200 shadow-2xl card-media-float transition-transform duration-700 ease-out group-hover:scale-[1.04] group-hover:-rotate-[0.4deg]"
                         loading="lazy"
                       />
