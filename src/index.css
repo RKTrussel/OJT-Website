@@ -236,3 +236,182 @@ html {
 body {
   background: #0b1220;
 }
+
+.ojt-datepicker.react-datepicker {
+  background: rgba(11, 18, 32, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px -30px rgba(2, 6, 23, 0.9);
+  font-family: 'Manrope', sans-serif;
+  color: #e2e8f0;
+}
+
+.ojt-datepicker .react-datepicker__header {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding-top: 12px;
+}
+
+.ojt-datepicker .react-datepicker__current-month,
+.ojt-datepicker .react-datepicker-time__header,
+.ojt-datepicker .react-datepicker__day-name {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.ojt-datepicker .react-datepicker__day,
+.ojt-datepicker .react-datepicker__time-list-item {
+  color: #cbd5f5;
+  border-radius: 10px;
+  transition: all 160ms ease;
+}
+
+.ojt-datepicker .react-datepicker__day:hover,
+.ojt-datepicker .react-datepicker__time-list-item:hover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #ecfeff;
+}
+
+.ojt-datepicker .react-datepicker__day--selected,
+.ojt-datepicker .react-datepicker__time-list-item--selected,
+.ojt-datepicker .react-datepicker__day--keyboard-selected {
+  background: rgba(16, 185, 129, 0.85);
+  color: #041013;
+  font-weight: 600;
+}
+
+.ojt-datepicker .react-datepicker__day--outside-month {
+  color: rgba(148, 163, 184, 0.35);
+}
+
+.ojt-datepicker .react-datepicker__navigation-icon::before {
+  border-color: #a7f3d0;
+}
+
+.ojt-datepicker .react-datepicker__triangle {
+  display: none;
+}
+
+.ojt-datepicker .react-datepicker__time-container {
+  border-left: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.ojt-datepicker .react-datepicker__time-list {
+  background: rgba(11, 18, 32, 0.98);
+}
+
+.time-picker {
+  position: relative;
+}
+
+.time-picker__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.time-picker__trigger:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.time-picker__trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.45);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.time-picker__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  background: rgba(11, 18, 32, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 25px 55px -35px rgba(2, 6, 23, 0.9);
+  z-index: 40;
+  padding: 12px;
+}
+
+.time-picker__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-height: 220px;
+}
+
+.time-picker__column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 234, 212, 0.5) transparent;
+}
+
+.time-picker__column::-webkit-scrollbar {
+  width: 6px;
+}
+
+.time-picker__column::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.time-picker__column::-webkit-scrollbar-thumb {
+  background: rgba(94, 234, 212, 0.4);
+  border-radius: 99px;
+}
+
+.time-picker__item {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: center;
+  color: #cbd5f5;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 150ms ease;
+}
+
+.time-picker__item:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #ecfeff;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.time-picker__item.is-selected {
+  background: rgba(16, 185, 129, 0.85);
+  color: #041013;
+  font-weight: 600;
+}
+
+.time-picker__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.time-picker__confirm {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.85);
+  color: #041013;
+  font-weight: 600;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.time-picker__confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px -14px rgba(16, 185, 129, 0.9);
+}

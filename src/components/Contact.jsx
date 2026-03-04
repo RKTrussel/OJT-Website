@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import emailjs from "@emailjs/browser";
 import logo from "../img/cliberduche_logo.png";
 import contactBg from "../img/main_background-contact.jpg";
@@ -7,10 +9,15 @@ const Contact = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
+  const [timePickerOpen, setTimePickerOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    date: null,
+    time: "",
+    type: "",
+    notes: "",
+    captcha: "",
     company: "",
   });
 
@@ -18,23 +25,86 @@ const Contact = ({ refProp, visible }) => {
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+  const timePickerRef = useRef(null);
+  const hours = useMemo(
+    () => Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0")),
+    []
+  );
+  const minutes = useMemo(
+    () => Array.from({ length: 60 }, (_, i) => String(i).padStart(2, "0")),
+    []
+  );
+  const meridiems = useMemo(() => ["AM", "PM"], []);
+
+  const [timeParts, setTimeParts] = useState({
+    hour: "08",
+    minute: "00",
+    meridiem: "AM",
+  });
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const updateTime = (next) => {
+    setTimeParts(next);
+    setFormData((prev) => ({
+      ...prev,
+      time: `${next.hour}:${next.minute} ${next.meridiem}`,
+    }));
+  };
+
   const validateForm = () => {
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.date ||
+      !formData.time ||
+      !formData.type
+    ) {
       return "Please fill in all required fields.";
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[^\s@]+@gmail\.com$/i;
     if (!emailPattern.test(formData.email.trim())) {
-      return "Please enter a valid email address.";
+      return "Please enter a valid Gmail address.";
     }
 
     return "";
   };
+
+  const formatDate = (value) =>
+    value
+      ? value.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "2-digit",
+        })
+      : "";
+
+  const formatTime = (value) =>
+    value
+      ? typeof value === "string"
+        ? value
+        : value.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+      : "";
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!timePickerRef.current) return;
+      if (!timePickerRef.current.contains(event.target)) {
+        setTimePickerOpen(false);
+      }
+    };
+    if (timePickerOpen) {
+      window.addEventListener("mousedown", handler);
+    }
+    return () => window.removeEventListener("mousedown", handler);
+  }, [timePickerOpen]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,7 +136,11 @@ const Contact = ({ refProp, visible }) => {
         {
           from_name: formData.name.trim(),
           from_email: formData.email.trim(),
-          message: formData.message.trim(),
+          contact_date: formatDate(formData.date),
+          contact_time: formatTime(formData.time),
+          contact_type: formData.type,
+          notes: formData.notes.trim(),
+          captcha: formData.captcha.trim(),
           reply_to: formData.email.trim(),
         },
         publicKey
@@ -76,7 +150,17 @@ const Contact = ({ refProp, visible }) => {
         type: "success",
         message: "Thanks! Your message has been sent. We'll get back to you soon.",
       });
-      setFormData({ name: "", email: "", message: "", company: "" });
+      setFormData({
+        name: "",
+        email: "",
+        date: null,
+        time: "",
+        type: "",
+        notes: "",
+        captcha: "",
+        company: "",
+      });
+      setTimeParts({ hour: "08", minute: "00", meridiem: "AM" });
     } catch (error) {
       console.error("EmailJS send failed", error);
       const errorMessage =
@@ -219,7 +303,7 @@ const Contact = ({ refProp, visible }) => {
 
                 <div className="mb-4">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
-                    Email
+                    Valid Gmail
                   </label>
                   <input
                     type="email"
@@ -227,23 +311,211 @@ const Contact = ({ refProp, visible }) => {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
-                    placeholder="your@email.com"
+                    placeholder="yourname@gmail.com"
                     required
                   />
                 </div>
 
-                <div className="mb-6">
+                <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-slate-200 mb-2 text-sm font-medium">
+                      Date
+                    </label>
+                    <DatePicker
+                      selected={formData.date}
+                      onChange={(date) =>
+                        setFormData((prev) => ({ ...prev, date }))
+                      }
+                      placeholderText="Select date"
+                      dateFormat="MMMM d, yyyy"
+                      minDate={new Date()}
+                      showPopperArrow={false}
+                      popperPlacement="bottom-start"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
+                      calendarClassName="ojt-datepicker"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-200 mb-2 text-sm font-medium">
+                      Time
+                    </label>
+                    <div className="time-picker" ref={timePickerRef}>
+                      <button
+                        type="button"
+                        className="time-picker__trigger"
+                        onClick={() => setTimePickerOpen((open) => !open)}
+                        aria-haspopup="dialog"
+                        aria-expanded={timePickerOpen}
+                      >
+                        <span>
+                          {formData.time ? formData.time : "Select time"}
+                        </span>
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M5 7.5L10 12.5L15 7.5"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      {timePickerOpen ? (
+                        <div className="time-picker__panel" role="dialog">
+                          <div className="time-picker__columns">
+                            <div className="time-picker__column" aria-label="Hours">
+                              {hours.map((hour) => (
+                                <button
+                                  key={hour}
+                                  type="button"
+                                  className={`time-picker__item ${
+                                    timeParts.hour === hour
+                                      ? "is-selected"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    updateTime({
+                                      ...timeParts,
+                                      hour,
+                                    })
+                                  }
+                                >
+                                  {hour}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="time-picker__column" aria-label="Minutes">
+                              {minutes.map((minute) => (
+                                <button
+                                  key={minute}
+                                  type="button"
+                                  className={`time-picker__item ${
+                                    timeParts.minute === minute
+                                      ? "is-selected"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    updateTime({
+                                      ...timeParts,
+                                      minute,
+                                    })
+                                  }
+                                >
+                                  {minute}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="time-picker__column" aria-label="AM/PM">
+                              {meridiems.map((meridiem) => (
+                                <button
+                                  key={meridiem}
+                                  type="button"
+                                  className={`time-picker__item ${
+                                    timeParts.meridiem === meridiem
+                                      ? "is-selected"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    updateTime({
+                                      ...timeParts,
+                                      meridiem,
+                                    })
+                                  }
+                                >
+                                  {meridiem}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="time-picker__footer">
+                            <button
+                              type="button"
+                              className="time-picker__confirm"
+                              onClick={() => setTimePickerOpen(false)}
+                            >
+                              Done
+                            </button>
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-4">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
-                    Message
+                    Type
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="Online"
+                        checked={formData.type === "Online"}
+                        onChange={handleChange}
+                        className="accent-emerald-500"
+                        required
+                      />
+                      Online
+                    </label>
+                    <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="F2F"
+                        checked={formData.type === "F2F"}
+                        onChange={handleChange}
+                        className="accent-emerald-500"
+                        required
+                      />
+                      F2F
+                    </label>
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-slate-200 mb-2 text-sm font-medium">
+                    Notes (optional)
                   </label>
                   <textarea
-                    name="message"
-                    value={formData.message}
+                    name="notes"
+                    value={formData.notes}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 h-32 resize-none"
-                    placeholder="Your message here..."
-                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 h-28 resize-none"
+                    placeholder="Add any notes or details..."
                   ></textarea>
+                </div>
+
+                <div className="mb-6">
+                  <label className="block text-slate-200 mb-2 text-sm font-medium">
+                    Captcha
+                  </label>
+                  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-5 text-sm text-slate-200">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium text-white">Cloudflare Turnstile</p>
+                        <p className="text-xs text-slate-400 mt-1">
+                          Captcha widget will appear here once keys are added.
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-emerald-500/15 text-emerald-200 px-3 py-1 text-xs">
+                        Pending
+                      </span>
+                    </div>
+                    <div className="mt-4 rounded-lg border border-dashed border-emerald-400/40 bg-slate-900/60 px-4 py-6 text-center text-emerald-200/80">
+                      Widget placeholder
+                    </div>
+                  </div>
                 </div>
 
                 <div className="hidden" aria-hidden="true">
