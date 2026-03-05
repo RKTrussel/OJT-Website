@@ -2,16 +2,6 @@ import { useIsMobile } from "../hooks/useIsMobile";
 import { Avatar, Badge } from "./UI";
 import I from "../utils/icons";
 
-// ─── Modal ────────────────────────────────────────────────
-// Handles all appointment action dialogs: view, approve, reject, cancel, complete.
-// Props:
-//   appt      — the appointment object (null = hidden)
-//   type      — "view" | "approve" | "reject" | "cancel" | "complete"
-//   link      — meeting link string (approve flow)
-//   setLink   — setter for link
-//   reason    — rejection/cancellation reason string
-//   setReason — setter for reason
-//   onClose, onApprove, onReject, onComplete, onCancel — callbacks
 export default function Modal({
   appt,
   type,

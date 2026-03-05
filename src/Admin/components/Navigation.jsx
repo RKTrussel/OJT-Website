@@ -1,15 +1,11 @@
 import I from "../utils/icons";
 import { STATUS } from "../data/appointments";
 
-// ─── TABS config ──────────────────────────────────────────
-// Add or remove tabs here to update all nav areas at once.
 export const TABS = [
   { id: "dashboard", label: "Dashboard", icon: I.grid },
   { id: "appointments", label: "Appointments", icon: I.calendar },
 ];
 
-// ─── Desktop Sidebar ──────────────────────────────────────
-// Props: tab, setTab, sidebar (bool), setSidebar, stats, onLogout
 export function Sidebar({ tab, setTab, sidebar, setSidebar, stats, onLogout }) {
   return (
     <aside
@@ -65,7 +61,6 @@ export function Sidebar({ tab, setTab, sidebar, setSidebar, stats, onLogout }) {
 }
 
 // ─── Desktop Topbar ───────────────────────────────────────
-// Props: tab, sidebar, setSidebar, stats, toast
 export function Topbar({ tab, setSidebar, stats, toast }) {
   return (
     <header className="px-7 py-4 border-b border-white/5 flex items-center gap-4 bg-white/1 sticky top-0 z-50 backdrop-blur-xl">
@@ -98,7 +93,6 @@ export function Topbar({ tab, setSidebar, stats, toast }) {
 }
 
 // ─── Mobile Topbar ────────────────────────────────────────
-// Props: stats, onOpenDrawer
 export function MobileTopbar({ stats, onOpenDrawer }) {
   return (
     <header className="px-4 py-3.5 border-b border-white/[0.07] flex items-center justify-between bg-[#080810]/95 backdrop-blur-xl sticky top-0 z-50">
@@ -126,7 +120,6 @@ export function MobileTopbar({ stats, onOpenDrawer }) {
 }
 
 // ─── Mobile Bottom Nav ────────────────────────────────────
-// Props: tab, setTab, stats
 export function BottomNav({ tab, setTab, stats }) {
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-[#080810]/95 border-t border-white/[0.07] backdrop-blur-xl z-50 flex">
@@ -154,8 +147,6 @@ export function BottomNav({ tab, setTab, stats }) {
 }
 
 // ─── Mobile Drawer ────────────────────────────────────────
-// Slide-in side menu with account info, stats, and logout.
-// Props: appts, onLogout, onClose
 export function MobileDrawer({ appts, onLogout, onClose }) {
   return (
     <div className="fixed inset-0 z-150" onClick={onClose}>

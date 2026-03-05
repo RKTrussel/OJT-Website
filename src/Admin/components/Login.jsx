@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { FontLoader } from "./UI";
 
-// ─── Login ────────────────────────────────────────────────
-// Full-page login screen.
-// Props: onLogin (fn) — called when credentials are correct.
-//
-// Default credentials: admin@company.com / admin123
-// To change: update the check inside `submit()`.
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("admin@company.com");
   const [pass, setPass] = useState("admin123");
