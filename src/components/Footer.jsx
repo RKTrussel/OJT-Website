@@ -39,7 +39,7 @@ const Footer = () => {
               Cliberduche Corporation
             </h3>
 
-            <p className="text-gray-300 leading-relaxed mb-4">
+            <p className="text-gray-300 leading-relaxed mb-4 text-justify">
               Building the future with quality and reliability since 2018.
             </p>
 

@@ -100,7 +100,7 @@ const TanzaCavite2026 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               WDV Phase 4 in Tanza, Cavite covered subdivision earthworks, road
               base preparation, and drainage line installation for planned
               expansion areas. The project established a reliable foundation

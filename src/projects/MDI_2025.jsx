@@ -106,7 +106,7 @@ const MDI_2025 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               The 2025 MDI phase advanced structural and circulation works
               through phase-2 earthworks, road formation, and utilities
               coordination. This stage expanded site readiness while improving

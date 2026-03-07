@@ -38,18 +38,17 @@ const About = ({ refProp, visible }) => {
                     About Cliberduche
                   </h2>
                 </div>
-                <p className="text-lg text-slate-300 max-w-2xl leading-relaxed">
+                <p className="text-lg text-slate-300 max-w-2xl leading-relaxed text-justify">
                   From a focused local team to a trusted construction partner,
                   we deliver land development, site preparation, and
                   infrastructure works with discipline, safety, and speed.
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-3">
                 {[
                   { value: "2018", label: "Founded" },
                   { value: "14M+", label: "Cubic meters sourced" },
-                  { value: "2", label: "Key locations" },
                   { value: "24–48h", label: "Response time" },
                 ].map((item) => (
                   <div

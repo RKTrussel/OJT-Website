@@ -46,7 +46,7 @@ const Hero = ({ parallaxRef, scrollY }) => {
           <h1 className="text-5xl md:text-7xl font-bold mb-5">
             Build with precision. Deliver with confidence.
           </h1>
-          <p className="text-lg md:text-2xl text-slate-100/90 mb-8">
+          <p className="text-lg md:text-2xl text-slate-100/90 mb-8 text-justify">
             End-to-end site development, backfill sourcing, and infrastructure
             execution across the Philippines.
           </p>
@@ -68,7 +68,7 @@ const Hero = ({ parallaxRef, scrollY }) => {
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center max-w-md mx-auto">
             {[
               { label: "Since", value: "2018" },
-              { label: "Locations", value: "Laguna" },
+              { label: "Location", value: "Laguna" },
             ].map((item) => (
               <div
                 key={item.label}

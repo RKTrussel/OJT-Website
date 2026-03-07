@@ -81,7 +81,7 @@ const ProjectDetails = ({
                 </h3>
               </div>
             </div>
-            <p className="mt-4 text-base sm:text-lg text-slate-300 text-center md:text-left">
+            <p className="mt-4 text-base sm:text-lg text-slate-300 text-center md:text-justify">
               {scopeText}
             </p>
           </div>
@@ -118,7 +118,7 @@ const ProjectDetails = ({
                   <h4 className="font-semibold text-sm sm:text-base mb-1 text-slate-100">
                     {item.title}
                   </h4>
-                  <p className="text-slate-300 text-xs sm:text-sm">
+                  <p className="text-slate-300 text-xs sm:text-sm text-justify">
                     {item.desc}
                   </p>
                 </div>
@@ -152,7 +152,7 @@ const ProjectDetails = ({
                 </h3>
               </div>
             </div>
-            <p className="mt-4 text-base sm:text-lg text-slate-300 text-center md:text-left">
+            <p className="mt-4 text-base sm:text-lg text-slate-300 text-center md:text-justify">
               {outcomeText}
             </p>
           </div>

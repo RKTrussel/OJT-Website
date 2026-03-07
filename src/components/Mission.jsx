@@ -46,7 +46,7 @@ const Mission = ({ refProp, visible = true }) => {
                   Our Mission
                 </h3>
               </div>
-              <p className="text-slate-300 leading-relaxed text-left max-w-prose mx-auto">
+              <p className="text-slate-300 leading-relaxed text-justify max-w-prose mx-auto">
                 “We are a responsible land development company that provides
                 high-quality backfill materials for land development projects
                 and other infrastructures, including but not limited to sub-base
@@ -73,7 +73,7 @@ const Mission = ({ refProp, visible = true }) => {
                   Our Vision
                 </h3>
               </div>
-              <p className="text-slate-300 leading-relaxed text-left max-w-prose mx-auto">
+              <p className="text-slate-300 leading-relaxed text-justify max-w-prose mx-auto">
                 “Our vision is to be a highly respected, world-class natural
                 resource land development company committed to adhering to
                 international standards in land development operations and
@@ -98,7 +98,7 @@ const Mission = ({ refProp, visible = true }) => {
                 Our Core Values
               </h3>
             </div>
-            <p className="text-slate-300 leading-relaxed text-left max-w-3xl mx-auto">
+            <p className="text-slate-300 leading-relaxed text-justify max-w-3xl mx-auto">
               Taking pride, we believe that there is an intelligent Creator who
               made us, and our purpose is to help one another and be truthful in
               all our transactions, and thus CLIBERDUCHE CORPORATION takes pride
@@ -117,7 +117,7 @@ const Mission = ({ refProp, visible = true }) => {
                     Quality
                   </h4>
                 </div>
-                <p className="text-slate-300 leading-relaxed text-left">
+                <p className="text-slate-300 leading-relaxed text-justify">
                   Ensures projects are of high Quality and pair with local
                   standards to be able to be competitive in the National and
                   Local Market scene.
@@ -134,7 +134,7 @@ const Mission = ({ refProp, visible = true }) => {
                     Safety
                   </h4>
                 </div>
-                <p className="text-slate-300 leading-relaxed text-left">
+                <p className="text-slate-300 leading-relaxed text-justify">
                   Ensures safety at work site, safety of projects and safety of
                   personnel and thus we ensure safety practices which is the
                   pinnacle, before and after execution of projects.
@@ -151,7 +151,7 @@ const Mission = ({ refProp, visible = true }) => {
                     Integrity
                   </h4>
                 </div>
-                <p className="text-slate-300 leading-relaxed text-left">
+                <p className="text-slate-300 leading-relaxed text-justify">
                   Ensure compliance with existing laws covering the construction
                   industry, reliable workforce and our timely delivery of
                   projects.

@@ -96,7 +96,7 @@ const CBD_2019 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               The CBD Building Project covers a 3-storey commercial facility,
               including site development and utilities coordination. The work
               prioritized structural integrity, safe access, and long-term

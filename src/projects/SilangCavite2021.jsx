@@ -100,7 +100,7 @@ const SilangCavite2021 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               The Silang, Cavite project centered on community-focused roadway
               upgrades, including widening works, slope protection, and
               drainage improvements. The completed works reduced erosion risk

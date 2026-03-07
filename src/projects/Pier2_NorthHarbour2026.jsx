@@ -86,7 +86,7 @@ const Pier2_NorthHarbour2026 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               The Pier 2 North Harbour project delivered maritime-focused civil
               works, including harbour-side earthworks, quay support, and
               access improvements. It was designed to strengthen port

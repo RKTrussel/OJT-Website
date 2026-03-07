@@ -160,7 +160,7 @@ const ProjectCard = ({ project, index, isCarousel }) => {
           {project.title}
         </h3>
 
-        <p className="text-slate-400 leading-relaxed line-clamp-2 text-xs sm:text-sm">
+        <p className="text-slate-400 leading-relaxed line-clamp-2 text-xs sm:text-sm text-justify">
           {project.desc}
         </p>
 

@@ -85,7 +85,7 @@ const MDI_2024 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               The 2024 MDI phase delivered precision earthworks, drainage, and
               site development to prepare a stable, build-ready platform. The
               implementation focused on compliant grading and reliable water

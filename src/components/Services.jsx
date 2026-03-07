@@ -94,7 +94,7 @@ const Services = ({ refProp, visible }) => {
       />
 
       {/* --- Card content --- */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-6 gap-4">
+      <div className="relative z-10 flex h-full flex-col justify-between gap-5 p-6 sm:p-7">
         {/* Top row: tag + icon */}
         <div className="flex items-start justify-between">
           <span
@@ -113,28 +113,25 @@ const Services = ({ refProp, visible }) => {
         </div>
 
         {/* Middle: title + desc */}
-        <div className="flex-1 flex flex-col justify-end gap-2 pt-4">
+        <div className="flex flex-1 flex-col justify-end gap-3 pt-3">
           {/* Thin accent line */}
           <div
-            className="w-8 h-0.5 bg-emerald-400/50 group-hover:w-16
-                          transition-all duration-500 rounded-full mb-1"
+            className="h-0.5 w-8 rounded-full bg-emerald-400/50 transition-all duration-500 group-hover:w-16"
           />
           <h3
-            className="text-lg sm:text-xl font-semibold text-white
-                          leading-snug tracking-tight"
+            className="text-lg font-semibold leading-tight tracking-tight text-white sm:text-xl"
             style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
           >
             {s.title}
           </h3>
-          <p className="text-slate-400 group-hover:text-slate-200 text-sm leading-relaxed transition-colors duration-300">
+          <p className="text-sm leading-relaxed text-slate-300 transition-colors duration-300 group-hover:text-slate-200 sm:text-[15px] text-justify">
             {s.desc}
           </p>
         </div>
 
         {/* Bottom: hover hint */}
         <div
-          className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100
-                        transition-opacity duration-500 pt-2"
+          className="flex items-center gap-1.5 pt-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-[10px] uppercase tracking-widest text-emerald-300/70">
@@ -165,7 +162,7 @@ const Services = ({ refProp, visible }) => {
           }`}
         >
           {/* Header */}
-          <div className="flex flex-col items-center justify-center gap-2 mb-12 text-center">
+          <div className="mb-12 flex flex-col items-center justify-center gap-3 text-center">
             <span
               className="text-[11px] uppercase tracking-[0.35em] text-amber-200
                              bg-amber-400/10 border border-amber-300/30
@@ -185,7 +182,7 @@ const Services = ({ refProp, visible }) => {
               </h2>
             </div>
 
-            <p className="text-slate-300 max-w-3xl">
+            <p className="max-w-3xl text-slate-300 leading-relaxed text-justify">
               Reliable execution from sourcing to site management, tailored to
               infrastructure and land development needs.
             </p>
@@ -197,20 +194,20 @@ const Services = ({ refProp, visible }) => {
           </div>
 
           {/* Primary Services */}
-          <h3 className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-5 text-center">
+          <h3 className="mb-4 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
             Primary Functions
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <div className="mb-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {primaryServices.map((s, i) => (
               <ServiceCard key={i} s={s} imgSrc={serviceImages[i]} index={i} />
             ))}
           </div>
 
           {/* Secondary Services */}
-          <h3 className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-5 text-center">
+          <h3 className="mb-4 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
             Secondary Functions
           </h3>
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid gap-5 md:grid-cols-2">
             {secondaryServices.map((s, i) => (
               <ServiceCard
                 key={i}

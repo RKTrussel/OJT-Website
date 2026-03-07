@@ -95,7 +95,7 @@ const MDI_2026 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-100">
               Project Overview
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-300 text-justify">
               The 2026 MDI phase completed critical grading, drainage upgrades,
               and site stabilization works to support long-term development.
               The project emphasized durable ground performance and sustained
