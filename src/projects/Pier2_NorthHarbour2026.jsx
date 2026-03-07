@@ -87,9 +87,11 @@ const Pier2_NorthHarbour2026 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery
-              of high-quality road infrastructure designed to improve traffic
-              flow, safety, and long-term durability.
+              The Pier 2 North Harbour project delivered maritime-focused civil
+              works, including harbour-side earthworks, quay support, and
+              access improvements. It was designed to strengthen port
+              operations through safer movement and reinforced coastal
+              infrastructure.
             </p>
           </div>
 
