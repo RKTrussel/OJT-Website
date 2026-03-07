@@ -32,7 +32,7 @@ const About = ({ refProp, visible }) => {
                   <img
                     src={logo}
                     alt="Cliberduche Logo"
-                    className="w-20 h-20 object-contain drop-shadow-xl"
+                    className="w-14 h-14 object-contain drop-shadow-xl"
                   />
                   <h2 className="text-4xl md:text-5xl font-bold text-slate-100">
                     About Cliberduche

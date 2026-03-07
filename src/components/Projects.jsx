@@ -274,7 +274,7 @@ const Projects = ({ refProp, visible }) => {
             <img
               src={logo}
               alt="Cliberduche Logo"
-              className="w-9 h-7 sm:w-12 sm:h-12 lg:w-14 lg:h-14 drop-shadow-lg"
+              className="w-14 h-14 object-contain drop-shadow-lg"
             />
             <h2 className="font-bold text-white tracking-tight text-2xl sm:text-4xl lg:text-5xl">
               Our Projects

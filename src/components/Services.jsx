@@ -175,7 +175,7 @@ const Services = ({ refProp, visible }) => {
               <img
                 src={logo}
                 alt="Cliberduche Logo"
-                className="w-16 h-16 object-contain"
+                className="w-14 h-14 object-contain drop-shadow-lg"
               />
               <h2 className="text-3xl font-semibold text-slate-100">
                 Our Services
