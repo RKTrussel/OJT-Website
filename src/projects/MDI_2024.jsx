@@ -86,9 +86,10 @@ const MDI_2024 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery
-              of high-quality road infrastructure designed to improve traffic
-              flow, safety, and long-term durability.
+              The 2024 MDI phase delivered precision earthworks, drainage, and
+              site development to prepare a stable, build-ready platform. The
+              implementation focused on compliant grading and reliable water
+              flow management across the project area.
             </p>
           </div>
 

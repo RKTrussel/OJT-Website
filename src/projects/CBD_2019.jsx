@@ -97,9 +97,10 @@ const CBD_2019 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery
-              of high-quality road infrastructure designed to improve traffic
-              flow, safety, and long-term durability.
+              The CBD Building Project covers a 3-storey commercial facility,
+              including site development and utilities coordination. The work
+              prioritized structural integrity, safe access, and long-term
+              functionality for a modern business environment.
             </p>
           </div>
 

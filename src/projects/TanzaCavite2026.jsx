@@ -101,9 +101,10 @@ const TanzaCavite2026 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery
-              of high-quality road infrastructure designed to improve traffic
-              flow, safety, and long-term durability.
+              WDV Phase 4 in Tanza, Cavite covered subdivision earthworks, road
+              base preparation, and drainage line installation for planned
+              expansion areas. The project established a reliable foundation
+              with better water control and long-term serviceability.
             </p>
           </div>
 

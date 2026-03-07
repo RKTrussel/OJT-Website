@@ -107,9 +107,10 @@ const MDI_2025 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery
-              of high-quality road infrastructure designed to improve traffic
-              flow, safety, and long-term durability.
+              The 2025 MDI phase advanced structural and circulation works
+              through phase-2 earthworks, road formation, and utilities
+              coordination. This stage expanded site readiness while improving
+              internal movement and operational safety.
             </p>
           </div>
 

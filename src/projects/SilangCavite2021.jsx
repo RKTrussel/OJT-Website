@@ -101,9 +101,10 @@ const SilangCavite2021 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery
-              of high-quality road infrastructure designed to improve traffic
-              flow, safety, and long-term durability.
+              The Silang, Cavite project centered on community-focused roadway
+              upgrades, including widening works, slope protection, and
+              drainage improvements. The completed works reduced erosion risk
+              and improved day-to-day travel safety for local residents.
             </p>
           </div>
 

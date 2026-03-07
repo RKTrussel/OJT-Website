@@ -96,9 +96,10 @@ const MDI_2026 = () => {
               Project Overview
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-slate-300">
-              This project focuses on the planning, construction, and delivery of
-              high-quality road infrastructure designed to improve traffic flow,
-              safety, and long-term durability.
+              The 2026 MDI phase completed critical grading, drainage upgrades,
+              and site stabilization works to support long-term development.
+              The project emphasized durable ground performance and sustained
+              readiness for succeeding construction activities.
             </p>
           </div>
 
