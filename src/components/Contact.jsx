@@ -7,7 +7,6 @@ import contactBg from "../img/main_background-contact.jpg";
 import { bookAppointment } from "../Admin/services/appointmentService";
 
 // ─── Helpers ──────────────────────────────────────────────
-// Converts a JS Date to "YYYY-MM-DD" for the backend
 const toDateString = (date) => {
   if (!date) return "";
   const y = date.getFullYear();
@@ -16,7 +15,6 @@ const toDateString = (date) => {
   return `${y}-${m}-${d}`;
 };
 
-// Converts "08:30 AM" → "08:30" 24-hour format for the backend
 const to24Hour = (timeStr) => {
   if (!timeStr) return "";
   const [time, meridiem] = timeStr.split(" ");
@@ -26,27 +24,26 @@ const to24Hour = (timeStr) => {
   return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
 };
 
+// ─── Check if reCAPTCHA site key is configured ────────────
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
 const Contact = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
   const [timePickerOpen, setTimePickerOpen] = useState(false);
 
-  // ── Form state ─────────────────────────────────────────
-  // Fields map directly to backend: full_name, email, contact_number,
-  // appointment_date, appointment_time, consultation_type, notes
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
     contact_number: "",
-    date: null, // JS Date object — converted to string on submit
-    time: "", // "HH:MM AM/PM" display — converted to 24h on submit
+    date: null,
+    time: "",
     consultation_type: "",
     notes: "",
-    company: "", // honeypot field (bot trap)
+    company: "",
   });
 
-  // reCAPTCHA v2 token — set when user checks the widget
   const [captchaToken, setCaptchaToken] = useState("");
   const recaptchaRef = useRef(null);
 
@@ -80,7 +77,6 @@ const Contact = ({ refProp, visible }) => {
     }));
   };
 
-  // Close time picker when clicking outside
   useEffect(() => {
     const handler = (e) => {
       if (timePickerRef.current && !timePickerRef.current.contains(e.target)) {
@@ -91,7 +87,6 @@ const Contact = ({ refProp, visible }) => {
     return () => window.removeEventListener("mousedown", handler);
   }, [timePickerOpen]);
 
-  // ── Validation ─────────────────────────────────────────
   const validateForm = () => {
     const { full_name, email, contact_number, date, time, consultation_type } =
       formData;
@@ -117,19 +112,18 @@ const Contact = ({ refProp, visible }) => {
       return "Please enter a valid contact number.";
     }
 
-    if (!captchaToken) {
+    // Only require captcha token if the key is configured
+    if (RECAPTCHA_SITE_KEY && !captchaToken) {
       return "Please complete the CAPTCHA verification.";
     }
 
     return "";
   };
 
-  // ── Submit ─────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ type: "", message: "" });
 
-    // Honeypot — silently ignore bots
     if (formData.company) return;
 
     const validationError = validateForm();
@@ -141,16 +135,16 @@ const Contact = ({ refProp, visible }) => {
     try {
       setIsSending(true);
 
-      // Build payload matching backend field names exactly
       const payload = {
         full_name: formData.full_name.trim(),
         email: formData.email.trim(),
         contact_number: formData.contact_number.trim(),
-        appointment_date: toDateString(formData.date), // "YYYY-MM-DD"
-        appointment_time: to24Hour(formData.time), // "HH:MM" 24h
-        consultation_type: formData.consultation_type, // "online" | "face_to_face"
+        appointment_date: toDateString(formData.date),
+        appointment_time: to24Hour(formData.time),
+        consultation_type: formData.consultation_type,
         notes: formData.notes.trim(),
-        captcha_token: captchaToken, // verified on backend
+        // Only include captcha token if available
+        ...(RECAPTCHA_SITE_KEY && { captcha_token: captchaToken }),
       };
 
       const result = await bookAppointment(payload);
@@ -160,7 +154,6 @@ const Contact = ({ refProp, visible }) => {
         message: `Appointment booked! Your reference code is: ${result.reference_code}`,
       });
 
-      // Reset form
       setFormData({
         full_name: "",
         email: "",
@@ -180,7 +173,6 @@ const Contact = ({ refProp, visible }) => {
         message:
           error?.message || "Sorry, something went wrong. Please try again.",
       });
-      // Reset captcha on failure so user can retry
       setCaptchaToken("");
       recaptchaRef.current?.reset();
     } finally {
@@ -512,21 +504,43 @@ const Contact = ({ refProp, visible }) => {
                   />
                 </div>
 
-                {/* reCAPTCHA v2 */}
+                {/* reCAPTCHA v2 — only renders if site key is set */}
                 <div className="mb-6">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
                     Verification
                   </label>
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                    onChange={(token) => setCaptchaToken(token || "")}
-                    onExpired={() => setCaptchaToken("")}
-                    theme="dark"
-                  />
+                  {RECAPTCHA_SITE_KEY ? (
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={RECAPTCHA_SITE_KEY}
+                      onChange={(token) => setCaptchaToken(token || "")}
+                      onExpired={() => setCaptchaToken("")}
+                      theme="dark"
+                    />
+                  ) : (
+                    <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-400/30 text-yellow-200 text-sm">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4 shrink-0"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      reCAPTCHA not available —{" "}
+                      <code className="font-mono text-xs mx-1">
+                        VITE_RECAPTCHA_SITE_KEY
+                      </code>{" "}
+                      is not set (dev mode).
+                    </div>
+                  )}
                 </div>
 
-                {/* Honeypot (hidden from real users) */}
+                {/* Honeypot */}
                 <div className="hidden" aria-hidden="true">
                   <label htmlFor="company">Company</label>
                   <input
@@ -556,7 +570,7 @@ const Contact = ({ refProp, visible }) => {
 
                 <button
                   type="submit"
-                  disabled={isSending || !captchaToken}
+                  disabled={isSending || (RECAPTCHA_SITE_KEY && !captchaToken)}
                   className="focus-ring w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/60 text-white font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-[0_18px_45px_-28px_rgba(14,165,233,0.6)] hover:shadow-[0_22px_55px_-28px_rgba(16,185,129,0.6)] disabled:cursor-not-allowed"
                 >
                   {isSending ? "Booking..." : "Book Appointment"}
