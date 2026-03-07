@@ -1,38 +1,63 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import emailjs from "@emailjs/browser";
+import ReCAPTCHA from "react-google-recaptcha";
 import logo from "../img/cliberduche_logo.png";
 import contactBg from "../img/main_background-contact.jpg";
+import { bookAppointment } from "../Admin/services/appointmentService";
+
+// ─── Helpers ──────────────────────────────────────────────
+// Converts a JS Date to "YYYY-MM-DD" for the backend
+const toDateString = (date) => {
+  if (!date) return "";
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+};
+
+// Converts "08:30 AM" → "08:30" 24-hour format for the backend
+const to24Hour = (timeStr) => {
+  if (!timeStr) return "";
+  const [time, meridiem] = timeStr.split(" ");
+  let [hour, minute] = time.split(":").map(Number);
+  if (meridiem === "AM" && hour === 12) hour = 0;
+  if (meridiem === "PM" && hour !== 12) hour += 12;
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+};
 
 const Contact = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
   const [timePickerOpen, setTimePickerOpen] = useState(false);
+
+  // ── Form state ─────────────────────────────────────────
+  // Fields map directly to backend: full_name, email, contact_number,
+  // appointment_date, appointment_time, consultation_type, notes
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    date: null,
-    time: "",
-    type: "",
+    contact_number: "",
+    date: null, // JS Date object — converted to string on submit
+    time: "", // "HH:MM AM/PM" display — converted to 24h on submit
+    consultation_type: "",
     notes: "",
-    captcha: "",
-    company: "",
+    company: "", // honeypot field (bot trap)
   });
 
-  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  // reCAPTCHA v2 token — set when user checks the widget
+  const [captchaToken, setCaptchaToken] = useState("");
+  const recaptchaRef = useRef(null);
 
   const timePickerRef = useRef(null);
   const hours = useMemo(
     () => Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0")),
-    []
+    [],
   );
   const minutes = useMemo(
     () => Array.from({ length: 60 }, (_, i) => String(i).padStart(2, "0")),
-    []
+    [],
   );
   const meridiems = useMemo(() => ["AM", "PM"], []);
 
@@ -42,8 +67,8 @@ const Contact = ({ refProp, visible }) => {
     meridiem: "AM",
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -55,122 +80,109 @@ const Contact = ({ refProp, visible }) => {
     }));
   };
 
+  // Close time picker when clicking outside
+  useEffect(() => {
+    const handler = (e) => {
+      if (timePickerRef.current && !timePickerRef.current.contains(e.target)) {
+        setTimePickerOpen(false);
+      }
+    };
+    if (timePickerOpen) window.addEventListener("mousedown", handler);
+    return () => window.removeEventListener("mousedown", handler);
+  }, [timePickerOpen]);
+
+  // ── Validation ─────────────────────────────────────────
   const validateForm = () => {
+    const { full_name, email, contact_number, date, time, consultation_type } =
+      formData;
+
     if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.date ||
-      !formData.time ||
-      !formData.type
+      !full_name.trim() ||
+      !email.trim() ||
+      !contact_number.trim() ||
+      !date ||
+      !time ||
+      !consultation_type
     ) {
       return "Please fill in all required fields.";
     }
 
-    const emailPattern = /^[^\s@]+@gmail\.com$/i;
-    if (!emailPattern.test(formData.email.trim())) {
-      return "Please enter a valid Gmail address.";
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.trim())) {
+      return "Please enter a valid email address.";
+    }
+
+    const phonePattern = /^[0-9+\-\s()]{7,15}$/;
+    if (!phonePattern.test(contact_number.trim())) {
+      return "Please enter a valid contact number.";
+    }
+
+    if (!captchaToken) {
+      return "Please complete the CAPTCHA verification.";
     }
 
     return "";
   };
 
-  const formatDate = (value) =>
-    value
-      ? value.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "2-digit",
-        })
-      : "";
-
-  const formatTime = (value) =>
-    value
-      ? typeof value === "string"
-        ? value
-        : value.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-      : "";
-
-  useEffect(() => {
-    const handler = (event) => {
-      if (!timePickerRef.current) return;
-      if (!timePickerRef.current.contains(event.target)) {
-        setTimePickerOpen(false);
-      }
-    };
-    if (timePickerOpen) {
-      window.addEventListener("mousedown", handler);
-    }
-    return () => window.removeEventListener("mousedown", handler);
-  }, [timePickerOpen]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // ── Submit ─────────────────────────────────────────────
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setStatus({ type: "", message: "" });
 
-    if (formData.company) {
-      return;
-    }
+    // Honeypot — silently ignore bots
+    if (formData.company) return;
 
-    const validationMessage = validateForm();
-    if (validationMessage) {
-      setStatus({ type: "error", message: validationMessage });
-      return;
-    }
-
-    if (!serviceId || !templateId || !publicKey) {
-      setStatus({
-        type: "error",
-        message: "Email service is not configured. Please try again later.",
-      });
+    const validationError = validateForm();
+    if (validationError) {
+      setStatus({ type: "error", message: validationError });
       return;
     }
 
     try {
       setIsSending(true);
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: formData.name.trim(),
-          from_email: formData.email.trim(),
-          contact_date: formatDate(formData.date),
-          contact_time: formatTime(formData.time),
-          contact_type: formData.type,
-          notes: formData.notes.trim(),
-          captcha: formData.captcha.trim(),
-          reply_to: formData.email.trim(),
-        },
-        publicKey
-      );
+
+      // Build payload matching backend field names exactly
+      const payload = {
+        full_name: formData.full_name.trim(),
+        email: formData.email.trim(),
+        contact_number: formData.contact_number.trim(),
+        appointment_date: toDateString(formData.date), // "YYYY-MM-DD"
+        appointment_time: to24Hour(formData.time), // "HH:MM" 24h
+        consultation_type: formData.consultation_type, // "online" | "face_to_face"
+        notes: formData.notes.trim(),
+        captcha_token: captchaToken, // verified on backend
+      };
+
+      const result = await bookAppointment(payload);
 
       setStatus({
         type: "success",
-        message: "Thanks! Your message has been sent. We'll get back to you soon.",
+        message: `Appointment booked! Your reference code is: ${result.reference_code}`,
       });
+
+      // Reset form
       setFormData({
-        name: "",
+        full_name: "",
         email: "",
+        contact_number: "",
         date: null,
         time: "",
-        type: "",
+        consultation_type: "",
         notes: "",
-        captcha: "",
         company: "",
       });
       setTimeParts({ hour: "08", minute: "00", meridiem: "AM" });
+      setCaptchaToken("");
+      recaptchaRef.current?.reset();
     } catch (error) {
-      console.error("EmailJS send failed", error);
-      const errorMessage =
-        error?.text ||
-        error?.message ||
-        "Sorry, something went wrong while sending. Please try again.";
       setStatus({
         type: "error",
-        message: errorMessage,
+        message:
+          error?.message || "Sorry, something went wrong. Please try again.",
       });
+      // Reset captcha on failure so user can retry
+      setCaptchaToken("");
+      recaptchaRef.current?.reset();
     } finally {
       setIsSending(false);
     }
@@ -184,9 +196,7 @@ const Contact = ({ refProp, visible }) => {
         className="scroll-mt-6 w-full relative overflow-hidden"
       >
         <div
-          className={`absolute inset-0 bg-cinematic ${
-            bgLoaded ? "is-loaded" : ""
-          }`}
+          className={`absolute inset-0 bg-cinematic ${bgLoaded ? "is-loaded" : ""}`}
         >
           <img
             src={contactBg}
@@ -199,9 +209,7 @@ const Contact = ({ refProp, visible }) => {
         </div>
 
         <div
-          className={`relative z-10 max-w-6xl mx-auto px-6 py-20 reveal-clip ${
-            visible ? "is-visible" : ""
-          }`}
+          className={`relative z-10 max-w-6xl mx-auto px-6 py-20 reveal-clip ${visible ? "is-visible" : ""}`}
         >
           <div className="flex items-center justify-center gap-4 mb-10">
             <img
@@ -215,11 +223,11 @@ const Contact = ({ refProp, visible }) => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
+            {/* ── Left: Contact Info ── */}
             <div>
               <h3 className="text-xl font-semibold mb-6 text-emerald-200">
                 Get In Touch
               </h3>
-
               <div className="space-y-6">
                 <div className="flex items-start">
                   <img
@@ -235,7 +243,6 @@ const Contact = ({ refProp, visible }) => {
                     </p>
                   </div>
                 </div>
-
                 <div className="flex items-center">
                   <img
                     src="https://img.icons8.com/ios-filled/24/22c55e/phone.png"
@@ -249,7 +256,6 @@ const Contact = ({ refProp, visible }) => {
                     </p>
                   </div>
                 </div>
-
                 <div className="flex items-center">
                   <img
                     src="https://img.icons8.com/ios-filled/24/22c55e/email.png"
@@ -264,6 +270,7 @@ const Contact = ({ refProp, visible }) => {
               </div>
             </div>
 
+            {/* ── Right: Booking Form ── */}
             <div>
               <form
                 onSubmit={handleSubmit}
@@ -277,33 +284,35 @@ const Contact = ({ refProp, visible }) => {
                     Send us a Message
                   </h4>
                   <p className="text-slate-300 mt-2">
-                    Tell us about your project and we’ll respond within 24–48
+                    Tell us about your project and we'll respond within 24–48
                     hours.
                   </p>
                   <p className="text-xs text-emerald-100/80 mt-3">
-                    Messages go to our Gmail inbox and you’ll receive an
-                    automatic acknowledgement.
+                    You'll receive a reference code after booking. Use it to
+                    check your appointment status.
                   </p>
                 </div>
 
+                {/* Full Name */}
                 <div className="mb-4">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
-                    Name
+                    Full Name
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="full_name"
+                    value={formData.full_name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
-                    placeholder="Your Name"
+                    placeholder="Your Full Name"
                     required
                   />
                 </div>
 
+                {/* Email */}
                 <div className="mb-4">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
-                    Valid Gmail
+                    Email
                   </label>
                   <input
                     type="email"
@@ -311,11 +320,28 @@ const Contact = ({ refProp, visible }) => {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
-                    placeholder="yourname@gmail.com"
+                    placeholder="yourname@email.com"
                     required
                   />
                 </div>
 
+                {/* Contact Number */}
+                <div className="mb-4">
+                  <label className="block text-slate-200 mb-2 text-sm font-medium">
+                    Contact Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="contact_number"
+                    value={formData.contact_number}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
+                    placeholder="09XXXXXXXXX"
+                    required
+                  />
+                </div>
+
+                {/* Date & Time */}
                 <div className="grid sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-slate-200 mb-2 text-sm font-medium">
@@ -369,66 +395,54 @@ const Contact = ({ refProp, visible }) => {
                         </svg>
                       </button>
 
-                      {timePickerOpen ? (
+                      {timePickerOpen && (
                         <div className="time-picker__panel" role="dialog">
                           <div className="time-picker__columns">
-                            <div className="time-picker__column" aria-label="Hours">
+                            <div
+                              className="time-picker__column"
+                              aria-label="Hours"
+                            >
                               {hours.map((hour) => (
                                 <button
                                   key={hour}
                                   type="button"
-                                  className={`time-picker__item ${
-                                    timeParts.hour === hour
-                                      ? "is-selected"
-                                      : ""
-                                  }`}
+                                  className={`time-picker__item ${timeParts.hour === hour ? "is-selected" : ""}`}
                                   onClick={() =>
-                                    updateTime({
-                                      ...timeParts,
-                                      hour,
-                                    })
+                                    updateTime({ ...timeParts, hour })
                                   }
                                 >
                                   {hour}
                                 </button>
                               ))}
                             </div>
-                            <div className="time-picker__column" aria-label="Minutes">
+                            <div
+                              className="time-picker__column"
+                              aria-label="Minutes"
+                            >
                               {minutes.map((minute) => (
                                 <button
                                   key={minute}
                                   type="button"
-                                  className={`time-picker__item ${
-                                    timeParts.minute === minute
-                                      ? "is-selected"
-                                      : ""
-                                  }`}
+                                  className={`time-picker__item ${timeParts.minute === minute ? "is-selected" : ""}`}
                                   onClick={() =>
-                                    updateTime({
-                                      ...timeParts,
-                                      minute,
-                                    })
+                                    updateTime({ ...timeParts, minute })
                                   }
                                 >
                                   {minute}
                                 </button>
                               ))}
                             </div>
-                            <div className="time-picker__column" aria-label="AM/PM">
+                            <div
+                              className="time-picker__column"
+                              aria-label="AM/PM"
+                            >
                               {meridiems.map((meridiem) => (
                                 <button
                                   key={meridiem}
                                   type="button"
-                                  className={`time-picker__item ${
-                                    timeParts.meridiem === meridiem
-                                      ? "is-selected"
-                                      : ""
-                                  }`}
+                                  className={`time-picker__item ${timeParts.meridiem === meridiem ? "is-selected" : ""}`}
                                   onClick={() =>
-                                    updateTime({
-                                      ...timeParts,
-                                      meridiem,
-                                    })
+                                    updateTime({ ...timeParts, meridiem })
                                   }
                                 >
                                   {meridiem}
@@ -446,11 +460,12 @@ const Contact = ({ refProp, visible }) => {
                             </button>
                           </div>
                         </div>
-                      ) : null}
+                      )}
                     </div>
                   </div>
                 </div>
 
+                {/* Consultation Type */}
                 <div className="mb-4">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
                     Type
@@ -459,9 +474,9 @@ const Contact = ({ refProp, visible }) => {
                     <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40">
                       <input
                         type="radio"
-                        name="type"
-                        value="Online"
-                        checked={formData.type === "Online"}
+                        name="consultation_type"
+                        value="online"
+                        checked={formData.consultation_type === "online"}
                         onChange={handleChange}
                         className="accent-emerald-500"
                         required
@@ -471,9 +486,9 @@ const Contact = ({ refProp, visible }) => {
                     <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40">
                       <input
                         type="radio"
-                        name="type"
-                        value="F2F"
-                        checked={formData.type === "F2F"}
+                        name="consultation_type"
+                        value="face_to_face"
+                        checked={formData.consultation_type === "face_to_face"}
                         onChange={handleChange}
                         className="accent-emerald-500"
                         required
@@ -483,6 +498,7 @@ const Contact = ({ refProp, visible }) => {
                   </div>
                 </div>
 
+                {/* Notes */}
                 <div className="mb-4">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
                     Notes (optional)
@@ -493,31 +509,24 @@ const Contact = ({ refProp, visible }) => {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 h-28 resize-none"
                     placeholder="Add any notes or details..."
-                  ></textarea>
+                  />
                 </div>
 
+                {/* reCAPTCHA v2 */}
                 <div className="mb-6">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
-                    Captcha
+                    Verification
                   </label>
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-5 text-sm text-slate-200">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-white">Cloudflare Turnstile</p>
-                        <p className="text-xs text-slate-400 mt-1">
-                          Captcha widget will appear here once keys are added.
-                        </p>
-                      </div>
-                      <span className="rounded-full bg-emerald-500/15 text-emerald-200 px-3 py-1 text-xs">
-                        Pending
-                      </span>
-                    </div>
-                    <div className="mt-4 rounded-lg border border-dashed border-emerald-400/40 bg-slate-900/60 px-4 py-6 text-center text-emerald-200/80">
-                      Widget placeholder
-                    </div>
-                  </div>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                    onChange={(token) => setCaptchaToken(token || "")}
+                    onExpired={() => setCaptchaToken("")}
+                    theme="dark"
+                  />
                 </div>
 
+                {/* Honeypot (hidden from real users) */}
                 <div className="hidden" aria-hidden="true">
                   <label htmlFor="company">Company</label>
                   <input
@@ -531,7 +540,8 @@ const Contact = ({ refProp, visible }) => {
                   />
                 </div>
 
-                {status.message ? (
+                {/* Status message */}
+                {status.message && (
                   <div
                     className={`mb-4 text-sm font-medium rounded-lg px-4 py-3 ${
                       status.type === "success"
@@ -542,14 +552,14 @@ const Contact = ({ refProp, visible }) => {
                   >
                     {status.message}
                   </div>
-                ) : null}
+                )}
 
                 <button
                   type="submit"
-                  disabled={isSending}
+                  disabled={isSending || !captchaToken}
                   className="focus-ring w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/60 text-white font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-[0_18px_45px_-28px_rgba(14,165,233,0.6)] hover:shadow-[0_22px_55px_-28px_rgba(16,185,129,0.6)] disabled:cursor-not-allowed"
                 >
-                  {isSending ? "Sending..." : "Send Message"}
+                  {isSending ? "Booking..." : "Book Appointment"}
                 </button>
               </form>
             </div>
