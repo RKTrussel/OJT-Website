@@ -9,10 +9,7 @@ import { bookAppointment } from "../Admin/services/appointmentService";
 // ─── Helpers ──────────────────────────────────────────────
 const toDateString = (date) => {
   if (!date) return "";
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
+  return date.toLocaleDateString("en-CA");
 };
 
 const to24Hour = (timeStr) => {
@@ -23,9 +20,6 @@ const to24Hour = (timeStr) => {
   if (meridiem === "PM" && hour !== 12) hour += 12;
   return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
 };
-
-// ─── Check if reCAPTCHA site key is configured ────────────
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const Contact = ({ refProp, visible }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
@@ -46,8 +40,8 @@ const Contact = ({ refProp, visible }) => {
 
   const [captchaToken, setCaptchaToken] = useState("");
   const recaptchaRef = useRef(null);
-
   const timePickerRef = useRef(null);
+
   const hours = useMemo(
     () => Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0")),
     [],
@@ -112,8 +106,7 @@ const Contact = ({ refProp, visible }) => {
       return "Please enter a valid contact number.";
     }
 
-    // Only require captcha token if the key is configured
-    if (RECAPTCHA_SITE_KEY && !captchaToken) {
+    if (!captchaToken) {
       return "Please complete the CAPTCHA verification.";
     }
 
@@ -143,8 +136,7 @@ const Contact = ({ refProp, visible }) => {
         appointment_time: to24Hour(formData.time),
         consultation_type: formData.consultation_type,
         notes: formData.notes.trim(),
-        // Only include captcha token if available
-        ...(RECAPTCHA_SITE_KEY && { captcha_token: captchaToken }),
+        captcha_token: captchaToken,
       };
 
       const result = await bookAppointment(payload);
@@ -187,6 +179,7 @@ const Contact = ({ refProp, visible }) => {
         ref={refProp}
         className="scroll-mt-6 w-full relative overflow-hidden"
       >
+        {/* Background */}
         <div
           className={`absolute inset-0 bg-cinematic ${bgLoaded ? "is-loaded" : ""}`}
         >
@@ -197,66 +190,78 @@ const Contact = ({ refProp, visible }) => {
             onLoad={() => setBgLoaded(true)}
             onError={() => setBgLoaded(true)}
           />
-          <div className="absolute inset-0 bg-linear-to-br from-slate-900/85 via-slate-900/60 to-emerald-900/70"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-slate-900/85 via-slate-900/60 to-emerald-900/70" />
         </div>
 
+        {/* Content */}
         <div
-          className={`relative z-10 max-w-6xl mx-auto px-6 py-20 reveal-clip ${visible ? "is-visible" : ""}`}
+          className={`relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 reveal-clip ${
+            visible ? "is-visible" : ""
+          }`}
         >
-          <div className="flex items-center justify-center gap-4 mb-10">
+          {/* Header */}
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10">
             <img
               src={logo}
               alt="Cliberduche Logo"
-              className="w-14 h-14 object-contain drop-shadow-lg"
+              className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
             />
-            <h2 className="text-3xl font-semibold text-white text-center">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white text-center">
               Contact Us
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          {/* Two-column grid — stacks on mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {/* ── Left: Contact Info ── */}
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-emerald-200">
+              <h3 className="text-xl font-semibold mb-5 sm:mb-6 text-emerald-200">
                 Get In Touch
               </h3>
-              <div className="space-y-6">
-                <div className="flex items-start">
+              <div className="space-y-5 sm:space-y-6">
+                {/* Address */}
+                <div className="flex items-start gap-3">
                   <img
                     src="https://img.icons8.com/ios-filled/24/22c55e/marker.png"
                     alt="Address"
-                    className="mt-1 mr-3"
+                    className="mt-1 shrink-0"
                   />
                   <div>
                     <p className="font-semibold text-white">Office Address</p>
-                    <p className="text-slate-200">
+                    <p className="text-slate-200 text-sm sm:text-base">
                       Lot 3739 National Highway, 3/F CBD Building, Brgy. Pulo,
                       Cabuyao City, Laguna, Philippines
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center">
+
+                {/* Phone */}
+                <div className="flex items-center gap-3">
                   <img
                     src="https://img.icons8.com/ios-filled/24/22c55e/phone.png"
                     alt="Phone"
-                    className="mr-3"
+                    className="shrink-0"
                   />
                   <div>
                     <p className="font-semibold text-white">Phone</p>
-                    <p className="text-slate-200">
+                    <p className="text-slate-200 text-sm sm:text-base">
                       +63 49 546-6107 / 0967-302-6643
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center">
+
+                {/* Email */}
+                <div className="flex items-center gap-3">
                   <img
                     src="https://img.icons8.com/ios-filled/24/22c55e/email.png"
                     alt="Email"
-                    className="mr-3"
+                    className="shrink-0"
                   />
                   <div>
                     <p className="font-semibold text-white">Email</p>
-                    <p className="text-slate-200">cliberduche.corp@yahoo.com</p>
+                    <p className="text-slate-200 text-sm sm:text-base break-all">
+                      cliberduche.corp@yahoo.com
+                    </p>
                   </div>
                 </div>
               </div>
@@ -266,16 +271,17 @@ const Contact = ({ refProp, visible }) => {
             <div>
               <form
                 onSubmit={handleSubmit}
-                className="bg-slate-900/70 p-8 sm:p-10 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-md"
+                className="bg-slate-900/70 p-5 sm:p-8 md:p-10 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-md"
               >
-                <div className="mb-6">
+                {/* Form header */}
+                <div className="mb-5 sm:mb-6">
                   <p className="text-xs uppercase tracking-[0.3em] text-emerald-200/80">
                     Contact Form
                   </p>
-                  <h4 className="text-2xl font-semibold text-white">
+                  <h4 className="text-xl sm:text-2xl font-semibold text-white mt-1">
                     Send us a Message
                   </h4>
-                  <p className="text-slate-300 mt-2">
+                  <p className="text-slate-300 mt-2 text-sm sm:text-base">
                     Tell us about your project and we'll respond within 24–48
                     hours.
                   </p>
@@ -295,7 +301,7 @@ const Contact = ({ refProp, visible }) => {
                     name="full_name"
                     value={formData.full_name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 text-sm sm:text-base"
                     placeholder="Your Full Name"
                     required
                   />
@@ -311,7 +317,7 @@ const Contact = ({ refProp, visible }) => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 text-sm sm:text-base"
                     placeholder="yourname@email.com"
                     required
                   />
@@ -327,33 +333,42 @@ const Contact = ({ refProp, visible }) => {
                     name="contact_number"
                     value={formData.contact_number}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 text-sm sm:text-base"
                     placeholder="09XXXXXXXXX"
                     required
                   />
                 </div>
 
-                {/* Date & Time */}
-                <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                {/* Date & Time — stacks on very small screens, side-by-side from sm up */}
+                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 mb-4">
+                  {/* Date */}
                   <div>
                     <label className="block text-slate-200 mb-2 text-sm font-medium">
                       Date
                     </label>
                     <DatePicker
                       selected={formData.date}
-                      onChange={(date) =>
-                        setFormData((prev) => ({ ...prev, date }))
-                      }
+                      onChange={(date) => {
+                        if (!date) return;
+                        const local = new Date(
+                          date.getFullYear(),
+                          date.getMonth(),
+                          date.getDate(),
+                        );
+                        setFormData((prev) => ({ ...prev, date: local }));
+                      }}
                       placeholderText="Select date"
                       dateFormat="MMMM d, yyyy"
                       minDate={new Date()}
                       showPopperArrow={false}
                       popperPlacement="bottom-start"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 text-sm"
                       calendarClassName="ojt-datepicker"
                       required
                     />
                   </div>
+
+                  {/* Time */}
                   <div>
                     <label className="block text-slate-200 mb-2 text-sm font-medium">
                       Time
@@ -366,7 +381,7 @@ const Contact = ({ refProp, visible }) => {
                         aria-haspopup="dialog"
                         aria-expanded={timePickerOpen}
                       >
-                        <span>
+                        <span className="text-sm">
                           {formData.time ? formData.time : "Select time"}
                         </span>
                         <svg
@@ -376,6 +391,7 @@ const Contact = ({ refProp, visible }) => {
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                           aria-hidden="true"
+                          className="shrink-0"
                         >
                           <path
                             d="M5 7.5L10 12.5L15 7.5"
@@ -388,7 +404,12 @@ const Contact = ({ refProp, visible }) => {
                       </button>
 
                       {timePickerOpen && (
-                        <div className="time-picker__panel" role="dialog">
+                        <div
+                          className="time-picker__panel"
+                          role="dialog"
+                          /* Keep panel within viewport on mobile */
+                          style={{ maxWidth: "min(280px, 90vw)" }}
+                        >
                           <div className="time-picker__columns">
                             <div
                               className="time-picker__column"
@@ -398,7 +419,9 @@ const Contact = ({ refProp, visible }) => {
                                 <button
                                   key={hour}
                                   type="button"
-                                  className={`time-picker__item ${timeParts.hour === hour ? "is-selected" : ""}`}
+                                  className={`time-picker__item ${
+                                    timeParts.hour === hour ? "is-selected" : ""
+                                  }`}
                                   onClick={() =>
                                     updateTime({ ...timeParts, hour })
                                   }
@@ -415,7 +438,11 @@ const Contact = ({ refProp, visible }) => {
                                 <button
                                   key={minute}
                                   type="button"
-                                  className={`time-picker__item ${timeParts.minute === minute ? "is-selected" : ""}`}
+                                  className={`time-picker__item ${
+                                    timeParts.minute === minute
+                                      ? "is-selected"
+                                      : ""
+                                  }`}
                                   onClick={() =>
                                     updateTime({ ...timeParts, minute })
                                   }
@@ -432,7 +459,11 @@ const Contact = ({ refProp, visible }) => {
                                 <button
                                   key={meridiem}
                                   type="button"
-                                  className={`time-picker__item ${timeParts.meridiem === meridiem ? "is-selected" : ""}`}
+                                  className={`time-picker__item ${
+                                    timeParts.meridiem === meridiem
+                                      ? "is-selected"
+                                      : ""
+                                  }`}
                                   onClick={() =>
                                     updateTime({ ...timeParts, meridiem })
                                   }
@@ -463,29 +494,29 @@ const Contact = ({ refProp, visible }) => {
                     Type
                   </label>
                   <div className="grid grid-cols-2 gap-3">
-                    <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40">
+                    <label className="flex items-center gap-2 px-3 sm:px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40 text-sm sm:text-base">
                       <input
                         type="radio"
                         name="consultation_type"
                         value="online"
                         checked={formData.consultation_type === "online"}
                         onChange={handleChange}
-                        className="accent-emerald-500"
+                        className="accent-emerald-500 shrink-0"
                         required
                       />
                       Online
                     </label>
-                    <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40">
+                    <label className="flex items-center gap-2 px-3 sm:px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 cursor-pointer transition hover:border-emerald-400/40 text-sm sm:text-base">
                       <input
                         type="radio"
                         name="consultation_type"
                         value="face_to_face"
                         checked={formData.consultation_type === "face_to_face"}
                         onChange={handleChange}
-                        className="accent-emerald-500"
+                        className="accent-emerald-500 shrink-0"
                         required
                       />
-                      In-Person
+                      Face to Face
                     </label>
                   </div>
                 </div>
@@ -499,45 +530,25 @@ const Contact = ({ refProp, visible }) => {
                     name="notes"
                     value={formData.notes}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 h-28 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-300/60 transition duration-200 h-24 sm:h-28 resize-none text-sm sm:text-base"
                     placeholder="Add any notes or details..."
                   />
                 </div>
 
-                {/* reCAPTCHA v2 — only renders if site key is set */}
-                <div className="mb-6">
+                {/* reCAPTCHA — scale down on small screens */}
+                <div className="mb-5 sm:mb-6">
                   <label className="block text-slate-200 mb-2 text-sm font-medium">
                     Verification
                   </label>
-                  {RECAPTCHA_SITE_KEY ? (
+                  <div className="scale-[0.85] xs:scale-90 sm:scale-100 origin-center">
                     <ReCAPTCHA
                       ref={recaptchaRef}
-                      sitekey={RECAPTCHA_SITE_KEY}
+                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                       onChange={(token) => setCaptchaToken(token || "")}
                       onExpired={() => setCaptchaToken("")}
                       theme="dark"
                     />
-                  ) : (
-                    <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-400/30 text-yellow-200 text-sm">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 shrink-0"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      reCAPTCHA not available —{" "}
-                      <code className="font-mono text-xs mx-1">
-                        VITE_RECAPTCHA_SITE_KEY
-                      </code>{" "}
-                      is not set (dev mode).
-                    </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Honeypot */}
@@ -568,10 +579,11 @@ const Contact = ({ refProp, visible }) => {
                   </div>
                 )}
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  disabled={isSending || (RECAPTCHA_SITE_KEY && !captchaToken)}
-                  className="focus-ring w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/60 text-white font-semibold py-3.5 px-6 rounded-xl transition duration-300 shadow-[0_18px_45px_-28px_rgba(14,165,233,0.6)] hover:shadow-[0_22px_55px_-28px_rgba(16,185,129,0.6)] disabled:cursor-not-allowed"
+                  disabled={isSending || !captchaToken}
+                  className="focus-ring w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/60 text-white font-semibold py-3 sm:py-3.5 px-6 rounded-xl transition duration-300 shadow-[0_18px_45px_-28px_rgba(14,165,233,0.6)] hover:shadow-[0_22px_55px_-28px_rgba(16,185,129,0.6)] disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   {isSending ? "Booking..." : "Book Appointment"}
                 </button>

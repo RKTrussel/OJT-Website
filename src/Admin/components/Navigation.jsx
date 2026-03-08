@@ -18,7 +18,7 @@ export function Sidebar({ tab, setTab, sidebar, setSidebar, stats, onLogout }) {
         </div>
         {sidebar && (
           <span className="font-display text-white font-semibold text-base whitespace-nowrap">
-            AppointCo
+            Cliberduche
           </span>
         )}
       </div>

@@ -38,7 +38,7 @@ export default function Login({ onLogin }) {
             📋
           </div>
           <h1 className="font-display text-3xl text-white font-semibold mb-2">
-            Admin Portal
+            Cliberduche Admin Portal
           </h1>
           <p className="text-zinc-500 text-sm">Appointment Management System</p>
         </div>

@@ -60,15 +60,15 @@ const Services = ({ refProp, visible }) => {
     mainbackgroundmission,
   ];
 
-  const ServiceCard = ({ s, imgSrc, index }) => (
+  const ServiceCard = ({ s, imgSrc }) => (
     <div
       className="group relative overflow-hidden rounded-2xl border border-white/10
                  bg-white/5 backdrop-blur-md shadow-md
                  transition-all duration-500 hover:border-emerald-400/40
-                 hover:shadow-emerald-900/40 hover:shadow-xl cursor-default"
-      style={{ minHeight: "260px" }}
+                 hover:shadow-emerald-900/40 hover:shadow-xl cursor-default
+                 min-h-[220px] sm:min-h-[260px]"
     >
-      {/* --- Background image: hidden by default, fades in on hover --- */}
+      {/* Background image on hover */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100
                    transition-opacity duration-700 ease-in-out"
@@ -79,11 +79,10 @@ const Services = ({ refProp, visible }) => {
           className="w-full h-full object-cover scale-105 group-hover:scale-100
                      transition-transform duration-700 ease-in-out"
         />
-        {/* gradient overlay so text stays readable over image */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30" />
       </div>
 
-      {/* --- Default state: subtle dark background + faint grid pattern --- */}
+      {/* Default radial background */}
       <div
         className="absolute inset-0 opacity-100 group-hover:opacity-0
                    transition-opacity duration-500"
@@ -93,46 +92,44 @@ const Services = ({ refProp, visible }) => {
         }}
       />
 
-      {/* --- Card content --- */}
-      <div className="relative z-10 flex h-full flex-col justify-between gap-5 p-6 sm:p-7">
-        {/* Top row: tag + icon */}
-        <div className="flex items-start justify-between">
+      {/* Card content */}
+      <div className="relative z-10 flex h-full flex-col justify-between gap-3 p-4 sm:p-6 lg:p-7">
+        {/* Tag + Icon row */}
+        <div className="flex items-start justify-between gap-2">
           <span
             className="text-[10px] uppercase tracking-[0.3em] text-emerald-300/80
                           bg-emerald-400/10 border border-emerald-400/20
-                          px-3 py-1 rounded-full"
+                          px-2.5 py-1 rounded-full leading-none whitespace-nowrap"
           >
             {s.tag}
           </span>
+
           <div
             className="bg-emerald-700/60 group-hover:bg-emerald-500/80
-                          p-2.5 rounded-xl transition-colors duration-300 shadow"
+                          p-2 sm:p-2.5 rounded-xl transition-colors duration-300 shadow shrink-0"
           >
             <img src={s.icon} alt={s.title} className="w-5 h-5" />
           </div>
         </div>
 
-        {/* Middle: title + desc */}
-        <div className="flex flex-1 flex-col justify-end gap-3 pt-3">
-          {/* Thin accent line */}
-          <div
-            className="h-0.5 w-8 rounded-full bg-emerald-400/50 transition-all duration-500 group-hover:w-16"
-          />
+        {/* Title + Description */}
+        <div className="flex flex-1 flex-col justify-end gap-2 sm:gap-3 pt-1">
+          <div className="h-0.5 w-8 rounded-full bg-emerald-400/50 transition-all duration-500 group-hover:w-16" />
+
           <h3
-            className="text-lg font-semibold leading-tight tracking-tight text-white sm:text-xl"
+            className="text-base sm:text-lg lg:text-xl font-semibold leading-tight tracking-tight text-white"
             style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
           >
             {s.title}
           </h3>
-          <p className="text-sm leading-relaxed text-slate-300 transition-colors duration-300 group-hover:text-slate-200 sm:text-[15px] text-justify">
+
+          <p className="text-sm sm:text-[15px] leading-relaxed text-slate-300 transition-colors duration-300 group-hover:text-slate-200 text-left sm:text-justify">
             {s.desc}
           </p>
         </div>
 
-        {/* Bottom: hover hint */}
-        <div
-          className="flex items-center gap-1.5 pt-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        >
+        {/* Hover hint */}
+        <div className="flex items-center gap-1.5 pt-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-[10px] uppercase tracking-widest text-emerald-300/70">
             Project Reference
@@ -144,25 +141,24 @@ const Services = ({ refProp, visible }) => {
 
   return (
     <>
-      {/* Import Google Font */}
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap');`}</style>
 
       <section
         id="services"
         ref={refProp}
-        className="scroll-mt-6 relative overflow-hidden py-20"
+        className="scroll-mt-6 relative overflow-hidden py-12 sm:py-16 md:py-20"
       >
         {/* Background */}
         <div className="absolute inset-0 surface-a gradient-slow" />
         <div className="absolute inset-0 section-noise" />
 
         <div
-          className={`relative z-10 max-w-6xl mx-auto px-6 reveal-clip ${
+          className={`relative z-10 max-w-6xl mx-auto px-4 sm:px-6 reveal-clip ${
             visible ? "is-visible" : ""
           }`}
         >
           {/* Header */}
-          <div className="mb-12 flex flex-col items-center justify-center gap-3 text-center">
+          <div className="mb-8 sm:mb-12 flex flex-col items-center justify-center gap-2 sm:gap-3 text-center">
             <span
               className="text-[11px] uppercase tracking-[0.35em] text-amber-200
                              bg-amber-400/10 border border-amber-300/30
@@ -171,50 +167,49 @@ const Services = ({ refProp, visible }) => {
               Capabilities
             </span>
 
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-3 sm:gap-4">
               <img
                 src={logo}
                 alt="Cliberduche Logo"
-                className="w-14 h-14 object-contain drop-shadow-lg"
+                className="w-10 h-10 sm:w-14 sm:h-14 object-contain drop-shadow-lg"
               />
-              <h2 className="text-3xl font-semibold text-slate-100">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-100">
                 Our Services
               </h2>
             </div>
 
-            <p className="max-w-3xl text-slate-300 leading-relaxed text-justify">
+            <p className="max-w-3xl text-slate-300 leading-relaxed text-sm sm:text-base text-center sm:text-justify">
               Reliable execution from sourcing to site management, tailored to
               infrastructure and land development needs.
             </p>
 
-            {/* Hover hint */}
-            <p className="text-[11px] text-slate-500 tracking-wider uppercase mt-1">
+            {/* Hide hover hint on touch devices where hover doesn't apply */}
+            <p className="hidden sm:block text-[11px] text-slate-500 tracking-wider uppercase mt-1">
               ✦ Hover a card to reveal project imagery
             </p>
           </div>
 
           {/* Primary Services */}
-          <h3 className="mb-4 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
+          <h3 className="mb-3 sm:mb-4 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
             Primary Functions
           </h3>
-          <div className="mb-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+
+          {/* 1 col on mobile → 2 col on sm → 4 col on lg */}
+          <div className="mb-8 sm:mb-12 grid gap-3 sm:gap-4 md:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {primaryServices.map((s, i) => (
-              <ServiceCard key={i} s={s} imgSrc={serviceImages[i]} index={i} />
+              <ServiceCard key={i} s={s} imgSrc={serviceImages[i]} />
             ))}
           </div>
 
           {/* Secondary Services */}
-          <h3 className="mb-4 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
+          <h3 className="mb-3 sm:mb-4 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
             Secondary Functions
           </h3>
-          <div className="grid gap-5 md:grid-cols-2">
+
+          {/* 1 col on mobile → 2 col on sm */}
+          <div className="grid gap-3 sm:gap-4 md:gap-5 grid-cols-1 sm:grid-cols-2">
             {secondaryServices.map((s, i) => (
-              <ServiceCard
-                key={i}
-                s={s}
-                imgSrc={serviceImages[4 + i]}
-                index={4 + i}
-              />
+              <ServiceCard key={i} s={s} imgSrc={serviceImages[4 + i]} />
             ))}
           </div>
         </div>
